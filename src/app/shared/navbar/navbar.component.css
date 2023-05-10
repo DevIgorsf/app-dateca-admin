@@ -1,0 +1,15 @@
+.navbar {
+  height: 57px;
+  background: #191C24;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.header__title {
+  font-family: Baloo;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 50px;
+  text-align: center;
+}
