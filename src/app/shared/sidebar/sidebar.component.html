@@ -1,7 +1,58 @@
-<ul class="sidebar__link">
-  <li class="sidebar__link-item sidebar__link-sobre">Dashboard</li>
-  <li class="sidebar__link-item sidebar__link-sobre">Professores</li>
-  <li class="sidebar__link-item sidebar__link-sobre">Questões</li>
-  <li class="sidebar__link-item sidebar__link-sobre">Métricas</li>
-  <li class="sidebar__link-item sidebar__link-servicos">Ranking</li>
-</ul>
+<nav class="nav" id="sidebar">
+  <div class="nav-logo">
+    <!-- <h1 class="nav-logo__title">DATECA</h1> -->
+    <a class="nav-logo__title" href="index.html"><img src="assets/images/DATECA.png"></a>
+  </div>
+  <ul class="sidebar">
+    <li class="sidebar-item" [ngClass]="{ 'active': dashboard.isActive }">
+      <a class="sidebar-link" routerLink="/dashboard" routerLinkActive #dashboard="routerLinkActive">
+        <span class="sidebar-item__icon">
+          <i class="bi bi-newspaper"></i>
+        </span>
+        <span class="sidebar-item__title">
+          Dashboard
+        </span>
+      </a>
+    </li>
+    <li class="sidebar-item" [ngClass]="{ 'active': professors.isActive }">
+      <a class="sidebar-link" routerLink="/professors" routerLinkActive #professors="routerLinkActive">
+        <span class="sidebar-item__icon">
+          <i class="bi bi-mortarboard-fill"></i>
+        </span>
+        <span class="sidebar-item__title">
+          Professores
+        </span>
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a class="sidebar-link">
+        <span class="sidebar-item__icon">
+          <i class="bi bi-list-check"></i>
+        </span>
+        <span class="sidebar-item__title">
+          Questões
+        </span>
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a class="sidebar-link">
+        <span class="sidebar-item__icon">
+          <i class="bi bi-graph-up"></i>
+        </span>
+        <span class="sidebar-item__title">
+          Métricas
+        </span>
+      </a>
+    </li>
+    <li class="sidebar-item">
+      <a class="sidebar-link">
+        <span class="sidebar-item__icon">
+          <i class="bi bi-award"></i>
+        </span>
+        <span class="sidebar-item__title">
+          Ranking
+        </span>
+      </a>
+    </li>
+  </ul>
+</nav>
