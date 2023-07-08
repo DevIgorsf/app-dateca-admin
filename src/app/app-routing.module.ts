@@ -12,15 +12,16 @@ const routes: Routes = [
     redirectTo: 'login'
   },
   {
+    path: 'login',
+    component: SigninComponent,
+    canLoad: [LoginGuard]
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
     canLoad: [AuthGuard]
   },
-  {
-    path: 'login',
-    component: SigninComponent,
-    canLoad: [LoginGuard]
-},
+
 ];
 
 @NgModule({

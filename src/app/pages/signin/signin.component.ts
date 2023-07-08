@@ -23,7 +23,7 @@ export class SigninComponent implements OnInit {
   login() {
     this.authService.autenticar(this.usuario, this.senha).subscribe(
       () => {
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['admin']);
       },
       (error) => {
         alert('Usuário ou senha inválido');
