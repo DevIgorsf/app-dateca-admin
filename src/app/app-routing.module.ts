@@ -1,13 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ProfessorsComponent } from './pages/professors/professors.component';
+import { SigninComponent } from './pages/signin/signin.component';
+import { AuthGuard } from './service/auth.guard';
+import { LoginGuard } from './service/login.guard';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent},
-  { path: 'professors', component: ProfessorsComponent},
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login'
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
+    canLoad: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: SigninComponent,
+    canLoad: [LoginGuard]
+},
 ];
 
 @NgModule({

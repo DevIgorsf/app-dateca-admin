@@ -6,20 +6,14 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { SigninComponent } from './pages/signin/signin.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ProfessorsComponent } from './pages/professors/professors.component';
+import { MessageComponent } from './shared/message/message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    SidebarComponent,
     SigninComponent,
-    DashboardComponent,
-    ProfessorsComponent
+    MessageComponent
   ],
   imports: [
     BrowserModule,

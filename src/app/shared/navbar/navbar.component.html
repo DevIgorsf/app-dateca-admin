@@ -3,9 +3,15 @@
     <i class="bi bi-list text-white"></i>
   </button>
   <nav class="navbar__navegacao">
-    <ul class="navbar-list">
+    <!-- <ul class="navbar-list">
         <li class="navbar-list__item">perfil</li>
         <li class="navbar-list__item">Log out</li>
-    </ul>
+    </ul> -->
+    <div *ngIf="user$ | async as user">
+      <div >
+        <i class="bi bi-person-circle mr-1"> </i>
+        <a (click)="logout()">Logout</a>
+      </div>
+    </div>
   </nav>
 </header>

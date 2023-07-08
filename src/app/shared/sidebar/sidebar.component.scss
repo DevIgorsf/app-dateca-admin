@@ -85,6 +85,20 @@
       }
     }
   }
+
+  &:hover {
+    .sidebar-link {
+      background: #0f1015;
+      position: relative;
+      .sidebar-item__title {
+        transition: 0.25s ease-out;
+        color: #ffffff;
+      }
+      i {
+        color: #ffffff
+      }
+    }
+  }
 }
 
 
