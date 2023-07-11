@@ -6,11 +6,11 @@ import { AuthService } from 'src/app/service/auth.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
 
-  usuario = '';
+  login = '';
   senha = '';
 
   constructor(
@@ -20,13 +20,13 @@ export class SigninComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  login() {
-    this.authService.autenticar(this.usuario, this.senha).subscribe(
+  logIn() {
+    this.authService.autenticar(this.login, this.senha).subscribe(
       () => {
         this.router.navigate(['admin']);
       },
       (error) => {
-        alert('Usuário ou senha inválido');
+        alert('Login ou senha inválido');
         console.log(error);
       }
     );
