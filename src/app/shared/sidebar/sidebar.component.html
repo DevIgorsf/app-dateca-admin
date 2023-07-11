@@ -5,7 +5,7 @@
   </div>
   <ul class="sidebar">
     <li class="sidebar-item" [ngClass]="{ 'active': dashboard.isActive }">
-      <a class="sidebar-link" routerLink="/dashboard" routerLinkActive #dashboard="routerLinkActive">
+      <a class="sidebar-link" routerLink="/admin/dashboard" routerLinkActive #dashboard="routerLinkActive">
         <span class="sidebar-item__icon">
           <i class="bi bi-newspaper"></i>
         </span>
@@ -15,7 +15,7 @@
       </a>
     </li>
     <li class="sidebar-item" [ngClass]="{ 'active': professors.isActive }">
-      <a class="sidebar-link" routerLink="/professors" routerLinkActive #professors="routerLinkActive">
+      <a class="sidebar-link" routerLink="/admin/professor" routerLinkActive #professors="routerLinkActive">
         <span class="sidebar-item__icon">
           <i class="bi bi-mortarboard-fill"></i>
         </span>
