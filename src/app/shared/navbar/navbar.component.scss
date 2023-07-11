@@ -5,3 +5,34 @@
   left: 244px;
 }
 
+.navbar__navegacao {
+  margin-right: 20px;
+  width: 150px;
+}
+
+.navbar__navegacao-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 32px;
+  justify-content: space-between;
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.navbar-list__item {
+  cursor: pointer;
+}
+
+.navbar-list__icon {
+  line-height: 1;
+  background: rgba(108,114,147,.2);
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  border-radius: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
