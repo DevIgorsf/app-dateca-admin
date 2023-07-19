@@ -1,7 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/service/auth.service';
+import { AuthService } from 'src/app/service/auth/auth.service';
+
 
 @Component({
   selector: 'app-signin',
@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
 export class SigninComponent implements OnInit {
 
   login = '';
-  senha = '';
+  password = '';
 
   constructor(
     private authService: AuthService,
@@ -21,7 +21,7 @@ export class SigninComponent implements OnInit {
   ngOnInit(): void {}
 
   logIn() {
-    this.authService.autenticar(this.login, this.senha).subscribe(
+    this.authService.autenticar(this.login, this.password).subscribe(
       () => {
         this.router.navigate(['admin/dashboard']);
       },

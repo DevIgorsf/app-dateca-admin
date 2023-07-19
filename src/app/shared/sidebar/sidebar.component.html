@@ -24,6 +24,16 @@
         </span>
       </a>
     </li>
+    <li class="sidebar-item" [ngClass]="{ 'active': course.isActive }">
+      <a class="sidebar-link" routerLink="/admin/materia" routerLinkActive #course="routerLinkActive">
+        <span class="sidebar-item__icon">
+          <i class="bi bi-journal-bookmark-fill"></i>
+        </span>
+        <span class="sidebar-item__title">
+          Materias
+        </span>
+      </a>
+    </li>
     <li class="sidebar-item">
       <a class="sidebar-link">
         <span class="sidebar-item__icon">

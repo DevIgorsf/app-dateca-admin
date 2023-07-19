@@ -6,6 +6,11 @@ import { ProfessorsComponent } from './professors/professors.component';
 import { AdminComponent } from './admin.component';
 import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 import { SidebarComponent } from 'src/app/shared/sidebar/sidebar.component';
+import { CreateProfessorComponent } from './professors/create-professor/create-professor.component';
+import { CourseComponent } from './course/course.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MessageComponent } from 'src/app/shared/message/message.component';
+import { MessageModule } from 'src/app/shared/message/message.module';
 
 
 
@@ -13,12 +18,18 @@ import { SidebarComponent } from 'src/app/shared/sidebar/sidebar.component';
   declarations: [
     DashboardComponent,
     ProfessorsComponent,
+    CreateProfessorComponent,
+    CourseComponent,
     NavbarComponent,
     SidebarComponent,
     AdminComponent
   ],
   imports: [
-    CommonModule, AdminRoutingModule
+    CommonModule,
+    AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MessageModule
   ],
   exports: [AdminComponent],
 })

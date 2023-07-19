@@ -7,20 +7,20 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SigninComponent } from './pages/signin/signin.component';
-import { MessageComponent } from './shared/message/message.component';
+import { MessageModule } from './shared/message/message.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SigninComponent,
-    MessageComponent
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MessageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
