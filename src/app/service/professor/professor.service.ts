@@ -24,8 +24,10 @@ export class ProfessorService {
   }
 
   getAll(): void {
-    this.http.get<Professor[]>(`${API}/professor`).subscribe(professor =>{
-      console.log(professor)
+    this.http.get<Professor[]>(`${API}/professor`).subscribe(professors =>{
+      let professorsTemp = this.professorsSubject.getValue();
+      professorsTemp = professorsTemp.concat(professors)
+      this.professorsSubject.next(professorsTemp);
     })
   }
 }
