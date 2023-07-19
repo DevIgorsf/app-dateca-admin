@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SigninComponent } from './pages/signin/signin.component';
 import { MessageModule } from './shared/message/message.module';
+import { AuthModule } from './service/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MessageModule } from './shared/message/message.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    MessageModule
+    MessageModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
