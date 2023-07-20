@@ -32,10 +32,11 @@ export class CreateProfessorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createProfessor() : void {
+  async createProfessor() : Promise<void> {
     if(this.formulario.valid) {
       const newProfessor: Professor = this.formulario.value;
-      this.service.create(newProfessor)
+      await this.service.create(newProfessor)
+      this.router.navigate(['/admin/professor']);
     }
   }
 
@@ -61,5 +62,4 @@ export class CreateProfessorComponent implements OnInit {
       return 'form-item';
     }
   }
-
 }

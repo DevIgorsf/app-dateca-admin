@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription} from 'rxjs';
 import { Professor } from 'src/app/interfaces/professor';
 import { ProfessorService } from 'src/app/service/professor/professor.service';
 
@@ -21,6 +21,12 @@ export class ProfessorsComponent implements OnInit {
     this.professorsSubscription = this.service.professors$.subscribe(professors => {
       this.professors = professors;
     })
+  }
+
+  deleteProfessor(professorId: number): void {
+    if (professorId) {
+      this.service.deleteProfessor(professorId);
+    }
   }
 
 }
