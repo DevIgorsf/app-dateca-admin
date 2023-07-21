@@ -10,10 +10,8 @@ import { ProfessorService } from 'src/app/service/professor/professor.service';
   styleUrls: ['./update-professor.component.scss']
 })
 export class UpdateProfessorComponent {
-  formulario!: FormGroup
+  updateProfessorForm!: FormGroup
   validado: boolean = false;
-
-
 
   constructor(
     private service: ProfessorService,
@@ -25,7 +23,7 @@ export class UpdateProfessorComponent {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')
     this.service.getProfessor(parseInt(id!)).subscribe((professor) => {
-      this.formulario = this.fomBuilder.group({
+      this.updateProfessorForm = this.fomBuilder.group({
         registrationNumber: [professor.registrationNumber, Validators.required],
         name: [professor.name, Validators.required],
         phone: [professor.phone, Validators.required],
@@ -35,9 +33,10 @@ export class UpdateProfessorComponent {
   }
 
   async updateProfessor() : Promise<void> {
-    if(this.formulario.valid) {
-      const updateProfessor: Professor = this.formulario.value;
-      await this.service.update(updateProfessor)
+    if(this.updateProfessorForm.valid) {
+      const id = this.route.snapshot.paramMap.get('id')
+      const updateProfessor: Professor = this.updateProfessorForm.value;
+      await this.service.update(id!, updateProfessor)
       this.router.navigate(['/admin/professor']);
     }
   }
@@ -47,15 +46,15 @@ export class UpdateProfessorComponent {
   }
 
   habilitarBotao(): string {
-    if (this.formulario.valid) {
+    if (this.updateProfessorForm.valid) {
       return 'botao-salvar';
     } else return 'botao-desabilitado';
   }
 
   campoValidado(campoAtual: string): string {
     if (
-      this.formulario.get(campoAtual)?.errors &&
-      this.formulario.get(campoAtual)?.touched
+      this.updateProfessorForm.get(campoAtual)?.errors &&
+      this.updateProfessorForm.get(campoAtual)?.touched
     ) {
       this.validado = false;
       return 'form-item input-invalido';

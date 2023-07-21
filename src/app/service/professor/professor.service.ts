@@ -25,8 +25,8 @@ export class ProfessorService {
     });
   }
 
-  update(professor: Professor):void {
-    this.http.put<Professor>(`${API}/professor/${professor.id}`, professor).subscribe(updateProfessor => {
+  update(id: string, professor: Professor):void {
+    this.http.put<Professor>(`${API}/professor/${id}`, professor).subscribe(updateProfessor => {
       const professors = this.professorsSubject.getValue();
       const professorsResult = professors.map((t) => {
         if (t.id === updateProfessor.id) {
