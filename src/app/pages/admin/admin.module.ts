@@ -11,6 +11,7 @@ import { CourseComponent } from './course/course.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageComponent } from 'src/app/shared/message/message.component';
 import { MessageModule } from 'src/app/shared/message/message.module';
+import { UpdateProfessorComponent } from './professors/update-professor/update-professor.component';
 
 
 
@@ -22,7 +23,8 @@ import { MessageModule } from 'src/app/shared/message/message.module';
     CourseComponent,
     NavbarComponent,
     SidebarComponent,
-    AdminComponent
+    AdminComponent,
+    UpdateProfessorComponent
   ],
   imports: [
     CommonModule,

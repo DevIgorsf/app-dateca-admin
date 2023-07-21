@@ -21,7 +21,9 @@
         <td>{{professor.name}}</td>
         <td>{{professor.email}}</td>
         <td>
-          <i class="bi bi-pencil-square text-success mx-2"></i>
+          <a routerLink="editar-professor/{{professor.id}}">
+            <i  class="bi bi-pencil-square text-success mx-2"></i>
+          </a>
           <i (click)="deleteProfessor(professor.id)" class="bi bi-trash-fill text-danger mx-2"></i>
         </td>
       </tr>

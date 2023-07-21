@@ -5,6 +5,7 @@ import { ProfessorsComponent } from './professors/professors.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CourseComponent } from './course/course.component';
 import { CreateProfessorComponent } from './professors/create-professor/create-professor.component';
+import { UpdateProfessorComponent } from './professors/update-professor/update-professor.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'professor/adicionar-professor',
         component: CreateProfessorComponent,
+      },
+      {
+        path: 'professor/editar-professor/:id',
+        component: UpdateProfessorComponent,
       },
       {
         path: 'materia',
