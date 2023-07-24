@@ -27,12 +27,14 @@ export class ProfessorsComponent {
   ) { }
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.service.getAll()
     this.professorsSubscription = this.service.professors$.subscribe(professors => {
       this.dataSource= new MatTableDataSource<Professor>(professors);
       this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
     })
 
   }
@@ -49,10 +51,6 @@ export class ProfessorsComponent {
     } else {
       this._liveAnnouncer.announce('Sorting cleared');
     }
-  }
-
-  getRowIndex(index: number): number {
-    return index + 1;
   }
 
 }
