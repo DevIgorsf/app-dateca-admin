@@ -9,9 +9,10 @@ import { SidebarComponent } from 'src/app/shared/sidebar/sidebar.component';
 import { CreateProfessorComponent } from './professors/create-professor/create-professor.component';
 import { CourseComponent } from './course/course.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MessageComponent } from 'src/app/shared/message/message.component';
 import { MessageModule } from 'src/app/shared/message/message.module';
 import { UpdateProfessorComponent } from './professors/update-professor/update-professor.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -31,6 +32,8 @@ import { UpdateProfessorComponent } from './professors/update-professor/update-p
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatSortModule,
     MessageModule
   ],
   exports: [AdminComponent],
