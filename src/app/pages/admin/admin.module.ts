@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfessorsComponent } from './professors/professors.component';
@@ -14,6 +14,12 @@ import { UpdateProfessorComponent } from './professors/update-professor/update-p
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { CreateCourseComponent } from './course/create-course/create-course.component';
+import { UpdateCourseComponent } from './course/update-course/update-course.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -26,7 +32,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     NavbarComponent,
     SidebarComponent,
     AdminComponent,
-    UpdateProfessorComponent
+    UpdateProfessorComponent,
+    CreateCourseComponent,
+    UpdateCourseComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +44,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MessageModule
+    MessageModule,
+    MatFormFieldModule,
+    NgFor,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatIconModule,
+    AsyncPipe
   ],
   exports: [AdminComponent],
 })

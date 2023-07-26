@@ -1,1 +1,46 @@
-<p>course works!</p>
+
+<div class="professor">
+  <a class="btn btn-primary mb-4 fs-4 text-white" routerLink="adicionar-materia">
+    <i class="bi bi-person-plus-fill"></i>
+  </a>
+
+<div class="mat-elevation-z8">
+  <table class="mat-elevation-z8" mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
+
+    <ng-container matColumnDef="#">
+      <th mat-header-cell *matHeaderCellDef> code </th>
+      <td mat-cell *matCellDef="let element"> {{ element.code }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header
+      sortActionDescription="Ordenar por nome">
+        Nome
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Semestre </th>
+      <td mat-cell *matCellDef="let element"> {{element.semester}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes">
+      <th mat-header-cell *matHeaderCellDef> Professores </th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container *ngFor="let professor of element.professorList">
+          {{ professor.name?.split(' ')[0] }}<br>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator
+    [pageSize]="5"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+

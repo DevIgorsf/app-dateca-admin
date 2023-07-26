@@ -1,6 +1,6 @@
 export interface Professor
  {
-  id: number;
+  id?: number;
   registrationNumber?: string;
   name?: string;
   phone?: string;

@@ -6,18 +6,18 @@
       <div>
         <label
           class="mb-1 ms-2"
-          for="registrationNumber">
+          for="code">
           <i class="bi bi-person-vcard-fill me-2"></i>Registro
         </label>
         <input required
           type="text"
-          formControlName="registrationNumber"
+          formControlName="code"
           placeholder="Digite o registro"
-          [ngClass]="campoValidado('registrationNumber')"
+          [ngClass]="campoValidado('code')"
           >
         <app-message
           *ngIf="!validado"
-          mensagem="Usuário obrigatório"
+          mensagem="Registro obrigatório"
         ></app-message>
       </div>
 
@@ -35,7 +35,7 @@
           >
         <app-message
           *ngIf="!validado"
-          mensagem="Usuário obrigatório"
+          mensagem="Nome obrigatório"
         ></app-message>
       </div>
 
@@ -53,7 +53,7 @@
           >
         <app-message
           *ngIf="!validado"
-          mensagem="Usuário obrigatório"
+          mensagem="Telefone obrigatório"
         ></app-message>
       </div>
 
@@ -63,14 +63,14 @@
           for="email"><i class="bi bi-envelope-fill me-2"></i>Email
         </label>
         <input required
-          type="text"
+          type="email"
           formControlName="email"
           placeholder="Digite seu e-mail"
           [ngClass]="campoValidado('email')"
           >
         <app-message
           *ngIf="!validado"
-          mensagem="Usuário obrigatório"
+          mensagem="Email obrigatório"
         ></app-message>
       </div>
     </div>

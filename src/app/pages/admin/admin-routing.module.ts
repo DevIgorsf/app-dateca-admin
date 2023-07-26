@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CourseComponent } from './course/course.component';
 import { CreateProfessorComponent } from './professors/create-professor/create-professor.component';
 import { UpdateProfessorComponent } from './professors/update-professor/update-professor.component';
+import { CreateCourseComponent } from './course/create-course/create-course.component';
+import { UpdateCourseComponent } from './course/update-course/update-course.component';
 
 const routes: Routes = [
   {
@@ -31,6 +33,14 @@ const routes: Routes = [
       {
         path: 'materia',
         component: CourseComponent,
+      },
+      {
+        path: 'materia/adicionar-materia',
+        component: CreateCourseComponent,
+      },
+      {
+        path: 'materia/editar-materia/:id',
+        component: UpdateCourseComponent,
       },
     ]
   },

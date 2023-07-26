@@ -27,7 +27,6 @@ export class SigninComponent implements OnInit {
       },
       (error) => {
         alert('Login ou senha inválido');
-        console.log(error);
       }
     );
   }
