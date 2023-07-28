@@ -61,7 +61,7 @@ export class CreateCourseComponent {
     const filterValue = value.toLowerCase();
     return this.allProfessors.filter((professor) =>
       professor.name?.toLowerCase().includes(filterValue) &&
-      !this.professors.includes(professor)
+      !this.professors.some(selectedProf => selectedProf.name === professor.name)
     );
   }
 
@@ -106,6 +106,9 @@ export class CreateCourseComponent {
 
     if (index >= 0) {
       this.professors.splice(index, 1);
+
+      this.filteredProfessors = this.filteredProfessors.pipe(map(professors => [...professors, professor]));
+
     }
 
     this.announcer.announce(`Removed ${professor.name}`);
@@ -114,6 +117,9 @@ export class CreateCourseComponent {
   selected(event: MatAutocompleteSelectedEvent): void {
     const professor = event.option.value as Professor;
     this.professors.push(professor);
+
+    this.filteredProfessors = this.filteredProfessors.pipe(map(professors => professors.filter(p => p.name !== professor.name)));
+
     this.professorInput.nativeElement.value = '';
     this.professorCtrl.setValue(null);
   }
@@ -121,17 +127,14 @@ export class CreateCourseComponent {
   add(event: MatChipInputEvent): void {
     const value = event.value.trim();
 
-    // Check if the input value is not empty
     if (value) {
       const professorToAdd = this.allProfessors.find((professor) => professor.name === value);
 
-      // If the professor is found, add it to the list of professors
       if (professorToAdd) {
         this.professors.push(professorToAdd);
       }
     }
 
-    // Clear the input value
     event.chipInput!.clear();
 
     this.professorCtrl.setValue(null);
