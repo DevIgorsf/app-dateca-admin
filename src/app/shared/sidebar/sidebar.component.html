@@ -34,8 +34,8 @@
         </span>
       </a>
     </li>
-    <li class="sidebar-item">
-      <a class="sidebar-link">
+    <li class="sidebar-item" [ngClass]="{ 'active': question.isActive }">
+      <a class="sidebar-link" routerLink="/admin/questao" routerLinkActive #question="routerLinkActive">
         <span class="sidebar-item__icon">
           <i class="bi bi-list-check"></i>
         </span>

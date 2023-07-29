@@ -20,6 +20,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
+import { QuestionComponent } from './question/question.component';
+import { CreateQuestionComponent } from './question/create-question/create-question.component';
 
 
 
@@ -34,7 +36,9 @@ import {MatIconModule} from '@angular/material/icon';
     AdminComponent,
     UpdateProfessorComponent,
     CreateCourseComponent,
-    UpdateCourseComponent
+    UpdateCourseComponent,
+    QuestionComponent,
+    CreateQuestionComponent
   ],
   imports: [
     CommonModule,

@@ -8,6 +8,8 @@ import { CreateProfessorComponent } from './professors/create-professor/create-p
 import { UpdateProfessorComponent } from './professors/update-professor/update-professor.component';
 import { CreateCourseComponent } from './course/create-course/create-course.component';
 import { UpdateCourseComponent } from './course/update-course/update-course.component';
+import { QuestionComponent } from './question/question.component';
+import { CreateQuestionComponent } from './question/create-question/create-question.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,14 @@ const routes: Routes = [
       {
         path: 'materia/editar-materia/:id',
         component: UpdateCourseComponent,
+      },
+      {
+        path: 'questao',
+        component: QuestionComponent,
+      },
+      {
+        path: 'questao/adicionar-questao',
+        component: CreateQuestionComponent,
       },
     ]
   },
