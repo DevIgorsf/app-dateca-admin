@@ -1,4 +1,7 @@
+import { CourseService } from 'src/app/service/course/course.service';
 import { Component, OnInit } from '@angular/core';
+import { ProfessorService } from 'src/app/service/professor/professor.service';
+import { QuestionService } from 'src/app/service/question/question.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  course: string = '0';
 
-  constructor() { }
+  constructor(
+    private courseService: CourseService,
+    private professorService: ProfessorService,
+    private questionService: QuestionService
+  ) { }
 
   ngOnInit(): void {
+    this.courseService.getCourseData().subscribe(data => {
+      this.course = data
+    })
   }
 
 }

@@ -22,6 +22,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import { QuestionComponent } from './question/question.component';
 import { CreateQuestionComponent } from './question/create-question/create-question.component';
+import { MatSelectModule } from '@angular/material/select';
+import {MatCardModule} from '@angular/material/card';
+import { CardComponent } from 'src/app/shared/card/card.component';
 
 
 
@@ -33,6 +36,7 @@ import { CreateQuestionComponent } from './question/create-question/create-quest
     CourseComponent,
     NavbarComponent,
     SidebarComponent,
+    CardComponent,
     AdminComponent,
     UpdateProfessorComponent,
     CreateCourseComponent,
@@ -52,6 +56,8 @@ import { CreateQuestionComponent } from './question/create-question/create-quest
     MatFormFieldModule,
     NgFor,
     MatAutocompleteModule,
+    MatCardModule,
+    MatSelectModule,
     MatChipsModule,
     MatIconModule,
     AsyncPipe

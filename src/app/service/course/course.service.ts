@@ -26,7 +26,7 @@ export class CourseService {
     });
   }
 
-  update(id: string, course: Course):void {
+  update(id: string, course: Course): void {
     this.http.put<Course>(`${API}/materia/${id}`, course).subscribe(updatecourse => {
       const courses = this.coursesSubject.getValue();
       const coursesResult = courses.map((t) => {
@@ -60,5 +60,9 @@ export class CourseService {
       const coursesResult = courses.filter(t => t.id !== courseId);
       this.coursesSubject.next(coursesResult);
     });
+  }
+
+  getCourseData(): Observable<any> {
+    return this.http.get(`${API}/materia/dados`);
   }
 }
