@@ -10,6 +10,7 @@ import { QuestionService } from 'src/app/service/question/question.service';
 })
 export class DashboardComponent implements OnInit {
   course: string = '0';
+  professor: string = '0';
 
   constructor(
     private courseService: CourseService,
@@ -19,7 +20,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.courseService.getCourseData().subscribe(data => {
-      this.course = data
+      this.course = data;
+    })
+    this.professorService.getProfessorData().subscribe(data => {
+      this.professor = data;
     })
   }
 

@@ -60,4 +60,8 @@ export class ProfessorService {
       this.professorsSubject.next(professorsResult);
     });
   }
+
+  getProfessorData(): Observable<any> {
+    return this.http.get(`${API}/professor/dados`);
+  }
 }
