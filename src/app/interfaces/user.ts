@@ -1,5 +1,4 @@
-export interface User
- {
+export interface User {
   login?: string;
   password?: string;
- }
+}
