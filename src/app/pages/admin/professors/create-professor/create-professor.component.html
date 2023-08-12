@@ -6,14 +6,14 @@
       <div>
         <label
           class="mb-1 ms-2"
-          for="code">
+          for="registrationNumber">
           <i class="bi bi-person-vcard-fill me-2"></i>Registro
         </label>
         <input required
           type="text"
-          formControlName="code"
+          formControlName="registrationNumber"
           placeholder="Digite o registro"
-          [ngClass]="campoValidado('code')"
+          [ngClass]="campoValidado('registrationNumber')"
           >
         <app-message
           *ngIf="!validado"

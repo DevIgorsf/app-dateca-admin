@@ -10,17 +10,17 @@ import { ProfessorService } from 'src/app/service/professor/professor.service';
   styleUrls: ['./create-professor.component.scss']
 })
 export class CreateProfessorComponent implements OnInit {
-  code: string = '';
+  registrationNumber: string = '';
   name: string = '';
-  semester: string = '';
-  professor: string = '';
+  phone: string = '';
+  email: string = '';
   validado: boolean = false;
 
   formulario: FormGroup = this.fomBuilder.group({
-    code: ['', Validators.required],
+    registrationNumber: ['', Validators.required],
     name: ['', Validators.required],
-    semester: ['', Validators.required],
-    professor: ['', Validators.required],
+    phone: ['', Validators.required],
+    email: ['', Validators.required],
   });
 
   constructor(
