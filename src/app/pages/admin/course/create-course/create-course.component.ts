@@ -22,7 +22,6 @@ export class CreateCourseComponent {
   filteredProfessors!: Observable<Professor[]>;
   professorsSubscription: Subscription = new Subscription();
 
-
   separatorKeysCodes: number[] = [ENTER, COMMA];
   professorCtrl = new FormControl('');
 

@@ -1,12 +1,14 @@
 import { QuestionTypeEnum } from "./questionTypeEnum";
 import { Professor } from "./professor";
 import { PointsEnum } from "./pointsEnum";
+import { Course } from "./course";
 
 export interface Question {
   id: number;
   name: string;
   statement: string;
   pointsEnum: PointsEnum;
-  questionTypeEnum: QuestionTypeEnum;
+  course: Course;
+  questionTypeEnum?: QuestionTypeEnum;
   professorCreate: Professor;
 }

@@ -31,7 +31,6 @@ export class CourseComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAll()
     this.coursesSubscription = this.service.courses$.subscribe(courses => {
-      console.log(courses);
       this.dataSource= new MatTableDataSource<Course>(courses);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;

@@ -25,8 +25,8 @@ import { CreateQuestionComponent } from './question/create-question/create-quest
 import { MatSelectModule } from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
 import { CardComponent } from 'src/app/shared/card/card.component';
-
-
+import {MatGridListModule} from '@angular/material/grid-list';
+import { FormTextFieldComponent } from 'src/app/shared/form-text-field/form-text-field.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { CardComponent } from 'src/app/shared/card/card.component';
     SidebarComponent,
     CardComponent,
     AdminComponent,
+    FormTextFieldComponent,
     UpdateProfessorComponent,
     CreateCourseComponent,
     UpdateCourseComponent,
@@ -59,6 +60,7 @@ import { CardComponent } from 'src/app/shared/card/card.component';
     MatCardModule,
     MatSelectModule,
     MatChipsModule,
+    MatGridListModule,
     MatIconModule,
     AsyncPipe
   ],

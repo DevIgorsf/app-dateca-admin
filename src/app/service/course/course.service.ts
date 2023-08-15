@@ -49,6 +49,12 @@ export class CourseService {
     })
   }
 
+  getCourseByProfessor() {
+    this.http.get<Course[]>(`${API}/materia/professor`).subscribe(courses =>{
+      this.coursesSubject.next(courses);
+    })
+  }
+
   deleteCourse(courseId: number): void {
     this.http.delete<Course>(`${API}/materia/${courseId}`).subscribe(() => {
       const courses = this.coursesSubject.getValue();

@@ -1,3 +1,4 @@
+import { Course } from "./course";
 import { PointsEnum } from "./pointsEnum";
 import { Professor } from "./professor";
 import { QuestionAlternative } from "./questionAlternative";
@@ -8,7 +9,8 @@ export interface QuestionMultipleChoice {
   name: string;
   statement: string;
   pointsEnum: PointsEnum;
-  questionTypeEnum: QuestionTypeEnum;
+  questionTypeEnum?: QuestionTypeEnum;
+  course: Course;
   professorCreate: Professor;
   choices: QuestionAlternative[];
 }
