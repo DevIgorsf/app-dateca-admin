@@ -1,5 +1,5 @@
 export enum PointsEnum {
-  Easy = 'EASY',
-  Regular = 'REGULAR',
-  Hard = 'HARD',
+  Easy = 'Fácil',
+  Regular = 'Médio',
+  Hard = 'Difícil',
 }

@@ -5,7 +5,6 @@ import { Course } from "./course";
 
 export interface Question {
   id: number;
-  name: string;
   statement: string;
   pointsEnum: PointsEnum;
   course: Course;

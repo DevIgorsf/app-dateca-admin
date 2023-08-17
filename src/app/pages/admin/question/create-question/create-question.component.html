@@ -7,15 +7,16 @@
       <div>
         <label
           class="mb-1 ms-2"
-          for="name">
-          <i class="bi bi-fonts me-1"></i>Nome
+          for="statement">
+          <i class="bi bi-fonts me-1"></i>Enunciado
         </label>
-        <input required
+        <textarea required
+        class="form-group__input"
           type="text"
-          formControlName="name"
-          placeholder="Digite seu nome"
-          [ngClass]="campoValidado('name')"
-          >
+          formControlName="statement"
+          placeholder="Digite o enunciado da questão"
+          [ngClass]="campoValidado('statement')"
+          ></textarea>
         <app-message
           *ngIf="!validado"
           mensagem="Nome obrigatório"
@@ -26,33 +27,17 @@
         <mat-form-field>
           <mat-label>Dificuldade</mat-label>
           <mat-select formControlName="pointsEnum">
-            <mat-option *ngFor="let point of points" [value]="point.value">
+            <mat-option *ngFor="let point of points" [value]="point">
               {{point.description}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
 
-      <div>
-        <label
-          class="mb-1 ms-2"
-          for="statement">
-          <i class="bi bi-fonts me-1"></i>Enunciado
-        </label>
-        <input required
-          type="text"
-          formControlName="statement"
-          placeholder="Digite seu nome"
-          [ngClass]="campoValidado('statement')"
-          >
-        <app-message
-          *ngIf="!validado"
-          mensagem="Nome obrigatório"
-        ></app-message>
-      </div>
+
 
       <div>
-        <mat-form-field>
+        <mat-form-field style="width: 81%;">
           <mat-label>Matéria</mat-label>
           <mat-select formControlName="course">
             <mat-option *ngFor="let course of courses" [value]="course">
@@ -61,36 +46,42 @@
           </mat-select>
         </mat-form-field>
       </div>
+    </div>
 
-      <h4>
-        Digite as alternativas:
-      </h4>
-      <div>
+    <h4>
+      Digite as alternativas:
+    </h4>
 
-      </div>
-
-      <div formArrayName="choices">
+    <div formArrayName="choices">
+      <mat-radio-group aria-label="Select an option">
         <div *ngFor="let choice of choices.controls; let i = index" [formGroupName]="i">
-          <div>
+          <div class="form-group">
+            <mat-radio-button
+              class="form-group__radio"
+              value="{{choice.value.correctAnswer}}"
+              [formControlName]="'correctAnswer'"
+              (change)="handleRadioChange(i)"></mat-radio-button>
             <label
-              class="mb-1 ms-2"
+              class="form-group__label"
               for="text">
-              <i class="bi bi-fonts me-1"></i>Alternativas
+              {{choice.value.letter}}
             </label>
-            <input required
+
+            <textarea required
               type="text"
+              class="form-group__input"
               formControlName="text"
-              placeholder="Digite seu nome"
+              placeholder="Digite a opção"
               [ngClass]="campoValidado('text')"
-              >
-            <app-message
-              *ngIf="!validado"
-              mensagem="Nome obrigatório"
-            ></app-message>
+              ></textarea>
           </div>
-          <input type="checkbox" [formControlName]="'correctAnswer'"> Resposta Correta
+          <app-message
+            *ngIf="!validado"
+            mensagem="Campo obrigatório"
+          ></app-message>
+
         </div>
-      </div>
+      </mat-radio-group>
     </div>
 
 

@@ -28,16 +28,15 @@ export class CreateQuestionComponent {
   name: string = '';
   validado: boolean = false;
 
-  formulario: FormGroup = this.formBuilder.group({
-    name: ['', Validators.required],
+  formulario = this.formBuilder.group({
     statement: ['', Validators.required],
     pointsEnum: [''],
     course: [''],
     choices: this.formBuilder.array([
-      this.createChoice('A'),
-      this.createChoice('B'),
-      this.createChoice('C'),
-      this.createChoice('D')
+      this.createChoice('A', true),  // Opção A é a correta
+      this.createChoice('B', false),
+      this.createChoice('C', false),
+      this.createChoice('D', false)
     ])
   });
 
@@ -88,23 +87,28 @@ export class CreateQuestionComponent {
     }
   }
 
-  createChoice(letter: string) {
+  createChoice(letter: string, isCorrect: boolean) {
     return this.formBuilder.group({
       letter: [letter, Validators.required],
       text: ['', Validators.required],
-      correctAnswer: [false]
+      correctAnswer: [isCorrect]
     });
-  }
-
-  addChoice(): void {
-    this.choices.push(this.createChoice('A'));
-    this.choices.push(this.createChoice('B'));
-    this.choices.push(this.createChoice('C'));
-    this.choices.push(this.createChoice('D'));
-    console.log(this.choices.controls);
   }
 
   get choices(): FormArray {
     return this.formulario.get('choices') as FormArray;
+  }
+
+  handleRadioChange(index: number) {
+    const choicesArray = this.formulario.get('choices') as FormArray;
+
+    choicesArray.controls.forEach((choiceControl, i) => {
+      if (i !== index) {
+        choiceControl.get('correctAnswer')?.setValue(false);
+      }
+    });
+
+    const selectedChoiceControl = choicesArray.at(index);
+    selectedChoiceControl.get('correctAnswer')?.setValue(true);
   }
 }

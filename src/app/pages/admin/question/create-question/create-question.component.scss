@@ -11,6 +11,7 @@
 
 .form {
   display: grid;
+  align-items: center;
   column-gap: 10px;
   row-gap: 20px;
   grid-template-columns: auto auto;
@@ -86,3 +87,23 @@
   }
 }
 
+.form-group{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  border: #FFF;
+  border-radius: 5px #fff;
+}
+
+.form-group__label {
+  margin-right: 18px;
+}
+
+.form-group__input {
+  height: 100px;
+}
+
+.form-group__radio {
+
+}

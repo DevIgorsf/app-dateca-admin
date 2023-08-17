@@ -5,12 +5,11 @@ import { QuestionAlternative } from "./questionAlternative";
 import { QuestionTypeEnum } from "./questionTypeEnum";
 
 export interface QuestionMultipleChoice {
-  id: number;
-  name: string;
+  id?: number;
   statement: string;
   pointsEnum: PointsEnum;
   questionTypeEnum?: QuestionTypeEnum;
   course: Course;
-  professorCreate: Professor;
+  professorCreate?: Professor;
   choices: QuestionAlternative[];
 }

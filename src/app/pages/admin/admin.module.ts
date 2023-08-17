@@ -27,6 +27,7 @@ import {MatCardModule} from '@angular/material/card';
 import { CardComponent } from 'src/app/shared/card/card.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { FormTextFieldComponent } from 'src/app/shared/form-text-field/form-text-field.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { FormTextFieldComponent } from 'src/app/shared/form-text-field/form-text
     MatSelectModule,
     MatChipsModule,
     MatGridListModule,
+    MatRadioModule,
     MatIconModule,
     AsyncPipe
   ],
