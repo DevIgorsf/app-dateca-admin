@@ -26,6 +26,7 @@ export class SigninComponent implements OnInit {
         this.router.navigate(['admin/dashboard']);
       },
       (error) => {
+        console.log(error)
         alert('Login ou senha inválido');
       }
     );

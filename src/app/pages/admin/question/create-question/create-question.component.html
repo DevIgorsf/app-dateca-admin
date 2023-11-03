@@ -28,7 +28,7 @@
           <mat-label>Dificuldade</mat-label>
           <mat-select formControlName="pointsEnum">
             <mat-option *ngFor="let point of points" [value]="point">
-              {{point.description}}
+              {{point}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -52,37 +52,128 @@
       Digite as alternativas:
     </h4>
 
-    <div formArrayName="choices">
-      <mat-radio-group aria-label="Select an option">
-        <div *ngFor="let choice of choices.controls; let i = index" [formGroupName]="i">
-          <div class="form-group">
-            <mat-radio-button
-              class="form-group__radio"
-              value="{{choice.value.correctAnswer}}"
-              [formControlName]="'correctAnswer'"
-              (change)="handleRadioChange(i)"></mat-radio-button>
-            <label
-              class="form-group__label"
-              for="text">
-              {{choice.value.letter}}
-            </label>
 
-            <textarea required
-              type="text"
-              class="form-group__input"
-              formControlName="text"
-              placeholder="Digite a opção"
-              [ngClass]="campoValidado('text')"
-              ></textarea>
-          </div>
-          <app-message
-            *ngIf="!validado"
-            mensagem="Campo obrigatório"
-          ></app-message>
+    <mat-radio-group aria-label="Select an option" formControlName="correctAnswer">
+      <div class="form-group">
+        <mat-radio-button
+          class="form-group__radio"
+          value="A">
+        </mat-radio-button>
+        <label
+          class="form-group__label"
+          for="alternativeA">
+          A
+        </label>
 
-        </div>
-      </mat-radio-group>
-    </div>
+        <textarea required
+          id="alternativeA"
+          type="text"
+          class="form-group__input"
+          formControlName="alternativeA"
+          placeholder="Digite a opção"
+          ></textarea>
+        <app-message
+          *ngIf="!validado"
+          mensagem="Campo obrigatório"
+        ></app-message>
+      </div>
+
+      <div class="form-group">
+        <mat-radio-button
+          class="form-group__radio"
+          value="B">
+        </mat-radio-button>
+        <label
+          class="form-group__label"
+          for="alternativeB">
+          B
+        </label>
+
+        <textarea required
+          id="alternativeB"
+          type="text"
+          class="form-group__input"
+          formControlName="alternativeB"
+          placeholder="Digite a opção"
+          ></textarea>
+        <app-message
+          *ngIf="!validado"
+          mensagem="Campo obrigatório"
+        ></app-message>
+      </div>
+
+      <div class="form-group">
+        <mat-radio-button
+          class="form-group__radio"
+          value="C">
+        </mat-radio-button>
+        <label
+          class="form-group__label"
+          for="alternativeC">
+          C
+        </label>
+
+        <textarea required
+          id="alternativeC"
+          type="text"
+          class="form-group__input"
+          formControlName="alternativeC"
+          placeholder="Digite a opção"
+          ></textarea>
+        <app-message
+          *ngIf="!validado"
+          mensagem="Campo obrigatório"
+        ></app-message>
+      </div>
+
+      <div class="form-group">
+        <mat-radio-button
+          class="form-group__radio"
+          value="D">
+        </mat-radio-button>
+        <label
+          class="form-group__label"
+          for="alternativeD">
+          D
+        </label>
+
+        <textarea required
+          id="alternativeD"
+          type="text"
+          class="form-group__input"
+          formControlName="alternativeD"
+          placeholder="Digite a opção"
+          ></textarea>
+        <app-message
+          *ngIf="!validado"
+          mensagem="Campo obrigatório"
+        ></app-message>
+      </div>
+
+      <div class="form-group">
+        <mat-radio-button
+          class="form-group__radio"
+          value="E">
+        </mat-radio-button>
+        <label
+          class="form-group__label"
+          for="text">
+          E
+        </label>
+
+        <textarea required
+          id="alternativeE"
+          type="text"
+          class="form-group__input"
+          formControlName="alternativeE"
+          placeholder="Digite a opção"
+          ></textarea>
+        <app-message
+          *ngIf="!validado"
+          mensagem="Campo obrigatório"
+        ></app-message>
+      </div>
+    </mat-radio-group>
 
 
 

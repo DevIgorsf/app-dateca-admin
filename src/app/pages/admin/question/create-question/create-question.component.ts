@@ -3,65 +3,66 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Course } from 'src/app/interfaces/course';
+import { PointsEnum } from 'src/app/interfaces/pointsEnum';
 import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
 import { CourseService } from 'src/app/service/course/course.service';
 import { QuestionService } from 'src/app/service/question/question.service';
 
-interface PointsEnum {
-  value: string;
-  description: string;
-}
+//interface PointsEnum {
+//  value: string;
+//  description: string;
+//}
+
+type EnumKeys<T> = Extract<keyof T, string>;
 
 @Component({
   selector: 'app-create-question',
   templateUrl: './create-question.component.html',
   styleUrls: ['./create-question.component.scss']
 })
-export class CreateQuestionComponent {
-  points: PointsEnum[] = [
-    {value: '5', description: 'Fácil'},
-    {value: '7', description: 'Normal'},
-    {value: '9', description: 'Difícil'},
-  ];
+export class CreateQuestionComponent implements OnInit {
+  points!: string[];
   coursesSubscription: Subscription = new Subscription();
   courses!: Course[];
   name: string = '';
   validado: boolean = false;
 
-  formulario = this.formBuilder.group({
-    statement: ['', Validators.required],
-    pointsEnum: [''],
-    course: [''],
-    choices: this.formBuilder.array([
-      this.createChoice('A', true),  // Opção A é a correta
-      this.createChoice('B', false),
-      this.createChoice('C', false),
-      this.createChoice('D', false)
-    ])
-  });
+  formulario: FormGroup;
 
   constructor(
     private questionService: QuestionService,
-    private courseService : CourseService,
+    private courseService: CourseService,
     private formBuilder: FormBuilder,
     private router: Router
-  ) { }
-
-  ngOnInit(): void {
-    this.courseService.getCourseByProfessor();
-    this.coursesSubscription = this.courseService.courses$.subscribe(courses => {
-      this.courses = courses;
-    })
-
+  ) {
+    this.formulario = this.formBuilder.group({
+      statement: ['', Validators.required],
+      pointsEnum: [''],
+      course: [''],
+      correctAnswer: ['', Validators.required],
+      alternativeA: ['', Validators.required],
+      alternativeB: ['', Validators.required],
+      alternativeC: ['', Validators.required],
+      alternativeD: ['', Validators.required],
+      alternativeE: ['', Validators.required],
+    });
   }
 
-  createQuestion() {
+  ngOnInit(): void {
+    this.points = Object.values(PointsEnum);
+    this.courseService.getCourseByProfessor();
+    this.coursesSubscription = this.courseService.courses$.subscribe((courses) => {
+      this.courses = courses;
+    });
+  }
+
+  async createQuestion() {
     console.log(this.formulario.value);
-    // if(this.formulario.valid) {
-    //   const newQuestion: QuestionMultipleChoice = this.formulario.value;
-    //   await this.questionService.create(newQuestion)
-    //   this.router.navigate(['/admin/questao']);
-    // }
+    if (this.formulario.valid) {
+      const newQuestion = this.formulario.value;
+      await this.questionService.create(newQuestion);
+      this.router.navigate(['/admin/questao']);
+    }
   }
 
   cancelar() {
@@ -69,16 +70,12 @@ export class CreateQuestionComponent {
   }
 
   habilitarBotao(): string {
-    if (this.formulario.valid) {
-      return 'botao-salvar';
-    } else return 'botao-desabilitado';
+    return this.formulario.valid ? 'botao-salvar' : 'botao-desabilitado';
   }
 
   campoValidado(campoAtual: string): string {
-    if (
-      this.formulario.get(campoAtual)?.errors &&
-      this.formulario.get(campoAtual)?.touched
-    ) {
+    const control = this.formulario.get(campoAtual);
+    if (control?.errors && control?.touched) {
       this.validado = false;
       return 'form-item input-invalido';
     } else {
@@ -87,28 +84,4 @@ export class CreateQuestionComponent {
     }
   }
 
-  createChoice(letter: string, isCorrect: boolean) {
-    return this.formBuilder.group({
-      letter: [letter, Validators.required],
-      text: ['', Validators.required],
-      correctAnswer: [isCorrect]
-    });
-  }
-
-  get choices(): FormArray {
-    return this.formulario.get('choices') as FormArray;
-  }
-
-  handleRadioChange(index: number) {
-    const choicesArray = this.formulario.get('choices') as FormArray;
-
-    choicesArray.controls.forEach((choiceControl, i) => {
-      if (i !== index) {
-        choiceControl.get('correctAnswer')?.setValue(false);
-      }
-    });
-
-    const selectedChoiceControl = choicesArray.at(index);
-    selectedChoiceControl.get('correctAnswer')?.setValue(true);
-  }
 }

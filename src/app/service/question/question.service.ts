@@ -17,7 +17,8 @@ export class QuestionService {
     private http: HttpClient,
     ) { }
 
-  create(question: QuestionMultipleChoice): void {
+  create(question: any): void {
+    console.log(question);
     this.http.post<QuestionMultipleChoice>(`${API}/questao`, question).subscribe(newQuestion => {
       let questionTemp: QuestionMultipleChoice[] = this.questionsSubject.getValue();
       questionTemp = [...questionTemp, newQuestion];

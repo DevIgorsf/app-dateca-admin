@@ -23,4 +23,8 @@ export class TokenService {
     return !!this.retornaToken();
   }
 
+  // isTokenExpired(): boolean {
+
+  // }
+
 }

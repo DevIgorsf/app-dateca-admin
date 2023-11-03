@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { Subscription} from 'rxjs';
-import { Professor } from 'src/app/interfaces/professor';
-import { ProfessorService } from 'src/app/service/professor/professor.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
+import { CourseService } from 'src/app/service/course/course.service';
+import { Course } from 'src/app/interfaces/course';
 
 @Component({
   selector: 'app-question',
@@ -13,16 +13,16 @@ import { MatSort, Sort } from '@angular/material/sort';
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent {
-  professors: Professor[] = [];
+  courses: Course[] = [];
   professorsSubscription: Subscription = new Subscription;
 
-  public dataSource!: MatTableDataSource<Professor>;
+  public dataSource!: MatTableDataSource<Course>;
   public displayedColumns:string[] = ['#', 'name', 'materia', 'acoes'];
   public pageSize=1;
   public length=5;
 
   constructor(
-    private service: ProfessorService,
+    private service: CourseService,
     private _liveAnnouncer: LiveAnnouncer
   ) { }
 
@@ -31,17 +31,17 @@ export class QuestionComponent {
 
   ngOnInit(): void {
     this.service.getAll()
-    this.professorsSubscription = this.service.professors$.subscribe(professors => {
-      this.dataSource= new MatTableDataSource<Professor>(professors);
+    this.professorsSubscription = this.service.courses$.subscribe(courses => {
+      this.dataSource= new MatTableDataSource<Course>(courses);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     })
 
   }
 
-  deleteProfessor(professorId: number): void {
-    if (professorId) {
-      this.service.deleteProfessor(professorId);
+  deleteCourse(courseId: number): void {
+    if (courseId) {
+      this.service.deleteCourse(courseId);
     }
   }
 

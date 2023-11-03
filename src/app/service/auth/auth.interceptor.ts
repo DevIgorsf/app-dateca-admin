@@ -18,6 +18,9 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
     ): Observable<HttpEvent<unknown>> {
+      if (request.url.includes('/login')) {
+        return next.handle(request); // Não aplicar o interceptor durante o login
+      }
       if (this.tokenService.possuiToken()) {
         const token = this.tokenService.retornaToken();
         const headers = new HttpHeaders().set('authorization', 'Bearer ' + token);
