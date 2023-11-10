@@ -8,7 +8,7 @@ export interface QuestionMultipleChoice {
   id?: any;
   statement?: any;
   pointsEnum?: any;
-  course: any;
+  courseName: any;
   correctAnswer: any;
   alternativeA: any;
   alternativeB: any;

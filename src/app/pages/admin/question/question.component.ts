@@ -6,6 +6,9 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { CourseService } from 'src/app/service/course/course.service';
 import { Course } from 'src/app/interfaces/course';
+import { QuestionService } from 'src/app/service/question/question.service';
+import { Question } from 'src/app/interfaces/question';
+import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
 
 @Component({
   selector: 'app-question',
@@ -13,16 +16,16 @@ import { Course } from 'src/app/interfaces/course';
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent {
-  courses: Course[] = [];
-  professorsSubscription: Subscription = new Subscription;
+  questions: QuestionMultipleChoice[] = [];
+  questionsSubscription: Subscription = new Subscription;
 
-  public dataSource!: MatTableDataSource<Course>;
-  public displayedColumns:string[] = ['#', 'name', 'materia', 'acoes'];
+  public dataSource!: MatTableDataSource<QuestionMultipleChoice>;
+  public displayedColumns:string[] = ['codigo', 'materia', 'dificuldade', 'acoes'];
   public pageSize=1;
   public length=5;
 
   constructor(
-    private service: CourseService,
+  private service: QuestionService,
     private _liveAnnouncer: LiveAnnouncer
   ) { }
 
@@ -31,17 +34,18 @@ export class QuestionComponent {
 
   ngOnInit(): void {
     this.service.getAll()
-    this.professorsSubscription = this.service.courses$.subscribe(courses => {
-      this.dataSource= new MatTableDataSource<Course>(courses);
+    this.questionsSubscription = this.service.questions$.subscribe(questions => {
+      this.dataSource = new MatTableDataSource<QuestionMultipleChoice>(questions);
+      console.log(this.dataSource);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     })
 
   }
 
-  deleteCourse(courseId: number): void {
+  deleteQuestion(courseId: number): void {
     if (courseId) {
-      this.service.deleteCourse(courseId);
+      this.service.deleteQuestion(courseId);
     }
   }
 
