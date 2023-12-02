@@ -52,6 +52,10 @@ const routes: Routes = [
         path: 'questao/adicionar-questao',
         component: CreateQuestionComponent,
       },
+      {
+        path: 'questao/editar-questao/:id',
+        component: CreateQuestionComponent,
+      },
     ]
   },
 ];

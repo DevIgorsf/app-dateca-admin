@@ -4,7 +4,7 @@
     [formGroup]="formulario">
     <div class="form">
 
-      <div>
+      <div class="form__statement">
         <label
           class="mb-1 ms-2"
           for="statement">
@@ -23,7 +23,7 @@
         ></app-message>
       </div>
 
-      <div>
+      <div class="form__select">
         <mat-form-field>
           <mat-label>Dificuldade</mat-label>
           <mat-select formControlName="pointsEnum">
@@ -34,13 +34,11 @@
         </mat-form-field>
       </div>
 
-
-
-      <div>
+      <div class="form__select">
         <mat-form-field style="width: 81%;">
           <mat-label>Matéria</mat-label>
           <mat-select formControlName="course">
-            <mat-option *ngFor="let course of courses" [value]="course">
+            <mat-option *ngFor="let course of courses" [value]="course.id">
               {{course.name}}
             </mat-option>
           </mat-select>

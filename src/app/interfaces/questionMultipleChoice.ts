@@ -1,14 +1,13 @@
 import { Course } from "./course";
 import { PointsEnum } from "./pointsEnum";
 import { Professor } from "./professor";
-import { QuestionAlternative } from "./questionAlternative";
 import { QuestionTypeEnum } from "./questionTypeEnum";
 
 export interface QuestionMultipleChoice {
   id?: any;
   statement?: any;
   pointsEnum?: any;
-  courseName: any;
+  course: any;
   correctAnswer: any;
   alternativeA: any;
   alternativeB: any;

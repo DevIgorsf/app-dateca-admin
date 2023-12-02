@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Course } from 'src/app/interfaces/course';
 import { PointsEnum } from 'src/app/interfaces/pointsEnum';
+import { Question } from 'src/app/interfaces/question';
 import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
 import { CourseService } from 'src/app/service/course/course.service';
 import { QuestionService } from 'src/app/service/question/question.service';
@@ -33,9 +34,11 @@ export class CreateQuestionComponent implements OnInit {
     private questionService: QuestionService,
     private courseService: CourseService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.formulario = this.formBuilder.group({
+      id: [''],
       statement: ['', Validators.required],
       pointsEnum: [''],
       course: [''],
@@ -49,6 +52,12 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      const questionId = params['id'];
+      if (questionId) {
+        this.loadQuestionToEdit(questionId);
+      }
+    });
     this.points = Object.values(PointsEnum);
     this.courseService.getCourseByProfessor();
     this.coursesSubscription = this.courseService.courses$.subscribe((courses) => {
@@ -56,12 +65,38 @@ export class CreateQuestionComponent implements OnInit {
     });
   }
 
+  loadQuestionToEdit(questionId: number) {
+    this.questionService.getQuestion(questionId).subscribe((question: QuestionMultipleChoice) => {
+      this.fillFormWithQuestionData(question);
+    });
+  }
+
+  fillFormWithQuestionData(question: QuestionMultipleChoice) {
+    this.formulario.patchValue({
+      id: question.id,
+      statement: question.statement,
+      pointsEnum: question.pointsEnum,
+      course: question.course.id,
+      correctAnswer: question. correctAnswer,
+      alternativeA: question.alternativeA,
+      alternativeB: question.alternativeB,
+      alternativeC: question.alternativeC,
+      alternativeD: question.alternativeD,
+      alternativeE: question.alternativeE,
+    });
+  }
+
   async createQuestion() {
-    console.log(this.formulario.value);
     if (this.formulario.valid) {
       const newQuestion = this.formulario.value;
-      await this.questionService.create(newQuestion);
-      this.router.navigate(['/admin/questao']);
+
+      if(!newQuestion.id) {
+        await this.questionService.create(newQuestion);
+        this.router.navigate(['/admin/questao']);
+      } else {
+        await this.questionService.update(newQuestion.id, newQuestion);
+        this.router.navigate(['/admin/questao']);
+      }
     }
   }
 

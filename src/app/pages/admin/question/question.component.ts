@@ -36,7 +36,6 @@ export class QuestionComponent {
     this.service.getAll()
     this.questionsSubscription = this.service.questions$.subscribe(questions => {
       this.dataSource = new MatTableDataSource<QuestionMultipleChoice>(questions);
-      console.log(this.dataSource);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     })
