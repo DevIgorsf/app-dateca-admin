@@ -10,6 +10,7 @@ import { CreateCourseComponent } from './course/create-course/create-course.comp
 import { UpdateCourseComponent } from './course/update-course/update-course.component';
 import { QuestionComponent } from './question/question.component';
 import { CreateQuestionComponent } from './question/create-question/create-question.component';
+import { RankingComponent } from './ranking/ranking.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,10 @@ const routes: Routes = [
       {
         path: 'questao/editar-questao/:id',
         component: CreateQuestionComponent,
+      },
+      {
+        path: 'ranking',
+        component: RankingComponent,
       },
     ]
   },

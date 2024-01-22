@@ -25,7 +25,7 @@ export class QuestionComponent {
   public length=5;
 
   constructor(
-  private service: QuestionService,
+    private service: QuestionService,
     private _liveAnnouncer: LiveAnnouncer
   ) { }
 

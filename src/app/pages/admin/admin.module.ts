@@ -19,15 +19,17 @@ import { UpdateCourseComponent } from './course/update-course/update-course.comp
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { QuestionComponent } from './question/question.component';
 import { CreateQuestionComponent } from './question/create-question/create-question.component';
 import { MatSelectModule } from '@angular/material/select';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { CardComponent } from 'src/app/shared/card/card.component';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 import { FormTextFieldComponent } from 'src/app/shared/form-text-field/form-text-field.component';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
+import { RankingComponent } from './ranking/ranking.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import {MatRadioModule} from '@angular/material/radio';
     CreateCourseComponent,
     UpdateCourseComponent,
     QuestionComponent,
-    CreateQuestionComponent
+    CreateQuestionComponent,
+    RankingComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +67,7 @@ import {MatRadioModule} from '@angular/material/radio';
     MatGridListModule,
     MatRadioModule,
     MatIconModule,
+    MatListModule,
     AsyncPipe
   ],
   exports: [AdminComponent],

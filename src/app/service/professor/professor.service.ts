@@ -64,4 +64,8 @@ export class ProfessorService {
   getProfessorData(): Observable<any> {
     return this.http.get(`${API}/professor/dados`);
   }
+
+  getRanking(): Observable<any> {
+    return this.http.get(`${API}/professor/ranking`);
+  }
 }

@@ -54,8 +54,8 @@
         </span>
       </a>
     </li>
-    <li class="sidebar-item">
-      <a class="sidebar-link">
+    <li class="sidebar-item" [ngClass]="{ 'active': ranking.isActive }">
+      <a class="sidebar-link" routerLink="/admin/ranking" routerLinkActive #ranking="routerLinkActive">
         <span class="sidebar-item__icon">
           <i class="bi bi-award"></i>
         </span>
