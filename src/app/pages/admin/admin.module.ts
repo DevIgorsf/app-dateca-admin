@@ -30,6 +30,7 @@ import { MatListModule } from '@angular/material/list';
 import { FormTextFieldComponent } from 'src/app/shared/form-text-field/form-text-field.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { RankingComponent } from './ranking/ranking.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { RankingComponent } from './ranking/ranking.component';
     UpdateCourseComponent,
     QuestionComponent,
     CreateQuestionComponent,
-    RankingComponent
+    RankingComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

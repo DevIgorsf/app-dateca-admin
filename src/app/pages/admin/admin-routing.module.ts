@@ -11,6 +11,7 @@ import { UpdateCourseComponent } from './course/update-course/update-course.comp
 import { QuestionComponent } from './question/question.component';
 import { CreateQuestionComponent } from './question/create-question/create-question.component';
 import { RankingComponent } from './ranking/ranking.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+      },
+      {
+        path: 'perfil',
+        component: ProfileComponent,
       },
       {
         path: 'professor',

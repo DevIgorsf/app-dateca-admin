@@ -42,6 +42,10 @@ export class ProfessorService {
     return this.http.get<Professor>(`${API}/professor/${id}`);
   }
 
+  getPerfil(): Observable<Professor> {
+    return this.http.get<Professor>(`${API}/professor/perfil`);
+  }
+
   getAll(): void {
     this.http.get<Professor[]>(`${API}/professor`).subscribe(professors =>{
       this.professorsSubject.next(professors);
