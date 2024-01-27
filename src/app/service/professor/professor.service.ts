@@ -38,7 +38,7 @@ export class ProfessorService {
     });
   }
 
-  getProfessor(id: number): Observable<Professor> {
+  getProfessor(id: number): Observable<any> {
     return this.http.get<Professor>(`${API}/professor/${id}`);
   }
 

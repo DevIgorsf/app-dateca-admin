@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SigninComponent } from './pages/signin/signin.component';
 import { MessageModule } from './shared/message/message.module';
 import { AuthModule } from './service/auth/auth.module';
+import { ProfessorService } from './service/professor/professor.service';
 
 @NgModule({
   declarations: [
