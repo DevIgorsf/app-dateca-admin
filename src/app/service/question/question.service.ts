@@ -52,6 +52,10 @@ export class QuestionService {
     })
   }
 
+  getQuestionData(): Observable<any>  {
+    return this.http.get(`${API}/questao/dados`);
+  }
+
   deleteQuestion(questionId: number): void {
     this.http.delete<QuestionMultipleChoice>(`${API}/questao/${questionId}`).subscribe(() => {
       const questions = this.questionsSubject.getValue();
