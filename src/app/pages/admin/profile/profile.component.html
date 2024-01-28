@@ -67,12 +67,6 @@
 
         <div class="d-flex justify-content-end m-5">
             <button
-                (click)="cancelar()"
-                class="button-cancelar me-5">
-                Cancelar
-            </button>
-
-            <button
             id="botao-salvar"
             (click)="updateProfessor()"
             class="button-adicionar  me-5"
@@ -80,6 +74,33 @@
             [disabled]="!updateProfessorForm.valid">
                 Editar
             </button>
+        </div>
+    </form>
+    <form [formGroup]="newPasswordProfessorForm">
+        <div class="form">
+            <div>
+                <label for="password" class="mb-1 ms-2">Nova senha</label>
+                <input type="password"  
+                placeholder="Digite a nova senha" 
+                required
+                [ngClass]="campoValidado('password')">
+            </div>
+            <div>
+                <label for="password" class="mb-1 ms-2">Confirme nova senha</label>
+                <input type="password"  
+                placeholder="Confirme a nova senha" 
+                required
+                [ngClass]="campoValidado('newPassword')">
+            </div>
+            <div></div>
+            <div class="d-flex justify-content-end mt-3 me-5">
+                <button 
+                id="botao-salvar"
+                type="submit" 
+                class="button-adicionar  me-5"
+                [ngClass]="habilitarBotao()"
+                [disabled]="!updateProfessorForm.valid">Alterar senha</button>
+            </div>
         </div>
     </form>
 </div>

@@ -11,6 +11,7 @@ import { ProfessorService } from 'src/app/service/professor/professor.service';
 })
 export class ProfileComponent {
   updateProfessorForm!: FormGroup;
+  newPasswordProfessorForm!: FormGroup;
   validado: boolean = false;
 
   constructor(
