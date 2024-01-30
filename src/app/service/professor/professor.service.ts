@@ -72,4 +72,10 @@ export class ProfessorService {
   getRanking(): Observable<any> {
     return this.http.get(`${API}/professor/ranking`);
   }
+
+  updatePassword(newPassword: Professor) {
+    this.http.post(`${API}/professor/updatePassword`, newPassword).subscribe(retorno => {
+      console.log(retorno);
+    });
+  }
 }

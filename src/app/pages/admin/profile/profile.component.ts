@@ -31,6 +31,10 @@ export class ProfileComponent {
         email: [professor.email, Validators.required],
       });
     })
+    this.newPasswordProfessorForm = this.fomBuilder.group({
+      password: ['', Validators.required],
+      newPassword: ['', Validators.required],
+    })
   }
 
   async updateProfessor() : Promise<void> {
@@ -38,6 +42,15 @@ export class ProfileComponent {
       const id = this.route.snapshot.paramMap.get('id')
       const updateProfessor: Professor = this.updateProfessorForm.value;
       await this.service.update(id!, updateProfessor)
+      this.router.navigate(['/admin/dashboard']);
+    }
+  }
+
+  async updatePassword() : Promise<void> {
+    if(this.newPasswordProfessorForm.valid) {
+      const id = this.route.snapshot.paramMap.get('id')
+      const newPassword: Professor = this.newPasswordProfessorForm.value.password;
+      await this.service.updatePassword(newPassword)
       this.router.navigate(['/admin/dashboard']);
     }
   }

@@ -76,29 +76,33 @@
             </button>
         </div>
     </form>
+
     <form [formGroup]="newPasswordProfessorForm">
         <div class="form">
             <div>
                 <label for="password" class="mb-1 ms-2">Nova senha</label>
                 <input type="password"  
+                formControlName="password"
                 placeholder="Digite a nova senha" 
                 required
-                [ngClass]="campoValidado('password')">
+                class="form-item">
+                <!-- [ngClass]="campoValidado('password')"> -->
             </div>
             <div>
                 <label for="password" class="mb-1 ms-2">Confirme nova senha</label>
                 <input type="password"  
                 placeholder="Confirme a nova senha" 
+                formControlName="newPassword"
                 required
-                [ngClass]="campoValidado('newPassword')">
+                class="form-item">
+                <!-- [ngClass]="campoValidado('newPassword')"> -->
             </div>
             <div></div>
             <div class="d-flex justify-content-end mt-3 me-5">
                 <button 
                 id="botao-salvar"
-                type="submit" 
-                class="button-adicionar  me-5"
-                [ngClass]="habilitarBotao()"
+                (click)="updatePassword()"
+                class="button-adicionar botao-salvar me-5"
                 [disabled]="!updateProfessorForm.valid">Alterar senha</button>
             </div>
         </div>
