@@ -22,6 +22,13 @@ export class UserService {
     this.usuarioSubject.next(usuario);
   }
 
+  verificarRole(token: string) {
+    const usuario = jwt_decode(token) as User;
+    if (usuario.role == "ALUNO"){
+      throw new Error('Usuário não tem permissão para acessar esse sistema.');
+    }
+  }
+
   retornaUsuario() {
     return this.usuarioSubject.asObservable();
   }

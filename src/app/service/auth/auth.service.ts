@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { UserService } from './user.service';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 
 const API = environment.ApiUrl;
 
@@ -29,7 +29,11 @@ export class AuthService {
       .pipe(
         tap((res: HttpResponse<any>) => {
           const authToken = res.body.token;
+          this.userService.verificarRole(authToken);
           this.userService.salvaToken(authToken);
+        }),
+        catchError((error: any) => {
+          return throwError(() => error);
         })
       );
   }

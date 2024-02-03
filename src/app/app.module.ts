@@ -1,15 +1,13 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule} from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { SigninComponent } from './pages/signin/signin.component';
-import { MessageModule } from './shared/message/message.module';
-import { AuthModule } from './service/auth/auth.module';
-import { ProfessorService } from './service/professor/professor.service';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AppRoutingModule } from "./app-routing.module";
+import { AuthModule } from "./service/auth/auth.module";
+import { MessageModule } from "./shared/message/message.module";
+import { SigninComponent } from "./pages/signin/signin.component";
+import { AppComponent } from "./app.component";
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
   declarations: [
@@ -19,7 +17,9 @@ import { ProfessorService } from './service/professor/professor.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-center',
+    }),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

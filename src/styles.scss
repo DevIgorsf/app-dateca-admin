@@ -1,8 +1,15 @@
+@import "node_modules/ngx-toastr/toastr.css";
 @import 'bootstrap/scss/bootstrap.scss';
 @import 'bootstrap-icons/font/bootstrap-icons.scss';
 @import './assets/scss/variables';
 
 @import './assets/scss/misc';
+
+.toast-center {
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 body {
   padding: 0;

@@ -35,7 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
             this.tokenService.excluiToken()
             this.router.navigate(['/login']);
           }
-          return next.handle(request); // Retorna uma resposta vazia para evitar que o erro seja propagado
+          return next.handle(request);
         })
       );
   }
