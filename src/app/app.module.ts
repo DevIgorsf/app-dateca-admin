@@ -8,6 +8,8 @@ import { MessageModule } from "./shared/message/message.module";
 import { SigninComponent } from "./pages/signin/signin.component";
 import { AppComponent } from "./app.component";
 import { ToastrModule } from "ngx-toastr";
+import { CommonModule } from "@angular/common";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { ToastrModule } from "ngx-toastr";
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     ToastrModule.forRoot({
       positionClass: 'toast-center',

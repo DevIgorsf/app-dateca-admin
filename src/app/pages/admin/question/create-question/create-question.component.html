@@ -3,6 +3,13 @@
   <form
     [formGroup]="formulario">
     <div class="form">
+      
+      
+      <div class="form__statement">
+        <input type="file" formControlName="file"  accept="image/jpeg" (change)="handleFile($event)"  />
+      </div>
+
+      <button (click)="onSubmit()">Enviar Imagens</button>
 
       <div class="form__statement">
         <label
@@ -22,7 +29,6 @@
           mensagem="Nome obrigatório"
         ></app-message>
       </div>
-
       <div class="form__select">
         <mat-form-field>
           <mat-label>Dificuldade</mat-label>

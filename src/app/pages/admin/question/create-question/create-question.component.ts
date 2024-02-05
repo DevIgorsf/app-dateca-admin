@@ -24,6 +24,8 @@ type EnumKeys<T> = Extract<keyof T, string>;
 export class CreateQuestionComponent implements OnInit {
   points!: string[];
   coursesSubscription: Subscription = new Subscription();
+  file!: File;
+  preview!: string;
   courses!: Course[];
   name: string = '';
   validado: boolean = false;
@@ -42,6 +44,7 @@ export class CreateQuestionComponent implements OnInit {
       statement: ['', Validators.required],
       pointsEnum: [''],
       course: [''],
+      idImages: [''],
       correctAnswer: ['', Validators.required],
       alternativeA: ['', Validators.required],
       alternativeB: ['', Validators.required],
@@ -77,7 +80,8 @@ export class CreateQuestionComponent implements OnInit {
       statement: question.statement,
       pointsEnum: question.pointsEnum,
       course: question.course.id,
-      correctAnswer: question. correctAnswer,
+      idImages: question.idImages,
+      correctAnswer: question.correctAnswer,
       alternativeA: question.alternativeA,
       alternativeB: question.alternativeB,
       alternativeC: question.alternativeC,
@@ -86,12 +90,35 @@ export class CreateQuestionComponent implements OnInit {
     });
   }
 
+  handleFile(event: any): void {
+    const files = event?.target?.files;
+  
+    if (files && files.length > 0) {
+      this.file = files[0];
+    }
+  }
+
+  onSubmit(): void {
+    if (this.file) {
+      this.questionService.saveImages(this.file).subscribe(
+        (urls: string[]) => {
+          this.formulario.patchValue({
+            idImages: urls,
+          });
+        }
+        );
+    } else {
+        console.error('Nenhum arquivo selecionado');
+    }
+  }
+
   async createQuestion() {
     if (this.formulario.valid) {
       const newQuestion = this.formulario.value;
 
+      console.log(newQuestion)
       if(!newQuestion.id) {
-        await this.questionService.create(newQuestion);
+        this.questionService.create(newQuestion);
         this.router.navigate(['/admin/questao']);
       } else {
         await this.questionService.update(newQuestion.id, newQuestion);

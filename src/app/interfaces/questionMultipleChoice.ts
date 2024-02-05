@@ -5,6 +5,7 @@ import { QuestionTypeEnum } from "./questionTypeEnum";
 
 export interface QuestionMultipleChoice {
   id?: any;
+  idImages?: string[];
   statement?: any;
   pointsEnum?: any;
   course: any;

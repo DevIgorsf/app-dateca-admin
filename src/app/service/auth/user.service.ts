@@ -24,7 +24,7 @@ export class UserService {
 
   verificarRole(token: string) {
     const usuario = jwt_decode(token) as User;
-    if (usuario.role == "ALUNO"){
+    if (usuario.role == "STUDENT"){
       throw new Error('Usuário não tem permissão para acessar esse sistema.');
     }
   }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
@@ -23,6 +23,14 @@ export class QuestionService {
       questionTemp = [...questionTemp, newQuestion];
       this.questionsSubject.next(questionTemp);
     });
+  }
+
+  saveImages(file: File): Observable<string[]> {
+    const formData = new FormData();
+
+    formData.append('imageFile', file);
+
+    return this.http.post<string[]>(`${API}/questao/imagens`, formData);
   }
 
   update(id: string, question: QuestionMultipleChoice): void {
