@@ -4,6 +4,7 @@
     [formGroup]="formulario">
     <div class="form">
       
+      <img [src]="images" alt="Imagem" *ngIf="images">
       
       <div class="form__statement">
         <input type="file" formControlName="file"  accept="image/jpeg" (change)="handleFile($event)"  />

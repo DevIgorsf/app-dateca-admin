@@ -25,6 +25,7 @@ export class CreateQuestionComponent implements OnInit {
   points!: string[];
   coursesSubscription: Subscription = new Subscription();
   file!: File;
+  images: any;
   preview!: string;
   courses!: Course[];
   name: string = '';
@@ -66,6 +67,7 @@ export class CreateQuestionComponent implements OnInit {
     this.coursesSubscription = this.courseService.courses$.subscribe((courses) => {
       this.courses = courses;
     });
+    
   }
 
   loadQuestionToEdit(questionId: number) {
@@ -95,6 +97,11 @@ export class CreateQuestionComponent implements OnInit {
   
     if (files && files.length > 0) {
       this.file = files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.images = e.target?.result as string;
+      };
+      reader.readAsDataURL(this.file);
     }
   }
 
