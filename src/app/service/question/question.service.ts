@@ -54,6 +54,10 @@ export class QuestionService {
     return this.http.get<QuestionMultipleChoice>(`${API}/questao/${id}`);
   }
 
+  getImages(idImages: any): Observable<any> {
+    return this.http.get(`${API}/questao/imagens/${idImages}`);
+  }
+
   getAll(): void {
     this.http.get<any[]>(`${API}/questao`).subscribe(questions => {
       this.questionsSubject.next(questions);

@@ -20,6 +20,23 @@
   margin-bottom: 30px;
 }
 
+.form__file {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.form__img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  & img {
+    width: 25%;
+  }
+}
+
 .form__select {
   width: 50%;
 }
@@ -51,7 +68,6 @@
   border: 2px solid #0083FD;
   color: #FFF;
   font-size: 20px;
-  margin-top: 25px;
   cursor: pointer;
   width: 160px;
   height: 40px;
@@ -68,7 +84,6 @@
   border: 2px solid #979797;
   color: #FFF;
   font-size: 20px;
-  margin-top: 25px;
   cursor: inherit;
 
   &:hover {
@@ -82,7 +97,6 @@
   border: 2px solid #979797d7;
   color: #FFF;
   font-size: 20px;
-  margin-top: 25px;
   cursor: pointer;
   width: 160px;
   height: 40px;

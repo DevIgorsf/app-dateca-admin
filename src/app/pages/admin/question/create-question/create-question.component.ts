@@ -73,6 +73,13 @@ export class CreateQuestionComponent implements OnInit {
   loadQuestionToEdit(questionId: number) {
     this.questionService.getQuestion(questionId).subscribe((question: QuestionMultipleChoice) => {
       this.fillFormWithQuestionData(question);
+      if(question.idImages !== null) {
+        this.questionService.getImages(question.idImages[0]).subscribe(
+          (response: any) => {
+            this.images = 'data:image/jpeg;base64,' + response.imagem;
+          }
+        );
+      }
     });
   }
 

@@ -1,16 +1,17 @@
 <div class="question" data-bs-spy="scroll" data-bs-smooth-scroll="true">
-  <h3 class="mt-3 mb-5">Adicionar questão</h3>
+  <h3 class="mt-3 mb-3">Adicionar questão</h3>
   <form
     [formGroup]="formulario">
     <div class="form">
       
-      <img [src]="images" alt="Imagem" *ngIf="images">
-      
-      <div class="form__statement">
-        <input type="file" formControlName="file"  accept="image/jpeg" (change)="handleFile($event)"  />
+      <div class="form__img">
+        <img [src]="images" alt="Imagem" *ngIf="images">
       </div>
-
-      <button (click)="onSubmit()">Enviar Imagens</button>
+      
+      <div class="form__file">
+        <input type="file" formControlName="file"  accept="image/jpeg" (change)="handleFile($event)"  />
+        <button type="button" class="button-adicionar" (click)="onSubmit()">Enviar Imagens</button>
+      </div>
 
       <div class="form__statement">
         <label

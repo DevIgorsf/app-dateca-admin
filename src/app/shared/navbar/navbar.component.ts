@@ -30,4 +30,10 @@ export class NavbarComponent {
     this.router.navigate(['']);
   }
 
+  getFirstName(fullName: string | undefined): string | undefined {
+    if (!fullName) return undefined;
+    const firstName = fullName.split(' ')[0];
+    return firstName;
+  }
+
 }
