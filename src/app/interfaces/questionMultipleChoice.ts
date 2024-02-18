@@ -15,4 +15,5 @@ export interface QuestionMultipleChoice {
   alternativeC: any;
   alternativeD: any;
   alternativeE: any;
+  [key: string]: any;
 }

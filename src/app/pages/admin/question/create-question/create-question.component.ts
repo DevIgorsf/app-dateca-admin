@@ -73,7 +73,7 @@ export class CreateQuestionComponent implements OnInit {
   loadQuestionToEdit(questionId: number) {
     this.questionService.getQuestion(questionId).subscribe((question: QuestionMultipleChoice) => {
       this.fillFormWithQuestionData(question);
-      if(question.idImages !== null) {
+      if(question.idImages != null && question.idImages.length > 0) {
         this.questionService.getImages(question.idImages[0]).subscribe(
           (response: any) => {
             this.images = 'data:image/jpeg;base64,' + response.imagem;
@@ -111,33 +111,25 @@ export class CreateQuestionComponent implements OnInit {
       reader.readAsDataURL(this.file);
     }
   }
-
-  onSubmit(): void {
-    if (this.file) {
-      this.questionService.saveImages(this.file).subscribe(
-        (urls: string[]) => {
-          this.formulario.patchValue({
-            idImages: urls,
-          });
-        }
-        );
-    } else {
-        console.error('Nenhum arquivo selecionado');
-    }
-  }
-
+  
   async createQuestion() {
-    if (this.formulario.valid) {
+    if (this.file && this.formulario.valid) {
       const newQuestion = this.formulario.value;
-
-      console.log(newQuestion)
-      if(!newQuestion.id) {
-        this.questionService.create(newQuestion);
-        this.router.navigate(['/admin/questao']);
-      } else {
-        await this.questionService.update(newQuestion.id, newQuestion);
-        this.router.navigate(['/admin/questao']);
-      }
+      this.questionService.saveImages(this.file, newQuestion);
+      this.router.navigate(['/admin/questao']);
+    } else {
+        if (this.formulario.valid) {
+          const newQuestion = this.formulario.value;
+    
+          console.log(newQuestion)
+          if(!newQuestion.id) {
+            this.questionService.create(newQuestion);
+            this.router.navigate(['/admin/questao']);
+          } else {
+            await this.questionService.update(newQuestion.id, newQuestion);
+            this.router.navigate(['/admin/questao']);
+          }
+        }
     }
   }
 

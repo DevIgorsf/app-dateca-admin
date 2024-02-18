@@ -25,12 +25,32 @@ export class QuestionService {
     });
   }
 
-  saveImages(file: File): Observable<string[]> {
+  saveImages(file: File, newQuestion: QuestionMultipleChoice | QuestionMultipleChoice[]): void {
     const formData = new FormData();
 
     formData.append('imageFile', file);
 
-    return this.http.post<string[]>(`${API}/questao/imagens`, formData);
+    if (Array.isArray(newQuestion)) {
+      newQuestion.forEach(question => {
+        Object.keys(question).forEach(key => {
+          if(question[key] != '') {
+            formData.append(key, question[key]);
+          }
+        });
+      });
+    } else {
+      Object.keys(newQuestion).forEach(key => {
+        if(newQuestion[key] != '') {
+          formData.append(key, newQuestion[key]);
+        }
+      });
+    }
+    
+    this.http.post<QuestionMultipleChoice>(`${API}/questao/imagens`, formData).subscribe(newQuestion => {
+      let questionTemp: QuestionMultipleChoice[] = this.questionsSubject.getValue();
+      questionTemp = [...questionTemp, newQuestion];
+      this.questionsSubject.next(questionTemp);
+    });
   }
 
   update(id: string, question: QuestionMultipleChoice): void {
