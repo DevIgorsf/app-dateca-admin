@@ -25,10 +25,14 @@ export class QuestionService {
     });
   }
 
-  saveImages(file: File, newQuestion: QuestionMultipleChoice | QuestionMultipleChoice[]): void {
+  saveImages(files: FileList, newQuestion: QuestionMultipleChoice | QuestionMultipleChoice[]): void {
     const formData = new FormData();
 
-    formData.append('imageFile', file);
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append('imageFile', files[i]);
+      }
+    }
 
     if (Array.isArray(newQuestion)) {
       newQuestion.forEach(question => {
@@ -45,7 +49,7 @@ export class QuestionService {
         }
       });
     }
-    
+
     this.http.post<QuestionMultipleChoice>(`${API}/questao/imagens`, formData).subscribe(newQuestion => {
       let questionTemp: QuestionMultipleChoice[] = this.questionsSubject.getValue();
       questionTemp = [...questionTemp, newQuestion];

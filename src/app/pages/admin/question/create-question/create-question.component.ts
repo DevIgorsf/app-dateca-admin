@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
 import { Course } from 'src/app/interfaces/course';
 import { PointsEnum } from 'src/app/interfaces/pointsEnum';
 import { Question } from 'src/app/interfaces/question';
@@ -24,8 +24,8 @@ type EnumKeys<T> = Extract<keyof T, string>;
 export class CreateQuestionComponent implements OnInit {
   points!: string[];
   coursesSubscription: Subscription = new Subscription();
-  file!: File;
-  images: any;
+  file!: FileList;
+  images: any[] = [];
   preview!: string;
   courses!: Course[];
   name: string = '';
@@ -74,9 +74,17 @@ export class CreateQuestionComponent implements OnInit {
     this.questionService.getQuestion(questionId).subscribe((question: QuestionMultipleChoice) => {
       this.fillFormWithQuestionData(question);
       if(question.idImages != null && question.idImages.length > 0) {
-        this.questionService.getImages(question.idImages[0]).subscribe(
-          (response: any) => {
-            this.images = 'data:image/jpeg;base64,' + response.imagem;
+        const imageObservables = question.idImages.map(imageId => {
+          return this.questionService.getImages(imageId);
+        });
+        forkJoin(imageObservables).subscribe(
+          (responses: any[]) => {
+            this.images = responses.map(response => {
+              return 'data:image/jpeg;base64,' + response.imagem;
+            });
+          },
+          error => {
+            console.error('Erro ao carregar imagens:', error);
           }
         );
       }
@@ -100,15 +108,16 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   handleFile(event: any): void {
-    const files = event?.target?.files;
-  
-    if (files && files.length > 0) {
-      this.file = files[0];
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.images = e.target?.result as string;
-      };
-      reader.readAsDataURL(this.file);
+    this.file = event?.target?.files;
+    if (this.file && this.file.length > 0) {
+      this.images = [];
+      for (let i = 0; i < this.file.length; i++) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.images.push(e.target?.result as string);
+        };
+        reader.readAsDataURL(this.file[i]);
+      }
     }
   }
   

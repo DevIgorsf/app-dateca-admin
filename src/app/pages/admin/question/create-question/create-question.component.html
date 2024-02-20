@@ -5,11 +5,13 @@
     <div class="form">
       
       <div class="form__img">
-        <img [src]="images" alt="Imagem" *ngIf="images">
+        <div *ngFor="let image of images">
+          <img [src]="image" alt="Imagem" />
+        </div>
       </div>
       
       <div class="form__file">
-        <input type="file" formControlName="file"  accept="image/jpeg" (change)="handleFile($event)"  />
+        <input type="file" formControlName="file" multiple accept="image/jpeg" (change)="handleFile($event)"  />
       </div>
 
       <div class="form__statement">
