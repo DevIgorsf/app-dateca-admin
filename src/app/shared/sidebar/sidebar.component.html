@@ -1,4 +1,4 @@
-<nav class="nav" id="sidebar">
+<nav class="nav" [ngClass]="{'sidebar-expanded': sidebarExpanded, 'sidebar-collapsed': !sidebarExpanded}" id="sidebar">
   <div class="nav-logo">
     <!-- <h1 class="nav-logo__title">DATECA</h1> -->
     <img src="assets/images/DATECA.png">
@@ -9,7 +9,7 @@
         <span class="sidebar-item__icon">
           <i class="bi bi-newspaper"></i>
         </span>
-        <span class="sidebar-item__title">
+        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Dashboard
         </span>
       </a>
@@ -19,7 +19,7 @@
         <span class="sidebar-item__icon">
           <i class="bi bi-mortarboard-fill"></i>
         </span>
-        <span class="sidebar-item__title">
+        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Professores
         </span>
       </a>
@@ -29,7 +29,7 @@
         <span class="sidebar-item__icon">
           <i class="bi bi-journal-bookmark-fill"></i>
         </span>
-        <span class="sidebar-item__title">
+        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Materias
         </span>
       </a>
@@ -39,7 +39,7 @@
         <span class="sidebar-item__icon">
           <i class="bi bi-list-check"></i>
         </span>
-        <span class="sidebar-item__title">
+        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Questões
         </span>
       </a>
@@ -49,7 +49,7 @@
         <span class="sidebar-item__icon">
           <i class="bi bi-graph-up"></i>
         </span>
-        <span class="sidebar-item__title">
+        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Métricas
         </span>
       </a>
@@ -59,7 +59,7 @@
         <span class="sidebar-item__icon">
           <i class="bi bi-award"></i>
         </span>
-        <span class="sidebar-item__title">
+        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Ranking
         </span>
       </a>

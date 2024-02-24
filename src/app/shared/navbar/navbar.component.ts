@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/auth/user.service';
 import { ProfessorService } from 'src/app/service/professor/professor.service';
+import { SidebarButtonService } from 'src/app/service/sidebar-button/sidebar-button.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ export class NavbarComponent {
     private userService: UserService, 
     private router: Router,
     private professorService: ProfessorService,
+    private sidebarButtonService: SidebarButtonService,
     ) {}
 
   ngOnInit(): void {
@@ -23,6 +25,10 @@ export class NavbarComponent {
         this.professor = professor;
     });
   
+  }
+
+  toggleSidebar() {
+    this.sidebarButtonService.toggleSidebar();
   }
 
   logout() {

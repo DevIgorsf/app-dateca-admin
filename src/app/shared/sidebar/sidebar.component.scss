@@ -4,7 +4,6 @@
   min-height: calc(100vh - 70px);
   height: 100vh;
   padding: 0;
-  width: 244px;
   background: #191c24;
 
   .nav-logo {
@@ -12,10 +11,17 @@
   }
 }
 
+.sidebar-expanded {
+  width: 240px;
+}
+
+.sidebar-collapsed {
+  width: 64px;
+}
+
 .sidebar {
   display: block;
   background: #191c24;
-  width: 244px;
 
   min-height: calc(100vh - 70px);
   font-family: Rubik,sans-serif;
@@ -55,6 +61,14 @@
     .sidebar-item__title {
       color: inherit;
       display: inline-block;
+      font-size: .9375rem;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .sidebar-item__title--none {
+      color: inherit;
+      display: none;
       font-size: .9375rem;
       line-height: 1;
       vertical-align: middle;
