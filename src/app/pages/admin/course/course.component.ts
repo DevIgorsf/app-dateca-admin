@@ -16,7 +16,7 @@ export class CourseComponent implements OnInit {
   courses: Course[] = [];
   coursesSubscription: Subscription = new Subscription;
   public dataSource!: MatTableDataSource<Course>;
-  public displayedColumns:string[] = ['code', 'name', 'semester','professors', 'acoes'];
+  public displayedColumns:string[] = ['code', 'name', 'semester','professor.name', 'acoes'];
   public pageSize=1;
   public length=5;
 

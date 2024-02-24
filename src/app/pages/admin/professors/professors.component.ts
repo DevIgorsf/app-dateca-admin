@@ -17,7 +17,7 @@ export class ProfessorsComponent {
   professorsSubscription: Subscription = new Subscription;
 
   public dataSource!: MatTableDataSource<Professor>;
-  public displayedColumns:string[] = ['#', 'name', 'email', 'acoes'];
+  public displayedColumns:string[] = ['registrationNumber', 'name', 'email', 'acoes'];
   public pageSize=1;
   public length=5;
 

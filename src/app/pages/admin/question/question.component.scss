@@ -6,3 +6,14 @@
 i {
   cursor: pointer;
 }
+
+.question__statement {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+}
+
+.question__acoes {
+  display: flex;
+}

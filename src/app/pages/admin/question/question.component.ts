@@ -1,13 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription} from 'rxjs';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
-import { CourseService } from 'src/app/service/course/course.service';
-import { Course } from 'src/app/interfaces/course';
 import { QuestionService } from 'src/app/service/question/question.service';
-import { Question } from 'src/app/interfaces/question';
 import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
 
 @Component({
@@ -15,12 +12,12 @@ import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoic
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss']
 })
-export class QuestionComponent {
+export class QuestionComponent implements OnInit {
   questions: QuestionMultipleChoice[] = [];
   questionsSubscription: Subscription = new Subscription;
 
   public dataSource!: MatTableDataSource<QuestionMultipleChoice>;
-  public displayedColumns:string[] = ['codigo', 'materia', 'dificuldade', 'acoes'];
+  public displayedColumns:string[] = ['id', 'statement', 'pointsEnum', 'acoes'];
   public pageSize=1;
   public length=5;
 
