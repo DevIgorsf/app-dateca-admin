@@ -4,10 +4,18 @@
     [formGroup]="formulario">
     <div class="form">
       
-      <div class="form__img">
-        <div *ngFor="let image of images">
-          <img [src]="image" alt="Imagem" />
+      <div class="carousel">
+        <button class="carousel__button" (click)="prevSlide()"><i class="bi bi-caret-left-fill"></i></button>
+        <div class="slides">
+          <div *ngFor="let image of images; let i = index" class="slide" >
+            <img [ngClass]="{'slide__image': i == slideIndex, 'slide__image--hidden': i != slideIndex}" [src]="image" alt="Imagem {{ i + 1 }} de {{ images.length }}" />
+          </div>
         </div>
+        <button class="carousel__button" (click)="nextSlide()"><i class="bi bi-caret-right-fill"></i></button>
+      </div>
+      
+      <div class="indicators">
+        <span class="indicator" *ngFor="let image of images; let i = index" [class.active]="i === slideIndex" (click)="goToSlide(i)"></span>
       </div>
       
       <div class="form__file">

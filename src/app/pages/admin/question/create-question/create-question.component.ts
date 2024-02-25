@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, forkJoin } from 'rxjs';
@@ -30,6 +30,39 @@ export class CreateQuestionComponent implements OnInit {
   courses!: Course[];
   name: string = '';
   validado: boolean = false;
+  
+  @Input() items: any[] = [];
+  slideIndex: number = 0;
+  slideOffset: string = '0';
+
+  goToSlide(index: number): void {
+    this.slideIndex = index;
+  }
+  prevSlide(): void {
+    if (this.slideIndex > 0) {
+      this.slideIndex--;
+      this.updateSlideOffset();
+    } else {
+      // Se estiver na primeira imagem, volte para a última
+      this.slideIndex = this.images.length - 1;
+      this.updateSlideOffset();
+    }
+  }
+
+  nextSlide(): void {
+    if (this.slideIndex < this.images.length - 1) {
+      this.slideIndex++;
+      this.updateSlideOffset();
+    } else {
+      // Se estiver na última imagem, volte para a primeira
+      this.slideIndex = 0;
+      this.updateSlideOffset();
+    }
+  }
+
+  updateSlideOffset(): void {
+    this.slideOffset = `-${this.slideIndex * 100}%`;
+  }
 
   formulario: FormGroup;
 
@@ -118,6 +151,8 @@ export class CreateQuestionComponent implements OnInit {
         };
         reader.readAsDataURL(this.file[i]);
       }
+    } else {
+      this.images = [];
     }
   }
   
