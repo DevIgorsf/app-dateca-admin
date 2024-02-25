@@ -4,7 +4,7 @@
     [formGroup]="formulario">
     <div class="form">
       
-      <div class="carousel">
+      <div class="carousel" *ngIf="images && images.length > 0">
         <button class="carousel__button" (click)="prevSlide()"><i class="bi bi-caret-left-fill"></i></button>
         <div class="slides">
           <div *ngFor="let image of images; let i = index" class="slide" >
