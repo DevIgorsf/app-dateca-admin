@@ -4,7 +4,7 @@
     <app-navbar></app-navbar>
     <div class="main-panel main-panel-only">
       <div class="content-wrapper">
-        <div contentAnimate class="h-100">
+        <div contentAnimate class="h-100" [ngClass]="{'sidebar-expanded': sidebarExpanded, 'sidebar-collapsed': !sidebarExpanded}">
           <router-outlet></router-outlet>
         </div>
       </div>
