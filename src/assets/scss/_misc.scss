@@ -20,7 +20,7 @@ body {
 
   padding-left: 0;
   padding-right: 0;
-  width: calc(100% - #{$sidebar-width-lg});
+  width: 100%;
   transition: width $action-transition-duration $action-transition-timing-function, margin $action-transition-duration $action-transition-timing-function;
 
   &.full-page-wrapper {
@@ -53,6 +53,7 @@ body {
   background: $content-bg;
   padding: 1.875rem 1.75rem;
   width: 100%;
+  overflow-y: auto;
 }
 
 .container-scroller {
