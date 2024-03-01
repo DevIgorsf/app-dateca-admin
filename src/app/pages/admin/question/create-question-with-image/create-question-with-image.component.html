@@ -1,0 +1,213 @@
+<div class="question" data-bs-spy="scroll" data-bs-smooth-scroll="true">
+    <h3 class="mt-3 mb-3">Adicionar questão</h3>
+    <form
+      [formGroup]="formulario"
+      (ngSubmit)="createQuestion()">
+      <div class="form">
+        
+        <div class="carousel" *ngIf="images && images.length > 0">
+          <button class="carousel__button" (click)="prevSlide()"><i class="bi bi-caret-left-fill"></i></button>
+          <div class="slides">
+            <div *ngFor="let image of images; let i = index" class="slide" >
+              <img [ngClass]="{'slide__image': i == slideIndex, 'slide__image--hidden': i != slideIndex}" [src]="image" alt="Imagem {{ i + 1 }} de {{ images.length }}" />
+            </div>
+          </div>
+          <button class="carousel__button" (click)="nextSlide()"><i class="bi bi-caret-right-fill"></i></button>
+        </div>
+        
+        <div class="indicators">
+          <span class="indicator" *ngFor="let image of images; let i = index" [class.active]="i === slideIndex" (click)="goToSlide(i)"></span>
+        </div>
+        
+        <div class="form__file">
+          <input type="file" formControlName="file" multiple accept="image/jpeg" (change)="handleFile($event)"  />
+        </div>
+  
+        <div class="form__statement">
+          <label
+            class="mb-1 ms-2"
+            for="statement">
+            <i class="bi bi-fonts me-1"></i>Enunciado
+          </label>
+          <textarea required
+          class="form-group__input"
+            type="text"
+            formControlName="statement"
+            placeholder="Digite o enunciado da questão"
+            [ngClass]="campoValidado('statement')"
+            ></textarea>
+          <app-message
+            *ngIf="!validado"
+            mensagem="Nome obrigatório"
+          ></app-message>
+        </div>
+        <div class="form__select">
+          <mat-form-field>
+            <mat-label>Dificuldade</mat-label>
+            <mat-select formControlName="pointsEnum">
+              <mat-option *ngFor="let point of points" [value]="point">
+                {{point}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div class="form__select">
+          <mat-form-field style="width: 81%;">
+            <mat-label>Matéria</mat-label>
+            <mat-select formControlName="course">
+              <mat-option *ngFor="let course of courses" [value]="course.id">
+                {{course.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <h4>
+        Digite as alternativas:
+      </h4>
+  
+  
+      <mat-radio-group aria-label="Select an option" formControlName="correctAnswer">
+        <div class="form-group">
+          <mat-radio-button
+            class="form-group__radio"
+            value="A">
+          </mat-radio-button>
+          <label
+            class="form-group__label"
+            for="alternativeA">
+            A
+          </label>
+  
+          <textarea required
+            id="alternativeA"
+            type="text"
+            class="form-group__input"
+            formControlName="alternativeA"
+            placeholder="Digite a opção"
+            ></textarea>
+          <app-message
+            *ngIf="!validado"
+            mensagem="Campo obrigatório"
+          ></app-message>
+        </div>
+  
+        <div class="form-group">
+          <mat-radio-button
+            class="form-group__radio"
+            value="B">
+          </mat-radio-button>
+          <label
+            class="form-group__label"
+            for="alternativeB">
+            B
+          </label>
+  
+          <textarea required
+            id="alternativeB"
+            type="text"
+            class="form-group__input"
+            formControlName="alternativeB"
+            placeholder="Digite a opção"
+            ></textarea>
+          <app-message
+            *ngIf="!validado"
+            mensagem="Campo obrigatório"
+          ></app-message>
+        </div>
+  
+        <div class="form-group">
+          <mat-radio-button
+            class="form-group__radio"
+            value="C">
+          </mat-radio-button>
+          <label
+            class="form-group__label"
+            for="alternativeC">
+            C
+          </label>
+  
+          <textarea required
+            id="alternativeC"
+            type="text"
+            class="form-group__input"
+            formControlName="alternativeC"
+            placeholder="Digite a opção"
+            ></textarea>
+          <app-message
+            *ngIf="!validado"
+            mensagem="Campo obrigatório"
+          ></app-message>
+        </div>
+  
+        <div class="form-group">
+          <mat-radio-button
+            class="form-group__radio"
+            value="D">
+          </mat-radio-button>
+          <label
+            class="form-group__label"
+            for="alternativeD">
+            D
+          </label>
+  
+          <textarea required
+            id="alternativeD"
+            type="text"
+            class="form-group__input"
+            formControlName="alternativeD"
+            placeholder="Digite a opção"
+            ></textarea>
+          <app-message
+            *ngIf="!validado"
+            mensagem="Campo obrigatório"
+          ></app-message>
+        </div>
+  
+        <div class="form-group">
+          <mat-radio-button
+            class="form-group__radio"
+            value="E">
+          </mat-radio-button>
+          <label
+            class="form-group__label"
+            for="text">
+            E
+          </label>
+  
+          <textarea required
+            id="alternativeE"
+            type="text"
+            class="form-group__input"
+            formControlName="alternativeE"
+            placeholder="Digite a opção"
+            ></textarea>
+          <app-message
+            *ngIf="!validado"
+            mensagem="Campo obrigatório"
+          ></app-message>
+        </div>
+      </mat-radio-group>
+  
+      <div class="d-flex justify-content-end m-5 pb-5">
+        <button
+          (click)="cancelar()"
+          class="button-cancelar me-5">
+            Cancelar
+        </button>
+  
+        <button
+        id="botao-salvar"
+        type="submit"
+        class="button-adicionar  me-5"
+        [ngClass]="habilitarBotao()"
+        [disabled]="!formulario.valid">
+          Adicionar
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  

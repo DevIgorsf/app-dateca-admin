@@ -1,6 +1,7 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { QuestionMultipleChoiceWithImage } from 'src/app/interfaces/QuestionMultipleChoiceWithImage';
 import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
 import { environment } from 'src/environments/environment';
 
@@ -18,14 +19,20 @@ export class QuestionService {
     ) { }
 
   create(question: any): void {
-    this.http.post<QuestionMultipleChoice>(`${API}/questao`, question).subscribe(newQuestion => {
-      let questionTemp: QuestionMultipleChoice[] = this.questionsSubject.getValue();
-      questionTemp = [...questionTemp, newQuestion];
-      this.questionsSubject.next(questionTemp);
-    });
+    this.http.post<QuestionMultipleChoice>(`${API}/questao`, question).
+    pipe(
+      tap(newQuestion => {
+        this.questionsSubject.next([...this.questionsSubject.getValue(), newQuestion]);
+      }),
+      catchError(error => {
+        console.error('Erro ao criar pergunta:', error);
+
+        return throwError(error);
+      })
+    );
   }
 
-  saveImages(files: FileList, newQuestion: QuestionMultipleChoice | QuestionMultipleChoice[]): void {
+  saveImages(files: FileList, newQuestion: QuestionMultipleChoiceWithImage | QuestionMultipleChoiceWithImage[]): void {
     const formData = new FormData();
 
     if (files && files.length > 0) {
@@ -50,8 +57,8 @@ export class QuestionService {
       });
     }
 
-    this.http.post<QuestionMultipleChoice>(`${API}/questao/imagens`, formData).subscribe(newQuestion => {
-      let questionTemp: QuestionMultipleChoice[] = this.questionsSubject.getValue();
+    this.http.post<QuestionMultipleChoiceWithImage>(`${API}/questao/imagens`, formData).subscribe(newQuestion => {
+      let questionTemp: QuestionMultipleChoiceWithImage[] = this.questionsSubject.getValue();
       questionTemp = [...questionTemp, newQuestion];
       this.questionsSubject.next(questionTemp);
     });

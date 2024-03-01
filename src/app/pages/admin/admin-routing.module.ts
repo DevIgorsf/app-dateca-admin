@@ -12,6 +12,7 @@ import { QuestionComponent } from './question/question.component';
 import { CreateQuestionComponent } from './question/create-question/create-question.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CreateQuestionWithImageComponent } from './question/create-question-with-image/create-question-with-image.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
       {
         path: 'questao/adicionar-questao',
         component: CreateQuestionComponent,
+      },
+      {
+        path: 'questao/adicionar-questao-imagem',
+        component: CreateQuestionWithImageComponent,
       },
       {
         path: 'questao/editar-questao/:id',

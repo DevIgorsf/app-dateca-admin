@@ -3,8 +3,9 @@ import { PointsEnum } from "./pointsEnum";
 import { Professor } from "./professor";
 import { QuestionTypeEnum } from "./questionTypeEnum";
 
-export interface QuestionMultipleChoice {
+export interface QuestionMultipleChoiceWithImage {
   id?: any;
+  idImages?: string[];
   statement?: any;
   pointsEnum?: any;
   course: any;
@@ -14,4 +15,5 @@ export interface QuestionMultipleChoice {
   alternativeC: any;
   alternativeD: any;
   alternativeE: any;
+  [key: string]: any;
 }
