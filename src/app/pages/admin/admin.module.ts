@@ -31,10 +31,11 @@ import { FormTextFieldComponent } from 'src/app/shared/form-text-field/form-text
 import { MatRadioModule } from '@angular/material/radio';
 import { RankingComponent } from './ranking/ranking.component';
 import { ProfileComponent } from './profile/profile.component';
-import { CreateComponent } from './enade/create/create.component';
 import { EnadeComponent } from './enade/enade.component';
-import { CreateWithImageComponent } from './enade/create-with-image/create-with-image.component';
 import { CreateQuestionWithImageComponent } from './question/create-question-with-image/create-question-with-image.component';
+import { CreateEnadeWithImageComponent } from './enade-image/create-enade-with-image/create-enade-with-image.component';
+import { CreateEnadeComponent } from './enade/create-enade/create-enade.component';
+import { EnadeImageComponent } from './enade-image/enade-image.component';
 
 @NgModule({
   declarations: [
@@ -55,9 +56,10 @@ import { CreateQuestionWithImageComponent } from './question/create-question-wit
     RankingComponent,
     ProfileComponent,
     EnadeComponent,
-    CreateComponent,
-    CreateWithImageComponent,
-    CreateQuestionWithImageComponent
+    CreateQuestionWithImageComponent,
+    CreateEnadeWithImageComponent,
+    CreateEnadeComponent,
+    EnadeImageComponent
   ],
   imports: [
     CommonModule,
