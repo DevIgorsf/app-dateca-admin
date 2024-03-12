@@ -4,19 +4,19 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { Enade } from 'src/app/interfaces/Enade';
+import { QuestionMultipleChoiceWithImage } from 'src/app/interfaces/QuestionMultipleChoiceWithImage';
 import { QuestionService } from 'src/app/service/question/question.service';
 
 @Component({
-  selector: 'app-enade',
-  templateUrl: './enade.component.html',
-  styleUrls: ['./enade.component.scss']
+  selector: 'app-question-image',
+  templateUrl: './question-image.component.html',
+  styleUrls: ['./question-image.component.scss']
 })
-export class EnadeComponent {
-  questions: Enade[] = [];
-  questionsSubscription: Subscription = new Subscription;
+export class QuestionImageComponent {
+  questions: QuestionMultipleChoiceWithImage[] = [];
+  questionsWithImageSubject: Subscription = new Subscription;
 
-  public dataSource!: MatTableDataSource<Enade>;
+  public dataSource!: MatTableDataSource<QuestionMultipleChoiceWithImage>;
   public displayedColumns:string[] = ['id', 'statement', 'pointsEnum', 'acoes'];
   public pageSize=1;
   public length=5;
@@ -30,12 +30,12 @@ export class EnadeComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.service.getAll()
-    // this.questionsSubscription = this.service.questions$.subscribe(questions => {
-    //   this.dataSource = new MatTableDataSource<Enade>(questions);
-    //   this.dataSource.sort = this.sort;
-    //   this.dataSource.paginator = this.paginator;
-    // })
+    this.service.getAllImages()
+    this.questionsWithImageSubject = this.service.questionsWithImage$.subscribe(questions => {
+      this.dataSource = new MatTableDataSource<QuestionMultipleChoiceWithImage>(questions);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    })
 
   }
 
@@ -54,4 +54,3 @@ export class EnadeComponent {
   }
 
 }
-

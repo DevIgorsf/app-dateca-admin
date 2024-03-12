@@ -13,6 +13,8 @@ const API = environment.ApiUrl;
 export class QuestionService {
   private questionsSubject = new BehaviorSubject<QuestionMultipleChoice[]>([]);
   questions$ = this.questionsSubject.asObservable();
+  private questionsWithImageSubject = new BehaviorSubject<QuestionMultipleChoiceWithImage[]>([]);
+  questionsWithImage$ = this.questionsWithImageSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -92,6 +94,13 @@ export class QuestionService {
   getAll(): void {
     this.http.get<any[]>(`${API}/questao`).subscribe(questions => {
       this.questionsSubject.next(questions);
+    })
+  }
+
+  getAllImages(): void {
+    this.http.get<any[]>(`${API}/questao/images`).subscribe(questions => {
+      console.log(questions);
+      this.questionsWithImageSubject.next(questions);
     })
   }
 

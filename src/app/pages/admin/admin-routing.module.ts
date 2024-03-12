@@ -12,11 +12,12 @@ import { QuestionComponent } from './question/question.component';
 import { CreateQuestionComponent } from './question/create-question/create-question.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { ProfileComponent } from './profile/profile.component';
-import { CreateQuestionWithImageComponent } from './question/create-question-with-image/create-question-with-image.component';
+import { CreateQuestionWithImageComponent } from './question-image/create-question-with-image/create-question-with-image.component';
 import { EnadeComponent } from './enade/enade.component';
 import { CreateEnadeComponent } from './enade/create-enade/create-enade.component';
 import { CreateEnadeWithImageComponent } from './enade-image/create-enade-with-image/create-enade-with-image.component';
 import { EnadeImageComponent } from './enade-image/enade-image.component';
+import { QuestionImageComponent } from './question-image/question-image.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
       {
         path: 'questao/adicionar-questao',
         component: CreateQuestionComponent,
+      },
+      {
+        path: 'questao-imagem',
+        component: QuestionImageComponent,
       },
       {
         path: 'questao/adicionar-questao-imagem',

@@ -32,10 +32,11 @@ import { MatRadioModule } from '@angular/material/radio';
 import { RankingComponent } from './ranking/ranking.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EnadeComponent } from './enade/enade.component';
-import { CreateQuestionWithImageComponent } from './question/create-question-with-image/create-question-with-image.component';
-import { CreateEnadeWithImageComponent } from './enade-image/create-enade-with-image/create-enade-with-image.component';
+import { CreateQuestionWithImageComponent } from './question-image/create-question-with-image/create-question-with-image.component';
 import { CreateEnadeComponent } from './enade/create-enade/create-enade.component';
 import { EnadeImageComponent } from './enade-image/enade-image.component';
+import { QuestionImageComponent } from './question-image/question-image.component';
+import { CreateEnadeWithImageComponent } from './enade-image/create-enade-with-image/create-enade-with-image.component';
 
 @NgModule({
   declarations: [
@@ -56,10 +57,11 @@ import { EnadeImageComponent } from './enade-image/enade-image.component';
     RankingComponent,
     ProfileComponent,
     EnadeComponent,
-    CreateQuestionWithImageComponent,
     CreateEnadeWithImageComponent,
     CreateEnadeComponent,
-    EnadeImageComponent
+    EnadeImageComponent,
+    QuestionImageComponent,
+    CreateQuestionWithImageComponent
   ],
   imports: [
     CommonModule,
