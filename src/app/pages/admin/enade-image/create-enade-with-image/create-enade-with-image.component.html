@@ -23,36 +23,74 @@
             <input type="file" formControlName="file" multiple accept="image/jpeg" (change)="handleFile($event)"  />
           </div>
   
-        <div class="form__statement">
-          <label
-            class="mb-1 ms-2"
-            for="statement">
-            <i class="bi bi-fonts me-1"></i>Enunciado
-          </label>
-          <textarea required
-          class="form-group__input"
-            type="text"
-            formControlName="statement"
-            placeholder="Digite o enunciado da questão"
-            [ngClass]="campoValidado('statement')"
-            ></textarea>
-          <app-message
-            *ngIf="!validado"
-            mensagem="Nome obrigatório"
-          ></app-message>
-        </div>
-        <div class="form__select">
-          <mat-form-field>
-            <mat-label>Dificuldade</mat-label>
-            <mat-select formControlName="pointsEnum">
-              <mat-option *ngFor="let point of points" [value]="point">
-                {{point}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+          <div class="form__year">
+            <label
+              class="mb-1 ms-2"
+              for="year">
+              <i class="bi bi-fonts me-1"></i>Ano
+            </label>
+            <input required
+            class="form-group__input"
+              type="number"
+              formControlName="year"
+              placeholder="Digite o ano da prova do enade"
+              [ngClass]="campoValidado('year')"
+              >
+            <app-message
+              *ngIf="!validado"
+              mensagem="Nome obrigatório"
+            ></app-message>
+          </div>
   
-      </div>
+          <div class="form__number">
+            <label
+              class="mb-1 ms-2"
+              for="number">
+              <i class="bi bi-fonts me-1"></i>Número
+            </label>
+            <input required
+            class="form-group__input"
+              type="number"
+              formControlName="number"
+              placeholder="Digite o número da questão"
+              [ngClass]="campoValidado('number')"
+              >
+            <app-message
+              *ngIf="!validado"
+              mensagem="Nome obrigatório"
+            ></app-message>
+          </div>
+  
+          <div class="form__select">
+            <mat-form-field>
+              <mat-label>Dificuldade</mat-label>
+              <mat-select formControlName="pointsEnum">
+                <mat-option *ngFor="let point of points" [value]="point">
+                  {{point}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+    
+          <div class="form__statement">
+            <label
+              class="mb-1 ms-2"
+              for="statement">
+              <i class="bi bi-fonts me-1"></i>Enunciado
+            </label>
+            <textarea required
+            class="form-group__textarea"
+              type="text"
+              formControlName="statement"
+              placeholder="Digite o enunciado da questão"
+              [ngClass]="campoValidado('statement')"
+              ></textarea>
+            <app-message
+              *ngIf="!validado"
+              mensagem="Nome obrigatório"
+            ></app-message>
+          </div>
+        </div>
   
       <h4>
         Digite as alternativas:
@@ -74,7 +112,7 @@
           <textarea required
             id="alternativeA"
             type="text"
-            class="form-group__input"
+            class="form-group__textarea"
             formControlName="alternativeA"
             placeholder="Digite a opção"
             ></textarea>
@@ -98,7 +136,7 @@
           <textarea required
             id="alternativeB"
             type="text"
-            class="form-group__input"
+            class="form-group__textarea"
             formControlName="alternativeB"
             placeholder="Digite a opção"
             ></textarea>
@@ -122,7 +160,7 @@
           <textarea required
             id="alternativeC"
             type="text"
-            class="form-group__input"
+            class="form-group__textarea"
             formControlName="alternativeC"
             placeholder="Digite a opção"
             ></textarea>
@@ -146,7 +184,7 @@
           <textarea required
             id="alternativeD"
             type="text"
-            class="form-group__input"
+            class="form-group__textarea"
             formControlName="alternativeD"
             placeholder="Digite a opção"
             ></textarea>
@@ -170,7 +208,7 @@
           <textarea required
             id="alternativeE"
             type="text"
-            class="form-group__input"
+            class="form-group__textarea"
             formControlName="alternativeE"
             placeholder="Digite a opção"
             ></textarea>

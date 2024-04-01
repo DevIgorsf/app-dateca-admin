@@ -29,10 +29,10 @@ export class CreateEnadeComponent {
   ) {
     this.formulario = this.formBuilder.group({
       id: [''],
+      year: ['', Validators.required],
+      number: ['', Validators.required],
       statement: ['', Validators.required],
       pointsEnum: [''],
-      course: [''],
-      idImages: [''],
       correctAnswer: ['', Validators.required],
       alternativeA: ['', Validators.required],
       alternativeB: ['', Validators.required],

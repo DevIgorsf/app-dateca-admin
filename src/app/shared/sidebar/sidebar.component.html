@@ -7,7 +7,7 @@
     <li class="sidebar-item" [ngClass]="{ 'active': dashboard.isActive }">
       <a class="sidebar-link" routerLink="/admin/dashboard" routerLinkActive #dashboard="routerLinkActive">
         <span class="sidebar-item__icon">
-          <i class="bi bi-newspaper"></i>
+          <i class="bi bi-newspaper" style="color: #b54747;"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Dashboard
@@ -27,7 +27,7 @@
     <li class="sidebar-item" [ngClass]="{ 'active': course.isActive }">
       <a class="sidebar-link" routerLink="/admin/materia" routerLinkActive #course="routerLinkActive">
         <span class="sidebar-item__icon">
-          <i class="bi bi-journal-bookmark-fill"></i>
+          <i class="bi bi-journal-bookmark-fill" style="color: #4e80e3;"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Materias
@@ -37,7 +37,7 @@
     <li class="sidebar-item" [ngClass]="{ 'active': question.isActive }">
       <a class="sidebar-link" routerLink="/admin/questao" routerLinkActive #question="routerLinkActive">
         <span class="sidebar-item__icon">
-          <i class="bi bi-list-check"></i>
+          <i class="bi bi-list-check" style="color: #f2c55c;"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Questões
@@ -47,7 +47,7 @@
     <li class="sidebar-item" [ngClass]="{ 'active': questionImage.isActive }">
       <a class="sidebar-link" routerLink="/admin/questao-imagem" routerLinkActive #questionImage="routerLinkActive">
         <span class="sidebar-item__icon">
-          <i class="bi bi-view-list"></i>
+          <i class="bi bi-view-list" style="color: #c99352;"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Questões com Imagem
@@ -57,7 +57,7 @@
     <li class="sidebar-item" [ngClass]="{ 'active': enade.isActive }">
       <a class="sidebar-link" routerLink="/admin/enade" routerLinkActive #enade="routerLinkActive">
         <span class="sidebar-item__icon">
-          <i class="bi bi-clipboard2-check"></i>
+          <i class="bi bi-clipboard2-check" style="color: #6e6abb;"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Enade
@@ -67,7 +67,7 @@
     <li class="sidebar-item"  [ngClass]="{ 'active': enadeImage.isActive }">
       <a class="sidebar-link" routerLink="/admin/enade-imagem" routerLinkActive #enadeImage="routerLinkActive">
         <span class="sidebar-item__icon">
-          <i class="bi bi-clipboard2-pulse"></i>
+          <i class="bi bi-clipboard2-pulse" style="color: #b952ac;"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Enade com Imagem
@@ -76,7 +76,7 @@
     </li>
     <li class="sidebar-item" [ngClass]="{ 'active': ranking.isActive }">
       <a class="sidebar-link" routerLink="/admin/ranking" routerLinkActive #ranking="routerLinkActive">
-        <span class="sidebar-item__icon">
+        <span class="sidebar-item__icon" style="color: #ebbe3f;">
           <i class="bi bi-award"></i>
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">

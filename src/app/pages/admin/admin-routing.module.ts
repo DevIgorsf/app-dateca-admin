@@ -65,16 +65,20 @@ const routes: Routes = [
         component: CreateQuestionComponent,
       },
       {
+        path: 'questao/editar-questao/:id',
+        component: CreateQuestionComponent,
+      },
+      {
         path: 'questao-imagem',
         component: QuestionImageComponent,
       },
       {
-        path: 'questao/adicionar-questao-imagem',
+        path: 'questao-imagem/adicionar-questao',
         component: CreateQuestionWithImageComponent,
       },
       {
-        path: 'questao/editar-questao/:id',
-        component: CreateQuestionComponent,
+        path: 'questao-imagem/editar-questao/:id',
+        component: CreateQuestionWithImageComponent,
       },
       {
         path: 'enade',
@@ -89,7 +93,7 @@ const routes: Routes = [
         component: EnadeImageComponent,
       },
       {
-        path: 'enade-imagem/adicionar-enade-imagem',
+        path: 'enade-imagem/adicionar-enade',
         component: CreateEnadeWithImageComponent,
       },
       {

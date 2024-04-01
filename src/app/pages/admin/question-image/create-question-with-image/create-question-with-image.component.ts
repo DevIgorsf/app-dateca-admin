@@ -154,11 +154,11 @@ export class CreateQuestionWithImageComponent {
     } 
     
 
-    this.router.navigate(['/admin/questao']);
+    this.router.navigate(['/admin/questao-imagem']);
   }
 
   cancelar() {
-    this.router.navigate(['/admin/questao']);
+    this.router.navigate(['/admin/questao-imagem']);
   }
 
   habilitarBotao(): string {

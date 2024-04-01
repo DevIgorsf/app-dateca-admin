@@ -61,9 +61,10 @@ export class CreateEnadeWithImageComponent {
     ) {
       this.formulario = this.formBuilder.group({
         id: [''],
+        year: ['', Validators.required],
+        number: ['', Validators.required],
         statement: ['', Validators.required],
         pointsEnum: [''],
-        course: [''],
         idImages: [''],
         correctAnswer: ['', Validators.required],
         alternativeA: ['', Validators.required],
