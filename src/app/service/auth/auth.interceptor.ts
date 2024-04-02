@@ -31,8 +31,8 @@ export class AuthInterceptor implements HttpInterceptor {
         const headers = new HttpHeaders().set('authorization', 'Bearer ' + token);
         request = request.clone({ headers });
       }
-
-        if (request.url.includes('/questao/imagens') && request.method === 'POST' && !request.headers.has('Content-Type')) {
+      
+      if (request.url.includes('/questao/imagens') && request.method === 'POST' && !request.headers.has('Content-Type')) {
         const modifiedRequest = request.clone();
         return next.handle(modifiedRequest);
       }

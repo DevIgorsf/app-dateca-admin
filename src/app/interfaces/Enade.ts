@@ -2,9 +2,10 @@
 
 export interface Enade {
   id?: any;
-  title: any;
-  statement?: any;
-  pointsEnum?: any;
+  year: any;
+  number: any;
+  statement: any;
+  pointsEnum: any;
   correctAnswer: any;
   alternativeA: any;
   alternativeB: any;

@@ -2,8 +2,8 @@
 
 export interface EnadeWithImage {
   id?: any;
-  title: any;
-  idImages?: string[];
+  year: any;
+  number: any;
   statement: any;
   pointsEnum: any;
   correctAnswer: any;
@@ -12,4 +12,5 @@ export interface EnadeWithImage {
   alternativeC: any;
   alternativeD: any;
   alternativeE: any;
+  images: any[];
 }

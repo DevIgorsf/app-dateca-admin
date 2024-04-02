@@ -5,6 +5,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { Enade } from 'src/app/interfaces/Enade';
+import { EnadeService } from 'src/app/service/enade/enade.service';
 import { QuestionService } from 'src/app/service/question/question.service';
 
 @Component({
@@ -13,8 +14,8 @@ import { QuestionService } from 'src/app/service/question/question.service';
   styleUrls: ['./enade.component.scss']
 })
 export class EnadeComponent {
-  questions: Enade[] = [];
-  questionsSubscription: Subscription = new Subscription;
+  enades: Enade[] = [];
+  enadesSubscription: Subscription = new Subscription;
 
   public dataSource!: MatTableDataSource<Enade>;
   public displayedColumns:string[] = ['id', 'statement', 'pointsEnum', 'acoes'];
@@ -22,7 +23,7 @@ export class EnadeComponent {
   public length=5;
 
   constructor(
-    private service: QuestionService,
+    private service: EnadeService,
     private _liveAnnouncer: LiveAnnouncer
   ) { }
 
@@ -30,18 +31,18 @@ export class EnadeComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.service.getAll()
-    // this.questionsSubscription = this.service.questions$.subscribe(questions => {
-    //   this.dataSource = new MatTableDataSource<Enade>(questions);
-    //   this.dataSource.sort = this.sort;
-    //   this.dataSource.paginator = this.paginator;
-    // })
+    this.service.getAllEnade()
+    this.enadesSubscription = this.service.enade$.subscribe(enades => {
+      this.dataSource = new MatTableDataSource<Enade>(enades);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    })
 
   }
 
-  deleteQuestion(courseId: number): void {
+  deleteEnade(courseId: number): void {
     if (courseId) {
-      this.service.deleteQuestion(courseId);
+      this.service.deleteEnade(courseId);
     }
   }
 

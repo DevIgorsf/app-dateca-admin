@@ -31,7 +31,24 @@ export class QuestionService {
 
         return throwError(error);
       })
-    );
+    ).subscribe();
+  }
+
+  update(id: string, question: QuestionMultipleChoice): void {
+    this.http.put<QuestionMultipleChoice>(`${API}/questao/${id}`, question)
+      .subscribe(updateQuestion => {
+        const questions = this.questionsSubject.getValue();
+        const questionsResult = questions.map((t) => {
+          if (t.id === updateQuestion.id) {
+            return updateQuestion;
+          }
+          return t;
+        });
+        this.questionsSubject.next(questionsResult);
+    },
+    error => {
+      console.error('Erro na atualização da pergunta:', error);
+    });
   }
 
   saveImages(files: FileList, newQuestion: QuestionMultipleChoiceWithImage | QuestionMultipleChoiceWithImage[]): void {
@@ -66,22 +83,7 @@ export class QuestionService {
     });
   }
 
-  update(id: string, question: QuestionMultipleChoice): void {
-    this.http.put<QuestionMultipleChoice>(`${API}/questao/${id}`, question)
-      .subscribe(updateQuestion => {
-        const questions = this.questionsSubject.getValue();
-        const questionsResult = questions.map((t) => {
-          if (t.id === updateQuestion.id) {
-            return updateQuestion;
-          }
-          return t;
-        });
-        this.questionsSubject.next(questionsResult);
-    },
-    error => {
-      console.error('Erro na atualização da pergunta:', error);
-    });
-  }
+
 
   getQuestion(id: number): Observable<QuestionMultipleChoice> {
     return this.http.get<QuestionMultipleChoice>(`${API}/questao/${id}`);
@@ -99,7 +101,6 @@ export class QuestionService {
 
   getAllImages(): void {
     this.http.get<any[]>(`${API}/questao/images`).subscribe(questions => {
-      console.log(questions);
       this.questionsWithImageSubject.next(questions);
     })
   }

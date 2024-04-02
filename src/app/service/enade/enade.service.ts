@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { Enade } from 'src/app/interfaces/Enade';
 import { EnadeWithImage } from 'src/app/interfaces/EnadeWithImage';
@@ -17,30 +18,53 @@ export class EnadeService {
   enadeWithImage$ = this.enadeWithImageSubject.asObservable();
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private toastr: ToastrService
   ) { }
 
-  getEnade(questionId: number): Observable<Enade> {
-    return this.http.get<Enade>(`${API}/questao/${questionId}`);
+  getEnade(enadeId: number): Observable<Enade> {
+    return this.http.get<Enade>(`${API}/enade/${enadeId}`);
   }
 
-  getEnadeWithImage(questionId: number): Observable<EnadeWithImage> {
-    return this.http.get<EnadeWithImage>(`${API}/questao/${questionId}`);
+  getEnadeWithImage(enadeId: number): Observable<EnadeWithImage> {
+    return this.http.get<EnadeWithImage>(`${API}/enade/${enadeId}`);
   }
 
   getAllEnade(): void {
-    this.http.get<Enade[]>(`${API}/questao`).subscribe(questions => {
-      this.enadeSubject.next(questions);
-    })
+    this.http.get<Enade[]>(`${API}/enade`).subscribe(
+      enades => {
+        this.enadeSubject.next(enades);
+      },
+      error => {
+        if (error.status === 404) {
+          this.toastr.error("Erro 404: Nenhuma questão encontrada.");
+        } else {
+          this.toastr.error("Erro inesperado:", error);
+        }
+      }
+    );
+  }
+
+  deleteEnade(enadeId: number): void {
+    this.http.delete<Enade>(`${API}/enade/${enadeId}`).subscribe(() => {
+      const enades = this.enadeSubject.getValue();
+      const enadesResult = enades.filter(t => t.id !== enadeId);
+      this.enadeSubject.next(enadesResult);
+    },
+    (error) => {
+      const enades = this.enadeSubject.getValue();
+      const enadesResult = enades.filter(t => t.id !== enadeId);
+      this.enadeSubject.next(enadesResult);
+    });
   }
 
   getAllEnadeWithImage(): void {
-    this.http.get<EnadeWithImage[]>(`${API}/questao`).subscribe(questions => {
-      this.enadeWithImageSubject.next(questions);
+    this.http.get<EnadeWithImage[]>(`${API}/enade`).subscribe(enades => {
+      this.enadeWithImageSubject.next(enades);
     })
   }
 
-  saveImages(files: FileList, newQuestion: any) {
+  saveImages(files: FileList, newEnade: any) {
     const formData = new FormData();
 
     if (files && files.length > 0) {
@@ -49,23 +73,23 @@ export class EnadeService {
       }
     }
 
-    if (Array.isArray(newQuestion)) {
-      newQuestion.forEach(question => {
-        Object.keys(question).forEach(key => {
-          if(question[key] != '') {
-            formData.append(key, question[key]);
+    if (Array.isArray(newEnade)) {
+      newEnade.forEach(enade => {
+        Object.keys(enade).forEach(key => {
+          if(enade[key] != '') {
+            formData.append(key, enade[key]);
           }
         });
       });
     } else {
-      Object.keys(newQuestion).forEach(key => {
-        if(newQuestion[key] != '') {
-          formData.append(key, newQuestion[key]);
+      Object.keys(newEnade).forEach(key => {
+        if(newEnade[key] != '') {
+          formData.append(key, newEnade[key]);
         }
       });
     }
 
-    this.http.post<EnadeWithImage>(`${API}/questao/imagens`, formData).subscribe(newQuestion => {
+    this.http.post<EnadeWithImage>(`${API}/enade/imagens`, formData).subscribe(newQuestion => {
       let questionTemp: EnadeWithImage[] = this.enadeWithImageSubject.getValue();
       questionTemp = [...questionTemp, newQuestion];
       this.enadeSubject.next(questionTemp);
@@ -77,17 +101,33 @@ export class EnadeService {
     throw new Error('Method not implemented.');
   }
 
-  createEnade(question: any): void {
-    this.http.post<Enade>(`${API}/questao`, question).
-    pipe(
-      tap(newQuestion => {
-        this.enadeSubject.next([...this.enadeSubject.getValue(), newQuestion]);
+  createEnade(enade: any): void {
+    console.log(enade);
+    this.http.post<Enade>(`${API}/enade`, enade).pipe(
+      tap(newEnade => {
+        this.enadeSubject.next([...this.enadeSubject.getValue(), newEnade]);
       }),
       catchError(error => {
         console.error('Erro ao criar pergunta:', error);
-
         return throwError(error);
       })
-    );
+    ).subscribe();
+  }
+
+  update(id: string, enade: Enade): void {
+    this.http.put<Enade>(`${API}/enade/${id}`, enade)
+      .subscribe(updateEnade => {
+        const enade = this.enadeSubject.getValue();
+        const enadeResult = enade.map((t) => {
+          if (t.id === updateEnade.id) {
+            return updateEnade;
+          }
+          return t;
+        });
+        this.enadeSubject.next(enadeResult);
+    },
+    error => {
+      console.error('Erro na atualização da pergunta:', error);
+    });
   }
 }

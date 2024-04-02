@@ -44,43 +44,53 @@ export class CreateEnadeComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      const questionId = params['id'];
-      if (questionId) {
-        this.loadQuestionToEdit(questionId);
+      const enadeId = params['id'];
+      if (enadeId) {
+        this.loadEnadeToEdit(enadeId);
       }
     });
     this.points = Object.values(PointsEnum);
     
   }
 
-  loadQuestionToEdit(questionId: number) {
-    this.enadeService.getEnade(questionId).subscribe((question: Enade) => {
-      this.fillFormWithQuestionData(question);
+  loadEnadeToEdit(enadeId: number) {
+    this.enadeService.getEnade(enadeId).subscribe((enade: Enade) => {
+      this.fillFormWithEnadeData(enade);
     });
   }
 
-  fillFormWithQuestionData(question: Enade) {
+  fillFormWithEnadeData(enade: Enade) {
     this.formulario.patchValue({
-      id: question.id,
-      statement: question.statement,
-      pointsEnum: question.pointsEnum,
-      correctAnswer: question.correctAnswer,
-      alternativeA: question.alternativeA,
-      alternativeB: question.alternativeB,
-      alternativeC: question.alternativeC,
-      alternativeD: question.alternativeD,
-      alternativeE: question.alternativeE,
+      id: enade.id,
+      year: enade.year,
+      number:enade.number,
+      statement: enade.statement,
+      pointsEnum: enade.pointsEnum,
+      correctAnswer: enade.correctAnswer,
+      alternativeA: enade.alternativeA,
+      alternativeB: enade.alternativeB,
+      alternativeC: enade.alternativeC,
+      alternativeD: enade.alternativeD,
+      alternativeE: enade.alternativeE,
     });
   }
   
   async createEnade() {
-    
+    const newEnade = this.formulario.value;
 
-    this.router.navigate(['/admin/questao']);
+    if(this.formulario.valid) {
+      if(!newEnade.id) {
+        await this.enadeService.createEnade(newEnade);
+      } else {
+        await this.enadeService.update(newEnade.id, newEnade);
+      }
+    }
+
+    this.router.navigate(['/admin/enade']);
   }
 
   cancelar() {
-    this.router.navigate(['/admin/questao']);
+    this.router.navigate(['/admin/enade']);
   }
 
   habilitarBotao(): string {

@@ -13,7 +13,7 @@ import { EnadeService } from 'src/app/service/enade/enade.service';
 })
 export class CreateEnadeWithImageComponent {
     points!: string[];
-    coursesSubscription: Subscription = new Subscription();
+    enadeSubscription: Subscription = new Subscription();
     file!: FileList;
     images: any[] = [];
     preview!: string;
@@ -89,21 +89,9 @@ export class CreateEnadeWithImageComponent {
     loadQuestionToEdit(questionId: number) {
       this.enadeService.getEnadeWithImage(questionId).subscribe((question: EnadeWithImage) => {
         this.fillFormWithQuestionData(question);
-        if(question.idImages != null && question.idImages.length > 0) {
-          const imageObservables = question.idImages.map(imageId => {
-            return this.enadeService.getImages(imageId);
-          });
-          forkJoin(imageObservables).subscribe(
-            (responses: any[]) => {
-              this.images = responses.map(response => {
-                return 'data:image/jpeg;base64,' + response.imagem;
-              });
-            },
-            error => {
-              console.error('Erro ao carregar imagens:', error);
-            }
-          );
-        }
+        this.images = question.images.map(response => {
+          return 'data:image/jpeg;base64,' + response.imagem;
+        });
       });
     }
   
@@ -112,7 +100,7 @@ export class CreateEnadeWithImageComponent {
         id: question.id,
         statement: question.statement,
         pointsEnum: question.pointsEnum,
-        idImages: question.idImages,
+        idImages: question.images,
         correctAnswer: question.correctAnswer,
         alternativeA: question.alternativeA,
         alternativeB: question.alternativeB,
@@ -144,13 +132,12 @@ export class CreateEnadeWithImageComponent {
         const newQuestion = this.formulario.value;
         this.enadeService.saveImages(this.file, newQuestion);
       } 
-      
   
-      this.router.navigate(['/admin/questao']);
+      this.router.navigate(['/admin/enadeService']);
     }
   
     cancelar() {
-      this.router.navigate(['/admin/questao']);
+      this.router.navigate(['/admin/enadeService']);
     }
   
     habilitarBotao(): string {

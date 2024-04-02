@@ -89,6 +89,10 @@ const routes: Routes = [
         component: CreateEnadeComponent,
       },
       {
+        path: 'enade/editar-enade/:id',
+        component: CreateEnadeComponent,
+      },
+      {
         path: 'enade-imagem',
         component: EnadeImageComponent,
       },
