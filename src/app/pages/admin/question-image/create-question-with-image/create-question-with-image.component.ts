@@ -147,7 +147,6 @@ export class CreateQuestionWithImageComponent {
   }
   
   async createQuestion() {
-    
     if (this.file) {
       const newQuestion = this.formulario.value;
       this.questionService.saveImages(this.file, newQuestion);

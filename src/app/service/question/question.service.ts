@@ -77,13 +77,11 @@ export class QuestionService {
     }
 
     this.http.post<QuestionMultipleChoiceWithImage>(`${API}/questao/imagens`, formData).subscribe(newQuestion => {
-      let questionTemp: QuestionMultipleChoiceWithImage[] = this.questionsSubject.getValue();
+      let questionTemp: QuestionMultipleChoiceWithImage[] = this.questionsWithImageSubject.getValue();
       questionTemp = [...questionTemp, newQuestion];
-      this.questionsSubject.next(questionTemp);
+      this.questionsWithImageSubject.next(questionTemp);
     });
   }
-
-
 
   getQuestion(id: number): Observable<QuestionMultipleChoice> {
     return this.http.get<QuestionMultipleChoice>(`${API}/questao/${id}`);

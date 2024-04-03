@@ -59,12 +59,12 @@ export class EnadeService {
   }
 
   getAllEnadeWithImage(): void {
-    this.http.get<EnadeWithImage[]>(`${API}/enade`).subscribe(enades => {
+    this.http.get<EnadeWithImage[]>(`${API}/enade/imagens`).subscribe(enades => {
       this.enadeWithImageSubject.next(enades);
     })
   }
 
-  saveImages(files: FileList, newEnade: any) {
+  saveImages(files: FileList, newEnade: EnadeWithImage | EnadeWithImage[]): void {
     const formData = new FormData();
 
     if (files && files.length > 0) {
@@ -89,20 +89,20 @@ export class EnadeService {
       });
     }
 
-    this.http.post<EnadeWithImage>(`${API}/enade/imagens`, formData).subscribe(newQuestion => {
-      let questionTemp: EnadeWithImage[] = this.enadeWithImageSubject.getValue();
-      questionTemp = [...questionTemp, newQuestion];
-      this.enadeSubject.next(questionTemp);
+    console.log(formData);
+
+    this.http.post<EnadeWithImage>(`${API}/enade/imagens`, formData).subscribe(newEnade => {
+      let enadeTemp: EnadeWithImage[] = this.enadeWithImageSubject.getValue();
+      enadeTemp = [...enadeTemp, newEnade];
+      this.enadeWithImageSubject.next(enadeTemp);
     });
-    
   }
 
-  getImages(imageId: string): any {
-    throw new Error('Method not implemented.');
+  getImages(imageId: any): Observable<any> {
+    return this.http.get(`${API}/enade/imagens/${imageId}`);
   }
 
   createEnade(enade: any): void {
-    console.log(enade);
     this.http.post<Enade>(`${API}/enade`, enade).pipe(
       tap(newEnade => {
         this.enadeSubject.next([...this.enadeSubject.getValue(), newEnade]);

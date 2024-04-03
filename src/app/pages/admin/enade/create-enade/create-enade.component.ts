@@ -13,7 +13,6 @@ import { EnadeService } from 'src/app/service/enade/enade.service';
 })
 export class CreateEnadeComponent {
   points!: string[];
-  coursesSubscription: Subscription = new Subscription();
   name: string = '';
   validado: boolean = false;
   

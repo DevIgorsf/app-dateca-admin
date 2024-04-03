@@ -5,7 +5,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { EnadeWithImage } from 'src/app/interfaces/EnadeWithImage';
-import { QuestionService } from 'src/app/service/question/question.service';
+import { EnadeService } from 'src/app/service/enade/enade.service';
 
 @Component({
   selector: 'app-enade-image',
@@ -13,8 +13,8 @@ import { QuestionService } from 'src/app/service/question/question.service';
   styleUrls: ['./enade-image.component.scss']
 })
 export class EnadeImageComponent {
-  questions: EnadeWithImage[] = [];
-  questionsSubscription: Subscription = new Subscription;
+  enadeWithImage: EnadeWithImage[] = [];
+  enadeWithImageSubscription: Subscription = new Subscription;
 
   public dataSource!: MatTableDataSource<EnadeWithImage>;
   public displayedColumns:string[] = ['id', 'statement', 'pointsEnum', 'acoes'];
@@ -22,7 +22,7 @@ export class EnadeImageComponent {
   public length=5;
 
   constructor(
-    private service: QuestionService,
+    private service: EnadeService,
     private _liveAnnouncer: LiveAnnouncer
   ) { }
 
@@ -30,18 +30,18 @@ export class EnadeImageComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.service.getAll()
-    // this.questionsSubscription = this.service.questions$.subscribe(questions => {
-    //   this.dataSource = new MatTableDataSource<EnadeWithImage>(questions);
-    //   this.dataSource.sort = this.sort;
-    //   this.dataSource.paginator = this.paginator;
-    // })
+    this.service.getAllEnadeWithImage()
+    this.enadeWithImageSubscription = this.service.enadeWithImage$.subscribe(enades => {
+      this.dataSource = new MatTableDataSource<EnadeWithImage>(enades);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    })
 
   }
 
-  deleteQuestion(courseId: number): void {
-    if (courseId) {
-      this.service.deleteQuestion(courseId);
+  deleteEnade(enadeId: number): void {
+    if (enadeId) {
+      this.service.deleteEnade(enadeId);
     }
   }
 

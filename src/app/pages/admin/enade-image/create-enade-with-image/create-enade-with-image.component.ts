@@ -13,7 +13,6 @@ import { EnadeService } from 'src/app/service/enade/enade.service';
 })
 export class CreateEnadeWithImageComponent {
     points!: string[];
-    enadeSubscription: Subscription = new Subscription();
     file!: FileList;
     images: any[] = [];
     preview!: string;
@@ -65,7 +64,7 @@ export class CreateEnadeWithImageComponent {
         number: ['', Validators.required],
         statement: ['', Validators.required],
         pointsEnum: [''],
-        idImages: [''],
+        images: [''],
         correctAnswer: ['', Validators.required],
         alternativeA: ['', Validators.required],
         alternativeB: ['', Validators.required],
@@ -77,36 +76,36 @@ export class CreateEnadeWithImageComponent {
   
     ngOnInit(): void {
       this.route.params.subscribe((params: Params) => {
-        const questionId = params['id'];
-        if (questionId) {
-          this.loadQuestionToEdit(questionId);
+        const enadeId = params['id'];
+        if (enadeId) {
+          this.loadEnadeToEdit(enadeId);
         }
       });
       this.points = Object.values(PointsEnum);
       
     }
   
-    loadQuestionToEdit(questionId: number) {
-      this.enadeService.getEnadeWithImage(questionId).subscribe((question: EnadeWithImage) => {
-        this.fillFormWithQuestionData(question);
-        this.images = question.images.map(response => {
+    loadEnadeToEdit(enadeId: number) {
+      this.enadeService.getEnadeWithImage(enadeId).subscribe((enade: EnadeWithImage) => {
+        this.fillFormWithEnadeData(enade);
+        this.images = enade.images.map(response => {
           return 'data:image/jpeg;base64,' + response.imagem;
         });
       });
     }
   
-    fillFormWithQuestionData(question: EnadeWithImage) {
+    fillFormWithEnadeData(enade: EnadeWithImage) {
       this.formulario.patchValue({
-        id: question.id,
-        statement: question.statement,
-        pointsEnum: question.pointsEnum,
-        idImages: question.images,
-        correctAnswer: question.correctAnswer,
-        alternativeA: question.alternativeA,
-        alternativeB: question.alternativeB,
-        alternativeC: question.alternativeC,
-        alternativeD: question.alternativeD,
-        alternativeE: question.alternativeE,
+        id: enade.id,
+        statement: enade.statement,
+        pointsEnum: enade.pointsEnum,
+        images: enade.images,
+        correctAnswer: enade.correctAnswer,
+        alternativeA: enade.alternativeA,
+        alternativeB: enade.alternativeB,
+        alternativeC: enade.alternativeC,
+        alternativeD: enade.alternativeD,
+        alternativeE: enade.alternativeE,
       });
     }
   
@@ -127,17 +126,16 @@ export class CreateEnadeWithImageComponent {
     }
     
     async createEnadeWithImage() {
-      
       if (this.file) {
-        const newQuestion = this.formulario.value;
-        this.enadeService.saveImages(this.file, newQuestion);
+        const newEnade = this.formulario.value;
+        this.enadeService.saveImages(this.file, newEnade);
       } 
   
-      this.router.navigate(['/admin/enadeService']);
+      this.router.navigate(['/admin/enade-imagem']);
     }
   
     cancelar() {
-      this.router.navigate(['/admin/enadeService']);
+      this.router.navigate(['/admin/enade-imagem']);
     }
   
     habilitarBotao(): string {
