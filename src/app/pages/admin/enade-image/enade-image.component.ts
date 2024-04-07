@@ -17,7 +17,7 @@ export class EnadeImageComponent {
   enadeWithImageSubscription: Subscription = new Subscription;
 
   public dataSource!: MatTableDataSource<EnadeWithImage>;
-  public displayedColumns:string[] = ['id', 'statement', 'pointsEnum', 'acoes'];
+  public displayedColumns:string[] = ['year', 'statement', 'pointsEnum', 'acoes'];
   public pageSize=1;
   public length=5;
 

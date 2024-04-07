@@ -101,6 +101,10 @@ const routes: Routes = [
         component: CreateEnadeWithImageComponent,
       },
       {
+        path: 'enade-imagem/editar-enade/:id',
+        component: CreateEnadeWithImageComponent,
+      },
+      {
         path: 'ranking',
         component: RankingComponent,
       },

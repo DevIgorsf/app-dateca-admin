@@ -45,6 +45,21 @@ export class EnadeService {
     );
   }
 
+  getAllEnadeWithImage(): void {
+    this.http.get<any[]>(`${API}/enade/images`).subscribe(
+      enades => {
+        this.enadeWithImageSubject.next(enades);
+      },
+      error => {
+        if (error.status === 404) {
+          this.toastr.error("Erro 404: Nenhuma questão encontrada.");
+        } else {
+          this.toastr.error("Erro inesperado:", error);
+        }
+      }
+    );
+  }
+
   deleteEnade(enadeId: number): void {
     this.http.delete<Enade>(`${API}/enade/${enadeId}`).subscribe(() => {
       const enades = this.enadeSubject.getValue();
@@ -56,12 +71,6 @@ export class EnadeService {
       const enadesResult = enades.filter(t => t.id !== enadeId);
       this.enadeSubject.next(enadesResult);
     });
-  }
-
-  getAllEnadeWithImage(): void {
-    this.http.get<EnadeWithImage[]>(`${API}/enade/imagens`).subscribe(enades => {
-      this.enadeWithImageSubject.next(enades);
-    })
   }
 
   saveImages(files: FileList, newEnade: EnadeWithImage | EnadeWithImage[]): void {
