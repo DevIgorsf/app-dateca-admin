@@ -27,7 +27,7 @@ export class EnadeService {
   }
 
   getEnadeWithImage(enadeId: number): Observable<EnadeWithImage> {
-    return this.http.get<EnadeWithImage>(`${API}/enade/${enadeId}`);
+    return this.http.get<EnadeWithImage>(`${API}/enade/imagens/${enadeId}`);
   }
 
   getAllEnade(): void {
