@@ -2,6 +2,9 @@
   <button class="navbar-toggler align-self-center" type="button" (click)="toggleSidebar()">
     <i class="bi bi-list text-white"></i>
   </button>
+  <mat-slide-toggle
+  [checked]="isDarkMode" 
+  (change)="onSlideToggleChange($event)"></mat-slide-toggle>
   <nav class="navbar__navegacao">
     <div class="dropdown" *ngIf="user$ | async as user">
       <div class="dropdown-toggle navbar__navegacao-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false">

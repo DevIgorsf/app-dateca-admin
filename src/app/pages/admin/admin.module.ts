@@ -37,6 +37,7 @@ import { CreateEnadeComponent } from './enade/create-enade/create-enade.componen
 import { EnadeImageComponent } from './enade-image/enade-image.component';
 import { QuestionImageComponent } from './question-image/question-image.component';
 import { CreateEnadeWithImageComponent } from './enade-image/create-enade-with-image/create-enade-with-image.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { CreateEnadeWithImageComponent } from './enade-image/create-enade-with-i
     MatFormFieldModule,
     NgFor,
     MatAutocompleteModule,
+    MatSlideToggleModule,
     MatCardModule,
     MatSelectModule,
     MatChipsModule,

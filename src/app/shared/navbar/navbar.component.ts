@@ -12,6 +12,7 @@ import { SidebarButtonService } from 'src/app/service/sidebar-button/sidebar-but
 export class NavbarComponent {
   user$ = this.userService.retornaUsuario();
   professor: any;
+  isDarkMode: boolean = false;
 
   constructor(
     private userService: UserService, 
@@ -19,6 +20,15 @@ export class NavbarComponent {
     private professorService: ProfessorService,
     private sidebarButtonService: SidebarButtonService,
     ) {}
+
+    onSlideToggleChange(event: any) {
+      this.isDarkMode = event.checked;
+      if (this.isDarkMode) {
+        document.body.classList.add('dark-mode');
+      } else {
+        document.body.classList.remove('dark-mode');
+      }
+    }
 
   ngOnInit(): void {
     this.professorService.getPerfil().subscribe((professor) => {

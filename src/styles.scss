@@ -5,6 +5,17 @@
 
 @import './assets/scss/misc';
 
+.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+// Estilos para o modo escuro
+.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
 .toast-center {
   top: 5%;
   left: 50%;
