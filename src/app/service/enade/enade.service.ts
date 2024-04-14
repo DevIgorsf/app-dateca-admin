@@ -98,8 +98,6 @@ export class EnadeService {
       });
     }
 
-    console.log(formData);
-
     this.http.post<EnadeWithImage>(`${API}/enade/imagens`, formData).subscribe(newEnade => {
       let enadeTemp: EnadeWithImage[] = this.enadeWithImageSubject.getValue();
       enadeTemp = [...enadeTemp, newEnade];
@@ -117,15 +115,15 @@ export class EnadeService {
         this.enadeSubject.next([...this.enadeSubject.getValue(), newEnade]);
       }),
       catchError(error => {
-        console.error('Erro ao criar pergunta:', error);
+        this.toastr.error('Erro ao criar pergunta:', error);
         return throwError(error);
       })
     ).subscribe();
   }
 
   update(id: string, enade: Enade): void {
-    this.http.put<Enade>(`${API}/enade/${id}`, enade)
-      .subscribe(updateEnade => {
+    this.http.put<Enade>(`${API}/enade/${id}`, enade).pipe(
+      tap(updateEnade => {
         const enade = this.enadeSubject.getValue();
         const enadeResult = enade.map((t) => {
           if (t.id === updateEnade.id) {
@@ -134,9 +132,11 @@ export class EnadeService {
           return t;
         });
         this.enadeSubject.next(enadeResult);
-    },
-    error => {
-      console.error('Erro na atualização da pergunta:', error);
-    });
+      }),
+      catchError(error => {
+        this.toastr.error('Erro na atualização da pergunta:', error);
+        return throwError(error);
+      })
+    ).subscribe;
   }
 }

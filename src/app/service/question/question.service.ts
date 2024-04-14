@@ -1,5 +1,6 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { QuestionMultipleChoiceWithImage } from 'src/app/interfaces/QuestionMultipleChoiceWithImage';
 import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
@@ -18,11 +19,11 @@ export class QuestionService {
 
   constructor(
     private http: HttpClient,
+    private toastr: ToastrService
     ) { }
 
   create(question: any): void {
-    this.http.post<QuestionMultipleChoice>(`${API}/questao`, question).
-    pipe(
+    this.http.post<QuestionMultipleChoice>(`${API}/questao`, question).pipe(
       tap(newQuestion => {
         this.questionsSubject.next([...this.questionsSubject.getValue(), newQuestion]);
       }),
@@ -35,8 +36,8 @@ export class QuestionService {
   }
 
   update(id: string, question: QuestionMultipleChoice): void {
-    this.http.put<QuestionMultipleChoice>(`${API}/questao/${id}`, question)
-      .subscribe(updateQuestion => {
+    this.http.put<QuestionMultipleChoice>(`${API}/questao/${id}`, question).pipe(
+      tap(updateQuestion => {
         const questions = this.questionsSubject.getValue();
         const questionsResult = questions.map((t) => {
           if (t.id === updateQuestion.id) {
@@ -45,10 +46,12 @@ export class QuestionService {
           return t;
         });
         this.questionsSubject.next(questionsResult);
-    },
-    error => {
-      console.error('Erro na atualização da pergunta:', error);
-    });
+      }),
+      catchError(error => {
+        this.toastr.error('Erro na atualização da pergunta:', error);
+        return throwError(error);
+      })
+    ).subscribe;
   }
 
   saveImages(files: FileList, newQuestion: QuestionMultipleChoiceWithImage | QuestionMultipleChoiceWithImage[]): void {

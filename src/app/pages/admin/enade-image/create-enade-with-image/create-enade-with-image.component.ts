@@ -88,7 +88,6 @@ export class CreateEnadeWithImageComponent {
     loadEnadeToEdit(enadeId: number) {
       this.enadeService.getEnadeWithImage(enadeId).subscribe((enade: EnadeWithImage) => {
         this.fillFormWithEnadeData(enade);
-        console.log(enade);
         this.images = enade.images.map(response => {
           return 'data:image/jpeg;base64,' + response.imagem;
         });
