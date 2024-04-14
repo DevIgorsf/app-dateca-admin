@@ -18,7 +18,7 @@ export class EnadeComponent {
   enadesSubscription: Subscription = new Subscription;
 
   public dataSource!: MatTableDataSource<Enade>;
-  public displayedColumns:string[] = ['id', 'statement', 'pointsEnum', 'acoes'];
+  public displayedColumns:string[] = ['ano','number', 'statement', 'pointsEnum', 'acoes'];
   public pageSize=1;
   public length=5;
 

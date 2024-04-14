@@ -32,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
         request = request.clone({ headers });
       }
       
-      if((request.url.includes('/questao/imagens') || request.url.includes('/enade/imagens')) && request.method === 'POST' && !request.headers.has('Content-Type')) {
+      if((request.url.includes('/questao/imagens') || request.url.includes('/enade/imagens')) && (request.method === 'POST' || request.method === 'PUT') && !request.headers.has('Content-Type')) {
         const modifiedRequest = request.clone();
         return next.handle(modifiedRequest);
       }

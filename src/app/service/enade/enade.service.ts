@@ -121,11 +121,11 @@ export class EnadeService {
     ).subscribe();
   }
 
-  update(id: string, enade: Enade): void {
+  update(id: string, enade: any): void {
     this.http.put<Enade>(`${API}/enade/${id}`, enade).pipe(
       tap(updateEnade => {
-        const enade = this.enadeSubject.getValue();
-        const enadeResult = enade.map((t) => {
+        const currentEnade = this.enadeSubject.getValue();
+        const enadeResult = currentEnade.map((t) => {
           if (t.id === updateEnade.id) {
             return updateEnade;
           }
@@ -137,6 +137,6 @@ export class EnadeService {
         this.toastr.error('Erro na atualização da pergunta:', error);
         return throwError(error);
       })
-    ).subscribe;
+    ).subscribe();
   }
 }

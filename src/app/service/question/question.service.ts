@@ -38,20 +38,20 @@ export class QuestionService {
   update(id: string, question: QuestionMultipleChoice): void {
     this.http.put<QuestionMultipleChoice>(`${API}/questao/${id}`, question).pipe(
       tap(updateQuestion => {
-        const questions = this.questionsSubject.getValue();
-        const questionsResult = questions.map((t) => {
+        const currentQuestionList = this.questionsSubject.getValue();
+        const updatedQuestions = currentQuestionList.map((t) => {
           if (t.id === updateQuestion.id) {
             return updateQuestion;
           }
           return t;
         });
-        this.questionsSubject.next(questionsResult);
+        this.questionsSubject.next(updatedQuestions);
       }),
       catchError(error => {
-        this.toastr.error('Erro na atualização da pergunta:', error);
+        this.toastr.error(`Erro na atualização da pergunta: ${error.message}`);
         return throwError(error);
       })
-    ).subscribe;
+    ).subscribe(); // Certifique-se de adicionar os parênteses aqui
   }
 
   saveImages(files: FileList, newQuestion: QuestionMultipleChoiceWithImage | QuestionMultipleChoiceWithImage[]): void {
