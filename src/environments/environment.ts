@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ApiUrl: 'http://localhost:8080'
+  ApiUrl: 'https://app-dateca-backend-production.up.railway.app'
 };
 
 /*
