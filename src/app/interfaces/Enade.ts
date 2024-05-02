@@ -1,5 +1,3 @@
-
-
 export interface Enade {
   id?: any;
   year: any;

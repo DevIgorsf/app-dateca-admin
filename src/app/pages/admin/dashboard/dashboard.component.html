@@ -15,7 +15,7 @@
         title = "Professors cadastradas"
         [conteudo] = "professor"
         icon = "bi bi-mortarboard-fill"
-      >
+        >
       </app-card>
     </mat-grid-tile>
 
@@ -25,9 +25,30 @@
       [conteudo] = "question"
       icon = "bi bi-list-check"
       style="color: #f2c55c;"
-    >
-    </app-card>
-  </mat-grid-tile>
+      >
+      </app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list class="mt-3" cols="3" rowHeight="3:1">
+    <mat-grid-tile>
+      <app-card
+        title = "Enade cadastradas"
+        [conteudo] = "enade"
+        icon = "bi bi-clipboard2-check"
+        style="color: #6e6abb;"
+        >
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <app-card
+        title = "Alunos cadastradas"
+        [conteudo] = "student"
+        icon = "bi bi-person-fill"
+        style="color: #6abb8e;"
+        >
+      </app-card>
+    </mat-grid-tile>
   </mat-grid-list>
 
 </div>

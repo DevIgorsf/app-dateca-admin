@@ -139,4 +139,8 @@ export class EnadeService {
       })
     ).subscribe();
   }
+
+  getEnadeData(): Observable<any>  {
+    return this.http.get(`${API}/enade/dados`);
+  }
 }
