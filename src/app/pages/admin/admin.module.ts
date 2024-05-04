@@ -34,9 +34,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EnadeComponent } from './enade/enade.component';
 import { CreateQuestionWithImageComponent } from './question-image/create-question-with-image/create-question-with-image.component';
 import { CreateEnadeComponent } from './enade/create-enade/create-enade.component';
-import { EnadeImageComponent } from './enade-image/enade-image.component';
 import { QuestionImageComponent } from './question-image/question-image.component';
-import { CreateEnadeWithImageComponent } from './enade-image/create-enade-with-image/create-enade-with-image.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
@@ -58,9 +56,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     RankingComponent,
     ProfileComponent,
     EnadeComponent,
-    CreateEnadeWithImageComponent,
     CreateEnadeComponent,
-    EnadeImageComponent,
     QuestionImageComponent,
     CreateQuestionWithImageComponent
   ],

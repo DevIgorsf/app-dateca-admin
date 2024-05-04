@@ -1,4 +1,4 @@
-export interface Enade {
+export interface EnadeDTO {
     id?: any;
     year: any;
     number: any;

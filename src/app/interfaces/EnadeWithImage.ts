@@ -12,6 +12,6 @@ export interface EnadeWithImage {
   alternativeC: any;
   alternativeD: any;
   alternativeE: any;
-  images: any[];
+  images?: any[];
   [key: string]: any;
 }

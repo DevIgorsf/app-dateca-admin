@@ -1,43 +1,59 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { Enade } from 'src/app/interfaces/Enade';
+import { EnadeDTO } from 'src/app/interfaces/EnadeDTO';
 import { EnadeService } from 'src/app/service/enade/enade.service';
-import { QuestionService } from 'src/app/service/question/question.service';
 
 @Component({
   selector: 'app-enade',
   templateUrl: './enade.component.html',
   styleUrls: ['./enade.component.scss']
 })
-export class EnadeComponent {
-  enades: Enade[] = [];
+export class EnadeComponent implements OnInit, OnDestroy {
+  enades: EnadeDTO[] = [];
   enadesSubscription: Subscription = new Subscription;
 
-  public dataSource!: MatTableDataSource<Enade>;
-  public displayedColumns:string[] = ['ano','number', 'statement', 'pointsEnum', 'acoes'];
+  public dataSource!: MatTableDataSource<EnadeDTO>;
+  public displayedColumns:string[] = ['year','number', 'statement', 'pointsEnum', 'acoes'];
   public pageSize=1;
   public length=5;
 
   constructor(
     private service: EnadeService,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private cdr: ChangeDetectorRef
   ) { }
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
-    this.service.getAllEnade()
+    this.getEnades();
     this.enadesSubscription = this.service.enade$.subscribe(enades => {
-      this.dataSource = new MatTableDataSource<Enade>(enades);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    })
+      this.updateDataSource(enades);
+    });
+  }
 
+  ngOnDestroy(): void {
+    this.enadesSubscription.unsubscribe();
+  }
+  
+  getEnades(): void {
+    if (this.enadesSubscription) {
+      this.enadesSubscription.unsubscribe();
+    }
+    this.service.getAllEnade();
+  }
+  
+  updateDataSource(enades: EnadeDTO[]): void {
+    this.enades = enades;
+    this.dataSource = new MatTableDataSource<EnadeDTO>(this.enades);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.cdr.detectChanges();
   }
 
   deleteEnade(courseId: number): void {
