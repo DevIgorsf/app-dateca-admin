@@ -2,6 +2,8 @@ import { CourseService } from 'src/app/service/course/course.service';
 import { Component, OnInit } from '@angular/core';
 import { ProfessorService } from 'src/app/service/professor/professor.service';
 import { QuestionService } from 'src/app/service/question/question.service';
+import { EnadeService } from 'src/app/service/enade/enade.service';
+import { StudentService } from 'src/app/service/student/student.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,11 +14,15 @@ export class DashboardComponent implements OnInit {
   course: string = '0';
   professor: string = '0';
   question: string = '0';
+  enade: string = '0';
+  student: string = '0';
 
   constructor(
     private courseService: CourseService,
     private professorService: ProfessorService,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private enadeService: EnadeService,
+    private studentService: StudentService
   ) { }
 
   ngOnInit(): void {
@@ -28,6 +34,12 @@ export class DashboardComponent implements OnInit {
     })
     this.questionService.getQuestionData().subscribe(data => {
       this.question = data;
+    })
+    this.enadeService.getEnadeData().subscribe(data => {
+      this.enade = data;
+    })
+    this.studentService.getStudentData().subscribe(data => {
+      this.student = data;
     })
   }
 
