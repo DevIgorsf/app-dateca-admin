@@ -13,7 +13,7 @@ export class RankingComponent {
 
   constructor(
     private service: ProfessorService,
-  ) {};
+  ) {}
 
   ngOnInit(): void {
     this.service.getRanking().subscribe(
