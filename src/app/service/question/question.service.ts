@@ -2,6 +2,7 @@ import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { QuestionMultipleChoiceDTO } from 'src/app/interfaces/QuestionMultipleChoiceDTO';
 import { QuestionMultipleChoiceWithImage } from 'src/app/interfaces/QuestionMultipleChoiceWithImage';
 import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
 import { environment } from 'src/environments/environment';
@@ -12,10 +13,8 @@ const API = environment.ApiUrl;
   providedIn: 'root'
 })
 export class QuestionService {
-  private questionsSubject = new BehaviorSubject<QuestionMultipleChoice[]>([]);
+  private questionsSubject = new BehaviorSubject<QuestionMultipleChoiceDTO[]>([]);
   questions$ = this.questionsSubject.asObservable();
-  private questionsWithImageSubject = new BehaviorSubject<QuestionMultipleChoiceWithImage[]>([]);
-  questionsWithImage$ = this.questionsWithImageSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -23,7 +22,7 @@ export class QuestionService {
     ) { }
 
   create(question: any): void {
-    this.http.post<QuestionMultipleChoice>(`${API}/questao`, question).pipe(
+    this.http.post<QuestionMultipleChoiceDTO>(`${API}/questao`, question).pipe(
       tap(newQuestion => {
         this.questionsSubject.next([...this.questionsSubject.getValue(), newQuestion]);
       }),
@@ -36,7 +35,7 @@ export class QuestionService {
   }
 
   update(id: string, question: QuestionMultipleChoice): void {
-    this.http.put<QuestionMultipleChoice>(`${API}/questao/${id}`, question).pipe(
+    this.http.put<QuestionMultipleChoiceDTO>(`${API}/questao/${id}`, question).pipe(
       tap(updateQuestion => {
         const currentQuestionList = this.questionsSubject.getValue();
         const updatedQuestions = currentQuestionList.map((t) => {
@@ -51,7 +50,7 @@ export class QuestionService {
         this.toastr.error(`Erro na atualização da pergunta: ${error.message}`);
         return throwError(error);
       })
-    ).subscribe(); // Certifique-se de adicionar os parênteses aqui
+    ).subscribe();
   }
 
   saveImages(files: FileList, newQuestion: QuestionMultipleChoiceWithImage | QuestionMultipleChoiceWithImage[]): void {
@@ -79,10 +78,10 @@ export class QuestionService {
       });
     }
 
-    this.http.post<QuestionMultipleChoiceWithImage>(`${API}/questao/imagens`, formData).subscribe(newQuestion => {
-      let questionTemp: QuestionMultipleChoiceWithImage[] = this.questionsWithImageSubject.getValue();
+    this.http.post<QuestionMultipleChoiceDTO>(`${API}/questao/imagens`, formData).subscribe(newQuestion => {
+      let questionTemp: QuestionMultipleChoiceDTO[] = this.questionsSubject.getValue();
       questionTemp = [...questionTemp, newQuestion];
-      this.questionsWithImageSubject.next(questionTemp);
+      this.questionsSubject.next(questionTemp);
     });
   }
 
@@ -102,7 +101,7 @@ export class QuestionService {
 
   getAllImages(): void {
     this.http.get<any[]>(`${API}/questao/images`).subscribe(questions => {
-      this.questionsWithImageSubject.next(questions);
+      this.questionsSubject.next(questions);
     })
   }
 

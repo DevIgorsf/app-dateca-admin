@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { QuestionService } from 'src/app/service/question/question.service';
-import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
+import { QuestionMultipleChoiceDTO } from 'src/app/interfaces/QuestionMultipleChoiceDTO';
 
 @Component({
   selector: 'app-question',
@@ -13,10 +13,10 @@ import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoic
   styleUrls: ['./question.component.scss']
 })
 export class QuestionComponent implements OnInit {
-  questions: QuestionMultipleChoice[] = [];
+  questions: QuestionMultipleChoiceDTO[] = [];
   questionsSubscription: Subscription = new Subscription;
 
-  public dataSource!: MatTableDataSource<QuestionMultipleChoice>;
+  public dataSource!: MatTableDataSource<QuestionMultipleChoiceDTO>;
   public displayedColumns:string[] = ['id', 'statement', 'pointsEnum', 'acoes'];
   public pageSize=1;
   public length=5;
@@ -32,7 +32,7 @@ export class QuestionComponent implements OnInit {
   ngOnInit(): void {
     this.service.getAll()
     this.questionsSubscription = this.service.questions$.subscribe(questions => {
-      this.dataSource = new MatTableDataSource<QuestionMultipleChoice>(questions);
+      this.dataSource = new MatTableDataSource<QuestionMultipleChoiceDTO>(questions);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     })

@@ -19,9 +19,16 @@ export class CreateQuestionComponent implements OnInit {
   coursesSubscription: Subscription = new Subscription();
   courses!: Course[];
   name: string = '';
+  file!: FileList;
+  images: any[] = [];
+  preview!: string;
   validado: boolean = false;
 
   formulario: FormGroup;
+  
+  @Input() items: any[] = [];
+  slideIndex: number = 0;
+  slideOffset: string = '0';
 
   constructor(
     private questionService: QuestionService,
@@ -35,6 +42,7 @@ export class CreateQuestionComponent implements OnInit {
       statement: ['', Validators.required],
       pointsEnum: [''],
       course: [''],
+      images: [''],
       correctAnswer: ['', Validators.required],
       alternativeA: ['', Validators.required],
       alternativeB: ['', Validators.required],
@@ -84,10 +92,19 @@ export class CreateQuestionComponent implements OnInit {
     const newQuestion = this.formulario.value;
 
     if(this.formulario.valid) {
-      if(!newQuestion.id) {
-        await this.questionService.create(newQuestion);
+      if (this.file) {
+        if(!newQuestion.id) {
+          this.questionService.saveImages(this.file, newQuestion);
+        }
+        else {
+
+        }
       } else {
-        await this.questionService.update(newQuestion.id, newQuestion);
+        if(!newQuestion.id) {
+          await this.questionService.create(newQuestion);
+        } else {
+          await this.questionService.update(newQuestion.id, newQuestion);
+        }
       }
     }
 
@@ -99,7 +116,7 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   habilitarBotao(): string {
-    return this.formulario.valid ? 'botao-salvar' : 'botao-desabilitado';
+    return this.formulario.valid ? 'button-salvar' : 'button-desabilitado';
   }
 
   campoValidado(campoAtual: string): string {
@@ -112,5 +129,51 @@ export class CreateQuestionComponent implements OnInit {
       return 'form-item';
     }
   }
+
+  
+
+  goToSlide(index: number): void {
+    this.slideIndex = index;
+  }
+  prevSlide(): void {
+    if (this.slideIndex > 0) {
+      this.slideIndex--;
+      this.updateSlideOffset();
+    } else {
+      this.slideIndex = this.images.length - 1;
+      this.updateSlideOffset();
+    }
+  }
+
+  nextSlide(): void {
+    if (this.slideIndex < this.images.length - 1) {
+      this.slideIndex++;
+      this.updateSlideOffset();
+    } else {
+      this.slideIndex = 0;
+      this.updateSlideOffset();
+    }
+  }
+
+  updateSlideOffset(): void {
+    this.slideOffset = `-${this.slideIndex * 100}%`;
+  }
+
+  handleFile(event: any): void {
+    this.file = event?.target?.files;
+    if (this.file && this.file.length > 0) {
+      this.images = [];
+      for (let i = 0; i < this.file.length; i++) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.images.push(e.target?.result as string);
+        };
+        reader.readAsDataURL(this.file[i]);
+      }
+    } else {
+      this.images = [];
+    }
+  }
+
 
 }
