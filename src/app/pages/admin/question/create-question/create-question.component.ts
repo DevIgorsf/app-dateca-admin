@@ -116,7 +116,7 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   habilitarBotao(): string {
-    return this.formulario.valid ? 'button-salvar' : 'button-desabilitado';
+    return this.formulario.valid ? 'form-button-adicionar' : 'form-button-cancelar';
   }
 
   campoValidado(campoAtual: string): string {

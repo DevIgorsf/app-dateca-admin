@@ -59,7 +59,7 @@ export class CreateEnadeComponent implements OnInit {
   }
 
   loadEnadeToEdit(enadeId: number) {
-    this.enadeService.getEnadeWithImage(enadeId).subscribe((enade: EnadeWithImage) => {
+    this.enadeService.getEnade(enadeId).subscribe((enade: EnadeWithImage) => {
       this.fillFormWithEnadeData(enade);
       if(enade.images) {
         this.images = enade.images.map(response => {

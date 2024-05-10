@@ -194,14 +194,13 @@
     <div class="d-flex justify-content-end m-5 pb-5">
       <button
         (click)="cancelar()"
-        class="button-cancelar me-5">
+        class="form-button-cancelar me-5">
           Cancelar
       </button>
 
       <button
       id="botao-salvar"
       type="submit"
-      class="button-adicionar  me-5"
       [ngClass]="habilitarBotao()"
       [disabled]="!formulario.valid">
         Salvar

@@ -85,22 +85,12 @@ export class QuestionService {
     });
   }
 
-  getQuestion(id: number): Observable<QuestionMultipleChoice> {
-    return this.http.get<QuestionMultipleChoice>(`${API}/questao/${id}`);
-  }
-
-  getImages(idImages: any): Observable<any> {
-    return this.http.get(`${API}/questao/imagens/${idImages}`);
+  getQuestion(id: number): Observable<QuestionMultipleChoiceWithImage> {
+    return this.http.get<QuestionMultipleChoice>(`${API}/questao/imagens/${id}`);
   }
 
   getAll(): void {
-    this.http.get<any[]>(`${API}/questao`).subscribe(questions => {
-      this.questionsSubject.next(questions);
-    })
-  }
-
-  getAllImages(): void {
-    this.http.get<any[]>(`${API}/questao/images`).subscribe(questions => {
+    this.http.get<QuestionMultipleChoiceDTO[]>(`${API}/questao`).subscribe(questions => {
       this.questionsSubject.next(questions);
     })
   }

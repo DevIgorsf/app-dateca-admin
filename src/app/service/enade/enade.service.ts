@@ -21,12 +21,8 @@ export class EnadeService {
     private toastr: ToastrService
   ) { }
 
-  getEnade(enadeId: number): Observable<Enade> {
-    return this.http.get<Enade>(`${API}/enade/${enadeId}`);
-  }
-
-  getEnadeWithImage(enadeId: number): Observable<EnadeWithImage> {
-    return this.http.get<EnadeWithImage>(`${API}/enade/imagens/${enadeId}`);
+  getEnade(enadeId: number): Observable<EnadeWithImage> {
+    return this.http.get<EnadeWithImage>(`${API}/enade/${enadeId}`);
   }
 
   getAllEnade(): void {
@@ -133,10 +129,6 @@ export class EnadeService {
         return throwError(error);
       })
     ).subscribe();
-  }
-
-  getImages(imageId: any): Observable<any> {
-    return this.http.get(`${API}/enade/imagens/${imageId}`);
   }
 
   createEnade(enade: any): void {
