@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription, forkJoin } from 'rxjs';
+import { QuestionMultipleChoiceWithImage } from 'src/app/interfaces/QuestionMultipleChoiceWithImage';
 import { Course } from 'src/app/interfaces/course';
 import { PointsEnum } from 'src/app/interfaces/pointsEnum';
 import { Question } from 'src/app/interfaces/question';
@@ -68,17 +69,23 @@ export class CreateQuestionComponent implements OnInit {
   }
 
   loadQuestionToEdit(questionId: number) {
-    this.questionService.getQuestion(questionId).subscribe((question: QuestionMultipleChoice) => {
+    this.questionService.getQuestion(questionId).subscribe((question: QuestionMultipleChoiceWithImage) => {
       this.fillFormWithQuestionData(question);
+      if(question.images) {
+        this.images = question.images.map(response => {
+          return 'data:image/jpeg;base64,' + response.imagem;
+        });
+      }
     });
   }
 
-  fillFormWithQuestionData(question: QuestionMultipleChoice) {
+  fillFormWithQuestionData(question: QuestionMultipleChoiceWithImage) {
     this.formulario.patchValue({
       id: question.id,
       statement: question.statement,
       pointsEnum: question.pointsEnum,
       course: question.course.id,
+      images: question.images,
       correctAnswer: question.correctAnswer,
       alternativeA: question.alternativeA,
       alternativeB: question.alternativeB,
@@ -97,7 +104,7 @@ export class CreateQuestionComponent implements OnInit {
           this.questionService.saveImages(this.file, newQuestion);
         }
         else {
-
+          this.questionService.updateImages(this.file, newQuestion.id, newQuestion);
         }
       } else {
         if(!newQuestion.id) {

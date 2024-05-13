@@ -1,5 +1,5 @@
 export interface QuestionMultipleChoiceDTO {
-    id: any;
+    id?: any;
     statement: any;
     pointsEnum: any;
     course: any;

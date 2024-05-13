@@ -21,6 +21,25 @@ export class QuestionService {
     private toastr: ToastrService
     ) { }
 
+  getQuestion(id: number): Observable<QuestionMultipleChoiceWithImage> {
+    return this.http.get<QuestionMultipleChoiceWithImage>(`${API}/questao/${id}`);
+  }
+
+  getAll(): void {
+    this.http.get<QuestionMultipleChoiceDTO[]>(`${API}/questao`).subscribe(
+      questions => {
+        this.questionsSubject.next(questions);
+      },
+      error => {
+        if (error.status === 404) {
+          this.toastr.error("Erro 404: Nenhuma questão encontrada.");
+        } else {
+          this.toastr.error("Erro inesperado:", error);
+        }
+      }
+    );
+  }
+
   create(question: any): void {
     this.http.post<QuestionMultipleChoiceDTO>(`${API}/questao`, question).pipe(
       tap(newQuestion => {
@@ -29,6 +48,45 @@ export class QuestionService {
       catchError(error => {
         console.error('Erro ao criar pergunta:', error);
 
+        return throwError(error);
+      })
+    ).subscribe();
+  }
+
+  updateImages(files: FileList, id:number, newQuestion: QuestionMultipleChoiceWithImage | QuestionMultipleChoiceWithImage[]): void {
+    const formData = new FormData();
+
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append('imageFile', files[i]);
+      }
+    }
+
+    if (Array.isArray(newQuestion)) {
+      newQuestion.forEach(question => {
+        Object.keys(question).forEach(key => {
+          if(question[key] != '') {
+            formData.append(key, question[key]);
+          }
+        });
+      });
+    } else {
+      Object.keys(newQuestion).forEach(key => {
+        if(newQuestion[key] != '') {
+          formData.append(key, newQuestion[key]);
+        }
+      });
+    }
+
+    this.http.put<QuestionMultipleChoiceWithImage>(`${API}/question/imagens/${id}`, formData).pipe(
+      tap(updateQuestion => {
+        const currentQuestion = this.questionsSubject.getValue();
+        const questionResult = currentQuestion.map(t => (t.id == updateQuestion.id ? updateQuestion : t));
+        this.questionsSubject.next(questionResult);
+        this.toastr.success('Questão atualizada com sucesso!');
+      }),
+      catchError(error => {
+        this.toastr.error('Erro ao criar pergunta:', error);
         return throwError(error);
       })
     ).subscribe();
@@ -83,16 +141,6 @@ export class QuestionService {
       questionTemp = [...questionTemp, newQuestion];
       this.questionsSubject.next(questionTemp);
     });
-  }
-
-  getQuestion(id: number): Observable<QuestionMultipleChoiceWithImage> {
-    return this.http.get<QuestionMultipleChoice>(`${API}/questao/imagens/${id}`);
-  }
-
-  getAll(): void {
-    this.http.get<QuestionMultipleChoiceDTO[]>(`${API}/questao`).subscribe(questions => {
-      this.questionsSubject.next(questions);
-    })
   }
 
   getQuestionData(): Observable<any>  {
