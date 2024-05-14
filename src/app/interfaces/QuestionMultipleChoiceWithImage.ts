@@ -1,8 +1,3 @@
-import { Course } from "./course";
-import { PointsEnum } from "./pointsEnum";
-import { Professor } from "./professor";
-import { QuestionTypeEnum } from "./questionTypeEnum";
-
 export interface QuestionMultipleChoiceWithImage {
   id?: any;
   statement: any;

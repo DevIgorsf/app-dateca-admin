@@ -78,7 +78,7 @@ export class QuestionService {
       });
     }
 
-    this.http.put<QuestionMultipleChoiceWithImage>(`${API}/question/imagens/${id}`, formData).pipe(
+    this.http.put<QuestionMultipleChoiceWithImage>(`${API}/questao/imagens/${id}`, formData).pipe(
       tap(updateQuestion => {
         const currentQuestion = this.questionsSubject.getValue();
         const questionResult = currentQuestion.map(t => (t.id == updateQuestion.id ? updateQuestion : t));
