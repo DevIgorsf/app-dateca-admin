@@ -111,6 +111,18 @@
     }
 }
 
+.slide__image {
+    max-width: 100%;
+    max-height: 300px;
+    height: auto;
+    display: block; 
+    margin: 0 auto; 
+
+    &--hidden {
+      display: none;
+    }
+}
+
 .carousel {
     display: flex;
     justify-content: space-around;
