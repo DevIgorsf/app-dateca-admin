@@ -2,6 +2,7 @@ import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { QuestionMultipleChoiceDTO } from 'src/app/interfaces/QuestionMultipleChoiceDTO';
 import { QuestionMultipleChoiceWithImage } from 'src/app/interfaces/QuestionMultipleChoiceWithImage';
 import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
 import { environment } from 'src/environments/environment';
@@ -12,18 +13,35 @@ const API = environment.ApiUrl;
   providedIn: 'root'
 })
 export class QuestionService {
-  private questionsSubject = new BehaviorSubject<QuestionMultipleChoice[]>([]);
+  private questionsSubject = new BehaviorSubject<QuestionMultipleChoiceDTO[]>([]);
   questions$ = this.questionsSubject.asObservable();
-  private questionsWithImageSubject = new BehaviorSubject<QuestionMultipleChoiceWithImage[]>([]);
-  questionsWithImage$ = this.questionsWithImageSubject.asObservable();
 
   constructor(
     private http: HttpClient,
     private toastr: ToastrService
     ) { }
 
+  getQuestion(id: number): Observable<QuestionMultipleChoiceWithImage> {
+    return this.http.get<QuestionMultipleChoiceWithImage>(`${API}/questao/${id}`);
+  }
+
+  getAll(): void {
+    this.http.get<QuestionMultipleChoiceDTO[]>(`${API}/questao`).subscribe(
+      questions => {
+        this.questionsSubject.next(questions);
+      },
+      error => {
+        if (error.status === 404) {
+          this.toastr.error("Erro 404: Nenhuma questão encontrada.");
+        } else {
+          this.toastr.error("Erro inesperado:", error);
+        }
+      }
+    );
+  }
+
   create(question: any): void {
-    this.http.post<QuestionMultipleChoice>(`${API}/questao`, question).pipe(
+    this.http.post<QuestionMultipleChoiceDTO>(`${API}/questao`, question).pipe(
       tap(newQuestion => {
         this.questionsSubject.next([...this.questionsSubject.getValue(), newQuestion]);
       }),
@@ -35,8 +53,47 @@ export class QuestionService {
     ).subscribe();
   }
 
+  updateImages(files: FileList, id:number, newQuestion: QuestionMultipleChoiceWithImage | QuestionMultipleChoiceWithImage[]): void {
+    const formData = new FormData();
+
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append('imageFile', files[i]);
+      }
+    }
+
+    if (Array.isArray(newQuestion)) {
+      newQuestion.forEach(question => {
+        Object.keys(question).forEach(key => {
+          if(question[key] != '') {
+            formData.append(key, question[key]);
+          }
+        });
+      });
+    } else {
+      Object.keys(newQuestion).forEach(key => {
+        if(newQuestion[key] != '') {
+          formData.append(key, newQuestion[key]);
+        }
+      });
+    }
+
+    this.http.put<QuestionMultipleChoiceWithImage>(`${API}/questao/imagens/${id}`, formData).pipe(
+      tap(updateQuestion => {
+        const currentQuestion = this.questionsSubject.getValue();
+        const questionResult = currentQuestion.map(t => (t.id == updateQuestion.id ? updateQuestion : t));
+        this.questionsSubject.next(questionResult);
+        this.toastr.success('Questão atualizada com sucesso!');
+      }),
+      catchError(error => {
+        this.toastr.error('Erro ao criar pergunta:', error);
+        return throwError(error);
+      })
+    ).subscribe();
+  }
+
   update(id: string, question: QuestionMultipleChoice): void {
-    this.http.put<QuestionMultipleChoice>(`${API}/questao/${id}`, question).pipe(
+    this.http.put<QuestionMultipleChoiceDTO>(`${API}/questao/${id}`, question).pipe(
       tap(updateQuestion => {
         const currentQuestionList = this.questionsSubject.getValue();
         const updatedQuestions = currentQuestionList.map((t) => {
@@ -51,7 +108,7 @@ export class QuestionService {
         this.toastr.error(`Erro na atualização da pergunta: ${error.message}`);
         return throwError(error);
       })
-    ).subscribe(); // Certifique-se de adicionar os parênteses aqui
+    ).subscribe();
   }
 
   saveImages(files: FileList, newQuestion: QuestionMultipleChoiceWithImage | QuestionMultipleChoiceWithImage[]): void {
@@ -79,31 +136,11 @@ export class QuestionService {
       });
     }
 
-    this.http.post<QuestionMultipleChoiceWithImage>(`${API}/questao/imagens`, formData).subscribe(newQuestion => {
-      let questionTemp: QuestionMultipleChoiceWithImage[] = this.questionsWithImageSubject.getValue();
+    this.http.post<QuestionMultipleChoiceDTO>(`${API}/questao/imagens`, formData).subscribe(newQuestion => {
+      let questionTemp: QuestionMultipleChoiceDTO[] = this.questionsSubject.getValue();
       questionTemp = [...questionTemp, newQuestion];
-      this.questionsWithImageSubject.next(questionTemp);
+      this.questionsSubject.next(questionTemp);
     });
-  }
-
-  getQuestion(id: number): Observable<QuestionMultipleChoice> {
-    return this.http.get<QuestionMultipleChoice>(`${API}/questao/${id}`);
-  }
-
-  getImages(idImages: any): Observable<any> {
-    return this.http.get(`${API}/questao/imagens/${idImages}`);
-  }
-
-  getAll(): void {
-    this.http.get<any[]>(`${API}/questao`).subscribe(questions => {
-      this.questionsSubject.next(questions);
-    })
-  }
-
-  getAllImages(): void {
-    this.http.get<any[]>(`${API}/questao/images`).subscribe(questions => {
-      this.questionsWithImageSubject.next(questions);
-    })
   }
 
   getQuestionData(): Observable<any>  {

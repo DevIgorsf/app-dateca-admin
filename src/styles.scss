@@ -5,15 +5,8 @@
 
 @import './assets/scss/misc';
 
-.light-mode {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-// Estilos para o modo escuro
 .dark-mode {
-  background-color: #000000;
-  color: #ffffff;
+  background: #000000;
 }
 
 .toast-center {
@@ -28,7 +21,7 @@ body {
   overflow-x: hidden;
   font-size: .875rem;
   font-family: 'Roboto', sans-serif;
-  background: black;
+  background: #56585d;
   color: #ffffff;
 }
 

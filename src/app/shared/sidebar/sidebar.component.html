@@ -44,16 +44,6 @@
         </span>
       </a>
     </li>
-    <li class="sidebar-item" [ngClass]="{ 'active': questionImage.isActive }">
-      <a class="sidebar-link" routerLink="/admin/questao-imagem" routerLinkActive #questionImage="routerLinkActive">
-        <span class="sidebar-item__icon">
-          <i class="bi bi-view-list" style="color: #c99352;"></i>
-        </span>
-        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
-          Questões com Imagem
-        </span>
-      </a>
-    </li>
     <li class="sidebar-item" [ngClass]="{ 'active': enade.isActive }">
       <a class="sidebar-link" routerLink="/admin/enade" routerLinkActive #enade="routerLinkActive">
         <span class="sidebar-item__icon">
@@ -61,16 +51,6 @@
         </span>
         <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
           Enade
-        </span>
-      </a>
-    </li>
-    <li class="sidebar-item"  [ngClass]="{ 'active': enadeImage.isActive }">
-      <a class="sidebar-link" routerLink="/admin/enade-imagem" routerLinkActive #enadeImage="routerLinkActive">
-        <span class="sidebar-item__icon">
-          <i class="bi bi-clipboard2-pulse" style="color: #b952ac;"></i>
-        </span>
-        <span [ngClass]="{'sidebar-item__title': sidebarExpanded, 'sidebar-item__title--none': !sidebarExpanded}">
-          Enade com Imagem
         </span>
       </a>
     </li>

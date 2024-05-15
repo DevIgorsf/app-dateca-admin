@@ -53,36 +53,30 @@
   }
 
   &-button {
-    background: #0083FD;
-    border: 2px solid #0083FD;
-    color: #FFF;
-    font-size: 20px;
-    cursor: pointer;
-    width: 160px;
-    height: 40px;
-    border-radius: 10px;
-
-    &:hover {
-      background: #47A5FC;
-      border: 2px solid #47A5FC;
-    }
-
-    &-adicionar {
-      &:hover {
-        background: #47A5FC;
-        border: 2px solid #47A5FC;
-      }
-    }
-
+    &-adicionar,
     &-cancelar {
       background: #979797d7;
       border: 2px solid #979797d7;
+      color: #FFF;
+      font-size: 20px;
+      cursor: pointer;
       width: 160px;
       height: 40px;
+      border-radius: 10px;
 
       &:hover {
         background: #979797;
         border: 2px solid #979797;
+      }
+    }
+
+    &-adicionar {
+      background: #0083FD;
+      border: 2px solid #0083FD;
+
+      &:hover {
+        background: #47A5FC;
+        border: 2px solid #47A5FC;
       }
     }
   }
@@ -109,6 +103,18 @@
     &__textarea {
       height: 100px;
     }
+  }
+}
+
+.slide__image {
+  max-width: 100%;
+  max-height: 300px;
+  height: auto;
+  display: block; 
+  margin: 0 auto; 
+
+  &--hidden {
+    display: none;
   }
 }
 

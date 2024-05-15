@@ -4,6 +4,24 @@
     [formGroup]="formulario"
     (ngSubmit)="createQuestion()">
     <div class="form">
+      
+      <div class="carousel" *ngIf="images && images.length > 0">
+        <button type="button" class="carousel__button" (click)="prevSlide()"><i class="bi bi-caret-left-fill"></i></button>
+        <div class="slides">
+          <div *ngFor="let image of images; let i = index" class="slide" >
+            <img [ngClass]="{'slide__image': i == slideIndex, 'slide__image--hidden': i != slideIndex}" [src]="image" alt="Imagem {{ i + 1 }} de {{ images.length }}" />
+          </div>
+        </div>
+        <button type="button" class="carousel__button" (click)="nextSlide()"><i class="bi bi-caret-right-fill"></i></button>
+      </div>
+      
+      <div class="indicators">
+        <span class="indicator" *ngFor="let image of images; let i = index" [class.active]="i === slideIndex" (click)="goToSlide(i)"></span>
+      </div>
+      
+      <div class="form__file">
+        <input type="file" formControlName="file" multiple accept="image/jpeg" (change)="handleFile($event)"  />
+      </div>
 
       <div class="form__statement">
         <label
@@ -176,14 +194,13 @@
     <div class="d-flex justify-content-end m-5 pb-5">
       <button
         (click)="cancelar()"
-        class="button-cancelar me-5">
+        class="form-button-cancelar me-5">
           Cancelar
       </button>
 
       <button
       id="botao-salvar"
       type="submit"
-      class="button-adicionar  me-5"
       [ngClass]="habilitarBotao()"
       [disabled]="!formulario.valid">
         Salvar
@@ -191,4 +208,5 @@
     </div>
   </form>
 </div>
+
 

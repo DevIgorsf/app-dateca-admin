@@ -12,12 +12,9 @@ import { QuestionComponent } from './question/question.component';
 import { CreateQuestionComponent } from './question/create-question/create-question.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { ProfileComponent } from './profile/profile.component';
-import { CreateQuestionWithImageComponent } from './question-image/create-question-with-image/create-question-with-image.component';
 import { EnadeComponent } from './enade/enade.component';
 import { CreateEnadeComponent } from './enade/create-enade/create-enade.component';
-import { CreateEnadeWithImageComponent } from './enade-image/create-enade-with-image/create-enade-with-image.component';
-import { EnadeImageComponent } from './enade-image/enade-image.component';
-import { QuestionImageComponent } from './question-image/question-image.component';
+
 
 const routes: Routes = [
   {
@@ -69,18 +66,6 @@ const routes: Routes = [
         component: CreateQuestionComponent,
       },
       {
-        path: 'questao-imagem',
-        component: QuestionImageComponent,
-      },
-      {
-        path: 'questao-imagem/adicionar-questao',
-        component: CreateQuestionWithImageComponent,
-      },
-      {
-        path: 'questao-imagem/editar-questao/:id',
-        component: CreateQuestionWithImageComponent,
-      },
-      {
         path: 'enade',
         component: EnadeComponent,
       },
@@ -91,18 +76,6 @@ const routes: Routes = [
       {
         path: 'enade/editar-enade/:id',
         component: CreateEnadeComponent,
-      },
-      {
-        path: 'enade-imagem',
-        component: EnadeImageComponent,
-      },
-      {
-        path: 'enade-imagem/adicionar-enade',
-        component: CreateEnadeWithImageComponent,
-      },
-      {
-        path: 'enade-imagem/editar-enade/:id',
-        component: CreateEnadeWithImageComponent,
       },
       {
         path: 'ranking',

@@ -5,6 +5,15 @@
   left: 244px;
 }
 
+.navbar__toggle {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__toggle-input {
+  margin-right: 1.5rem;
+}
+
 .navbar__navegacao {
   margin-right: 20px;
   width: 150px;

@@ -19,22 +19,40 @@ export class NavbarComponent {
     private router: Router,
     private professorService: ProfessorService,
     private sidebarButtonService: SidebarButtonService,
-    ) {}
-
-    onSlideToggleChange(event: any) {
-      this.isDarkMode = event.checked;
-      if (this.isDarkMode) {
-        document.body.classList.add('dark-mode');
-      } else {
-        document.body.classList.remove('dark-mode');
-      }
-    }
+  ) {}
 
   ngOnInit(): void {
+    const isDarkModeSession = sessionStorage.getItem('isDarkMode');
+    if (isDarkModeSession !== null) {
+      this.isDarkMode = isDarkModeSession === 'true';
+      this.updateDarkMode();
+    }
+
     this.professorService.getPerfil().subscribe((professor) => {
         this.professor = professor;
     });
-  
+  }
+
+  onSlideToggleChange(event: any) {
+    this.isDarkMode = event.checked;
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+    this.saveDarkModeState();
+  }
+
+  private updateDarkMode() {
+    if (this.isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }
+
+  private saveDarkModeState() {
+    sessionStorage.setItem('isDarkMode', this.isDarkMode.toString());
   }
 
   toggleSidebar() {
