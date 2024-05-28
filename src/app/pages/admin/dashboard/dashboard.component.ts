@@ -4,6 +4,7 @@ import { ProfessorService } from 'src/app/service/professor/professor.service';
 import { QuestionService } from 'src/app/service/question/question.service';
 import { EnadeService } from 'src/app/service/enade/enade.service';
 import { StudentService } from 'src/app/service/student/student.service';
+import { EnadePorcentagemDTO } from 'src/app/interfaces/EnadePorcentagemDTO';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ export class DashboardComponent implements OnInit {
   question: string = '0';
   enade: string = '0';
   student: string = '0';
+  enadePorcentagemDTO!: EnadePorcentagemDTO;
 
   constructor(
     private courseService: CourseService,
@@ -37,6 +39,9 @@ export class DashboardComponent implements OnInit {
     })
     this.enadeService.getEnadeData().subscribe(data => {
       this.enade = data;
+    })
+    this.enadeService.getEnadePorcentagem().subscribe(data => {
+      this.enadePorcentagemDTO = data;
     })
     this.studentService.getStudentData().subscribe(data => {
       this.student = data;
