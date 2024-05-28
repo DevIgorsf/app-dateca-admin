@@ -8,7 +8,6 @@ import { NavbarComponent } from 'src/app/shared/navbar/navbar.component';
 import { SidebarComponent } from 'src/app/shared/sidebar/sidebar.component';
 import { CreateProfessorComponent } from './professors/create-professor/create-professor.component';
 import { CourseComponent } from './course/course.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from 'src/app/shared/message/message.module';
 import { UpdateProfessorComponent } from './professors/update-professor/update-professor.component';
 import { MatTableModule } from '@angular/material/table';
@@ -34,6 +33,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EnadeComponent } from './enade/enade.component';
 import { CreateEnadeComponent } from './enade/create-enade/create-enade.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
