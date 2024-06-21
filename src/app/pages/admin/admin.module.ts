@@ -33,6 +33,7 @@ import { EnadeComponent } from './enade/enade.component';
 import { CreateEnadeComponent } from './enade/create-enade/create-enade.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatRadioModule,
     MatIconModule,
     MatListModule,
-    AsyncPipe
+    AsyncPipe,
+    CanvasJSAngularChartsModule
   ],
   exports: [AdminComponent],
 })

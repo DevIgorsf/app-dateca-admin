@@ -48,4 +48,21 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+
+  chartOptions = {
+    title: {
+      text: 'Questões',
+    },
+    backgroundColor: '#56585D',
+    data: [
+      {
+        type: 'pie',
+        dataPoints: [
+          { label: 'Acertos', y: 10, color: '#4CAF50'},
+          { label: 'Erros', y: 15, color: '#F44336' }
+        ],
+      },
+    ],
+  };
+
 }
