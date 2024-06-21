@@ -24,7 +24,6 @@ import { CreateQuestionComponent } from './question/create-question/create-quest
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { CardComponent } from 'src/app/shared/card/card.component';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { FormTextFieldComponent } from 'src/app/shared/form-text-field/form-text-field.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -34,6 +33,7 @@ import { EnadeComponent } from './enade/enade.component';
 import { CreateEnadeComponent } from './enade/create-enade/create-enade.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -72,7 +72,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatSelectModule,
     MatChipsModule,
-    MatGridListModule,
     MatRadioModule,
     MatIconModule,
     MatListModule,
