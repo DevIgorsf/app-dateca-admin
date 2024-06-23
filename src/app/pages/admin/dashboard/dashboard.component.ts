@@ -5,6 +5,7 @@ import { QuestionService } from 'src/app/service/question/question.service';
 import { EnadeService } from 'src/app/service/enade/enade.service';
 import { StudentService } from 'src/app/service/student/student.service';
 import { EnadePorcentagemDTO } from 'src/app/interfaces/EnadePorcentagemDTO';
+import { QuestionResultDTO } from 'src/app/interfaces/QuestionResultaDTO';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,8 @@ export class DashboardComponent implements OnInit {
   question: string = '0';
   enade: string = '0';
   student: string = '0';
-  enadePorcentagemDTO!: EnadePorcentagemDTO;
+  enadePorcentagemDTO: EnadePorcentagemDTO = { questoesFeitas: 0, questoesCorrect: 0 };
+  questionResultDTO: QuestionResultDTO = { questoesFeitas: 0, questoesCorrect: 0 };
 
   constructor(
     private courseService: CourseService,
@@ -42,6 +44,11 @@ export class DashboardComponent implements OnInit {
     })
     this.enadeService.getEnadePorcentagem().subscribe(data => {
       this.enadePorcentagemDTO = data;
+      this.updateChartEnade();
+    })
+    this.questionService.getQuestionPorcentagem().subscribe(data => {
+      this.questionResultDTO = data;
+      this.updateChartQuestion();
     })
     this.studentService.getStudentData().subscribe(data => {
       this.student = data;
@@ -49,20 +56,88 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  chartOptions = {
+  chartEnade = {
     title: {
-      text: 'Questões',
+      text: 'Questões Enade',
+      color: '#fff'
     },
     backgroundColor: '#56585D',
     data: [
       {
         type: 'pie',
+        indexLabelPlacement: "inside",
+        indexLabel: "{label}: {y}",
         dataPoints: [
-          { label: 'Acertos', y: 10, color: '#4CAF50'},
-          { label: 'Erros', y: 15, color: '#F44336' }
+          { label: 'Acertos', y: 0, color: '#4CAF50'},
+          { label: 'Erros', y: 0, color: '#F44336' }
         ],
       },
     ],
   };
+
+  updateChartEnade() {
+    if(this.enadePorcentagemDTO.questoesFeitas) {
+      this.chartEnade = {
+        title: {
+          text: 'Questões Enade',
+          color: '#fff'
+        },
+        backgroundColor: '#56585D',
+        data: [
+          {
+            type: 'pie',
+            indexLabelPlacement: "inside",
+            indexLabel: "{label}: {y}",
+            dataPoints: [
+              { label: 'Acertos', y: this.enadePorcentagemDTO.questoesCorrect, color: '#4CAF50' },
+              { label: 'Erros', y: this.enadePorcentagemDTO.questoesFeitas - this.enadePorcentagemDTO.questoesCorrect, color: '#F44336' }
+            ],
+          },
+        ],
+      };
+    }
+  }
+
+  chartQuestion = {
+    title: {
+      text: 'Questões',
+      color: '#fff'
+    },
+    backgroundColor: '#56585D',
+    data: [
+      {
+        type: 'pie',
+        indexLabelPlacement: "inside",
+        indexLabel: "{label}: {y}",
+        dataPoints: [
+          { label: 'Acertos', y: 0, color: '#4CAF50'},
+          { label: 'Erros', y: 0, color: '#F44336' }
+        ],
+      },
+    ],
+  };
+
+  updateChartQuestion() {
+    if(this.questionResultDTO.questoesFeitas) {
+      this.chartQuestion = {
+        title: {
+          text: 'Questões',
+          color: '#fff'
+        },
+        backgroundColor: '#56585D',
+        data: [
+          {
+            type: 'pie',
+            indexLabelPlacement: "inside",
+            indexLabel: "{label}: {y}",
+            dataPoints: [
+              { label: 'Acertos', y: this.questionResultDTO.questoesCorrect, color: '#4CAF50'},
+              { label: 'Erros', y: this.questionResultDTO.questoesFeitas - this.questionResultDTO.questoesCorrect, color: '#F44336' }
+            ],
+          },
+        ],
+      };
+    }
+  }
 
 }

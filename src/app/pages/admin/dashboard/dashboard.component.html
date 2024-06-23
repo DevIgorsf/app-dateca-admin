@@ -49,8 +49,13 @@
     </div>
 
   </div>
-  <div class="mt-5" style="width: 50%;">
-    <canvasjs-chart [options]="chartOptions"></canvasjs-chart>
+  <div class="dashboard__chart">
+    <div class="dashboard__chart-item">
+      <canvasjs-chart [options]="chartEnade"></canvasjs-chart>
+    </div>
+    <div class="dashboard__chart-item">
+      <canvasjs-chart [options]="chartQuestion"></canvasjs-chart>
+    </div>
   </div>
 
 </div>

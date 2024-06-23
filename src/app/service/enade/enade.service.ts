@@ -165,6 +165,6 @@ export class EnadeService {
   }
 
   getEnadePorcentagem(): Observable<EnadePorcentagemDTO> {
-    return this.http.get<EnadePorcentagemDTO>(`${API}/enade/porcentagem`);
+    return this.http.get<EnadePorcentagemDTO>(`${API}/enade/resultados`);
   }
 }

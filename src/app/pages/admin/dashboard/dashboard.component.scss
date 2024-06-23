@@ -12,3 +12,13 @@
 // .dashboard__list-item {
 
 // }
+
+.dashboard__chart {
+  display: flex;
+  justify-content: space-around;
+}
+
+.dashboard__chart-item {
+  width: 40%;
+  margin-top: 2rem;
+}
