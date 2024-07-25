@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "app-dateca-admin-front:build:production"
+              "buildTarget": "app-dateca-admin-front:build:production"
             },
             "development": {
-              "browserTarget": "app-dateca-admin-front:build:development"
+              "buildTarget": "app-dateca-admin-front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app-dateca-admin-front:build"
+            "buildTarget": "app-dateca-admin-front:build"
           }
         },
         "test": {

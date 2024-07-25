@@ -1,12 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription, forkJoin } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { QuestionMultipleChoiceWithImage } from 'src/app/interfaces/QuestionMultipleChoiceWithImage';
 import { Course } from 'src/app/interfaces/course';
 import { PointsEnum } from 'src/app/interfaces/pointsEnum';
-import { Question } from 'src/app/interfaces/question';
-import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
 import { CourseService } from 'src/app/service/course/course.service';
 import { QuestionService } from 'src/app/service/question/question.service';
 

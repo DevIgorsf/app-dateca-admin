@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { Enade } from 'src/app/interfaces/Enade';
 import { EnadeDTO } from 'src/app/interfaces/EnadeDTO';
+import { EnadePorcentagemDTO } from 'src/app/interfaces/EnadePorcentagemDTO';
 import { EnadeWithImage } from 'src/app/interfaces/EnadeWithImage';
 import { environment } from 'src/environments/environment';
 
@@ -161,5 +162,9 @@ export class EnadeService {
 
   getEnadeData(): Observable<any>  {
     return this.http.get(`${API}/enade/dados`);
+  }
+
+  getEnadePorcentagem(): Observable<EnadePorcentagemDTO> {
+    return this.http.get<EnadePorcentagemDTO>(`${API}/enade/resultados`);
   }
 }

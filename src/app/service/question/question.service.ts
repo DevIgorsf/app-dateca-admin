@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { QuestionMultipleChoiceDTO } from 'src/app/interfaces/QuestionMultipleChoiceDTO';
 import { QuestionMultipleChoiceWithImage } from 'src/app/interfaces/QuestionMultipleChoiceWithImage';
+import { QuestionResultDTO } from 'src/app/interfaces/QuestionResultaDTO';
 import { QuestionMultipleChoice } from 'src/app/interfaces/questionMultipleChoice';
 import { environment } from 'src/environments/environment';
 
@@ -158,5 +159,9 @@ export class QuestionService {
       const questionsResult = questions.filter(t => t.id !== questionId);
       this.questionsSubject.next(questionsResult);
     });
+  }
+
+  getQuestionPorcentagem(): Observable<QuestionResultDTO> {
+    return this.http.get<QuestionResultDTO>(`${API}/questao/resultados`);
   }
 }

@@ -2,7 +2,7 @@ import { AdminComponent } from './admin.component';
 import { NgModule } from '@angular/core';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfessorsComponent } from './professors/professors.component';
-import { RouterModule, Routes } from '@angular/router';
+
 import { CourseComponent } from './course/course.component';
 import { CreateProfessorComponent } from './professors/create-professor/create-professor.component';
 import { UpdateProfessorComponent } from './professors/update-professor/update-professor.component';
@@ -14,6 +14,7 @@ import { RankingComponent } from './ranking/ranking.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EnadeComponent } from './enade/enade.component';
 import { CreateEnadeComponent } from './enade/create-enade/create-enade.component';
+import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
